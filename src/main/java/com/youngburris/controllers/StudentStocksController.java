@@ -43,18 +43,18 @@ public class StudentStocksController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public String login(HttpSession session, String username, String password) throws Exception {
+    public String login(String username, String password, HttpSession session) throws Exception {
         User user = users.findFirstByName(username);
         if (user == null) {
-            user = new User(username, PasswordStorage.createHash(password));
+            user = new User(username,PasswordStorage.createHash(password));
             users.save(user);
         }
-        else if (PasswordStorage.verifyPassword(password, user.password)) {
-            throw new Exception("You have entered the wrong password.");
+        else if(!PasswordStorage.verifyPassword(password, user.password)) {
+            throw new Exception("Wrong password!");
         }
-
         session.setAttribute("username",username);
         return "redirect:/";
+
     }
 
     @RequestMapping(path = "/logout", method = RequestMethod.POST)
