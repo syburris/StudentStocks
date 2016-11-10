@@ -13,7 +13,7 @@ public class User {
     int id;
 
     @Column(nullable = false, unique = true)
-    private String name;
+    public String name;
 
     @Column(nullable = false)
     private String password;
@@ -49,4 +49,6 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+
 }

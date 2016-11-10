@@ -23,20 +23,19 @@ public class StudentStocksController {
     @Autowired
     UserRepository users;
 
-//    @PostConstruct
-//    public void init() throws PasswordStorage.CannotPerformOperationException {
-//        User defaultUser = new User("Steven", PasswordStorage.createHash("Young"));
-//        if (users.findFirstByName(defaultUser.name) == null) {
-//            users.save(defaultUser);
-//        }
-//    }
+    @PostConstruct
+    public void init() throws PasswordStorage.CannotPerformOperationException {
+        User defaultUser = new User("Steven", PasswordStorage.createHash("Young"));
+        if (users.findFirstByName(defaultUser.name) == null) {
+            users.save(defaultUser);
+        }
+    }
 
     //home page,
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String home(Model model, HttpSession session) {
         String name = (String) session.getAttribute("username");
         User user = users.findFirstByName(name);
-
 
         model.addAttribute("user",user);
         model.addAttribute("now", LocalDate.now());
