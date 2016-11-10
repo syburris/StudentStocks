@@ -41,4 +41,25 @@ public class StudentStocksController {
         model.addAttribute("now", LocalDate.now());
         return "home";
     }
+
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    public String login(HttpSession session, String username, String password) throws Exception {
+        User user = users.findFirstByName(username);
+        if (user == null) {
+            user = new User(username, PasswordStorage.createHash(password));
+            users.save(user);
+        }
+        else if (PasswordStorage.verifyPassword(password, user.password)) {
+            throw new Exception("You have entered the wrong password.");
+        }
+
+        session.setAttribute("username",username);
+        return "redirect:/";
+    }
+
+    @RequestMapping(path = "/logout", method = RequestMethod.POST)
+    public String logout(HttpSession session) {
+        session.invalidate();
+        return "redirect:/";
+    }
 }
