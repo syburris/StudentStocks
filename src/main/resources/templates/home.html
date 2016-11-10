@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>StudentStocks</title>
+</head>
+<body>
+{{^user}}
+<form action="/login" method="post">
+    <input type="text" placeholder="Username" name="username"/>
+    <input type="password" placeholder="Password" name="password"/>
+    <button type="submit">Submit</button>
+</form>
+{{/user}}
+{{#user}}
+
+<form action="/logout" method="post">
+    <button type="submit">Logout</button>
+</form>
+{{/user}}
+</body>
+</html>

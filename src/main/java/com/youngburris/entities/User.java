@@ -13,10 +13,10 @@ public class User {
     int id;
 
     @Column(nullable = false, unique = true)
-    public String name;
+    private String name;
 
     @Column(nullable = false)
-    String password;
+    private String password;
 
     public User() {
     }
