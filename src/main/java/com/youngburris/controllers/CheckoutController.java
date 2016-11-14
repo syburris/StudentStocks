@@ -41,7 +41,7 @@ public class CheckoutController {
             Transaction.Status.SUBMITTED_FOR_SETTLEMENT
     };
 
-    @RequestMapping(value = "/", method = RequestMethod.GET)
+    @RequestMapping(value = "/paytheman", method = RequestMethod.GET)
     public String root(Model model) {
         return "redirect:checkouts";
     }
