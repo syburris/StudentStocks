@@ -43,7 +43,7 @@ public class StudentStocksController {
     }
 
     //home page,
-    @RequestMapping(path = "/", method = RequestMethod.GET)
+    @RequestMapping(path = "/home", method = RequestMethod.GET)
     public String home(Model model, HttpSession session) {
         String name = (String) session.getAttribute("username");
         User user = users.findFirstByName(name);
