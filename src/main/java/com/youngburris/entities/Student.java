@@ -65,6 +65,9 @@ public class Student {
     @Column(nullable = false)
     boolean isFunded;
 
+    @OneToOne
+    Loan loan;
+
 
 
     public Student() {
@@ -72,7 +75,7 @@ public class Student {
 
     public Student(String username, String password, String firstName, String lastName, String school, Level level,
                    String bio, String highSchool, String transcript, String gpa, String major, String minor,
-                   String ssn, double balance) {
+                   String ssn, double balance, Loan loan, double loanGoal) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -87,6 +90,8 @@ public class Student {
         this.minor = minor;
         this.ssn = ssn;
         this.balance = balance;
+        this.loan = loan;
+        this.loanGoal = loanGoal;
     }
 
     public int getId() {
@@ -207,5 +212,29 @@ public class Student {
 
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+
+    public double getLoanGoal() {
+        return loanGoal;
+    }
+
+    public void setLoanGoal(double loanGoal) {
+        this.loanGoal = loanGoal;
+    }
+
+    public boolean isFunded() {
+        return isFunded;
+    }
+
+    public void setFunded(boolean funded) {
+        isFunded = funded;
+    }
+
+    public Loan getLoan() {
+        return loan;
+    }
+
+    public void setLoan(Loan loan) {
+        this.loan = loan;
     }
 }
