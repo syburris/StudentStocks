@@ -44,7 +44,7 @@ public class Loan {
     @Column
     LocalDate paymentDate;
 
-    @ManyToOne
+    @ManyToMany
     Investor investor;
 
     @OneToMany
