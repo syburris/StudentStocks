@@ -57,7 +57,15 @@ public class Student {
     String ssn;
 
     @Column(nullable = false)
+    double loanGoal;
+
+    @Column(nullable = false)
     double balance;
+
+    @Column(nullable = false)
+    boolean isFunded;
+
+
 
     public Student() {
     }
