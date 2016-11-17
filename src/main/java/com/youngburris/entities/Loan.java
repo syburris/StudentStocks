@@ -1,9 +1,10 @@
 package com.youngburris.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by stevenburris on 11/16/16.
@@ -16,5 +17,163 @@ public class Loan {
     @GeneratedValue
     int id;
 
+    @Column
+    double goal;
 
+    @Column
+    double balance;
+
+    @Column
+    double payment;
+
+    @Column
+    double pv;
+
+    @Column
+    double ratePerPeriod;
+
+    @Column
+    double apr;
+
+    @Column
+    int numberOfPeriods;
+
+    @Column
+    LocalDate initiationDate;
+
+    @Column
+    LocalDate finishDate;
+
+    @Column
+    LocalDate paymentDate;
+
+    @OneToOne
+    Student student;
+
+    @OneToMany
+    List<Portion> portions;
+
+    public Loan() {
+    }
+
+    public Loan(double goal, double balance, double payment, double pv, double ratePerPeriod, double apr,
+                int numberOfPeriods, LocalDate initiationDate, LocalDate finishDate, LocalDate paymentDate,
+                Student student, List<Portion> portions) {
+        this.goal = goal;
+        this.balance = balance;
+        this.payment = payment;
+        this.pv = pv;
+        this.ratePerPeriod = ratePerPeriod;
+        this.apr = apr;
+        this.numberOfPeriods = numberOfPeriods;
+        this.initiationDate = initiationDate;
+        this.finishDate = finishDate;
+        this.paymentDate = paymentDate;
+        this.student = student;
+        this.portions = portions;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getGoal() {
+        return goal;
+    }
+
+    public void setGoal(double goal) {
+        this.goal = goal;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public double getPayment() {
+        return payment;
+    }
+
+    public void setPayment(double payment) {
+        this.payment = payment;
+    }
+
+    public double getPv() {
+        return pv;
+    }
+
+    public void setPv(double pv) {
+        this.pv = pv;
+    }
+
+    public double getRatePerPeriod() {
+        return ratePerPeriod;
+    }
+
+    public void setRatePerPeriod(double ratePerPeriod) {
+        this.ratePerPeriod = ratePerPeriod;
+    }
+
+    public double getApr() {
+        return apr;
+    }
+
+    public void setApr(double apr) {
+        this.apr = apr;
+    }
+
+    public int getNumberOfPeriods() {
+        return numberOfPeriods;
+    }
+
+    public void setNumberOfPeriods(int numberOfPeriods) {
+        this.numberOfPeriods = numberOfPeriods;
+    }
+
+    public LocalDate getInitiationDate() {
+        return initiationDate;
+    }
+
+    public void setInitiationDate(LocalDate initiationDate) {
+        this.initiationDate = initiationDate;
+    }
+
+    public LocalDate getFinishDate() {
+        return finishDate;
+    }
+
+    public void setFinishDate(LocalDate finishDate) {
+        this.finishDate = finishDate;
+    }
+
+    public LocalDate getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDate paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public List<Portion> getPortions() {
+        return portions;
+    }
+
+    public void setPortions(List<Portion> portions) {
+        this.portions = portions;
+    }
 }

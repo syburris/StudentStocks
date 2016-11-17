@@ -1,6 +1,8 @@
 package com.youngburris.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by stevenburris on 11/15/16.
@@ -28,11 +30,15 @@ public class Investor {
     @Column(nullable = false)
     String ssn;
 
-    @Column(nullable = true)
+    @Column
     String school;
 
-    @Column(nullable = false)
+    @Column
     double balance;
+
+    @OneToMany
+    List<Portion> portions;
+
 
     public Investor() {
     }
@@ -47,6 +53,8 @@ public class Investor {
         this.school = school;
         this.balance = balance;
     }
+
+
 
     public int getId() {
         return id;
@@ -111,4 +119,13 @@ public class Investor {
     public void setBalance(double balance) {
         this.balance = balance;
     }
+
+    public List<Portion> getPortions() {
+        return portions;
+    }
+
+    public void setPortions(List<Portion> portions) {
+        this.portions = portions;
+    }
+
 }
