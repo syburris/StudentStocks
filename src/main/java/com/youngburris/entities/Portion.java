@@ -17,8 +17,53 @@ public class Portion {
     double amount;
 
     @ManyToOne
-    Investor investor;
+    Loan loan;
 
     @ManyToOne
-    Loan loan;
+    Investor investor;
+
+    public Portion() {
+    }
+
+    public Portion(double amount) {
+        this.amount = amount;
+    }
+
+    public Portion(double amount, Loan loan, Investor investor) {
+        this.amount = amount;
+        this.loan = loan;
+        this.investor = investor;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public Loan getLoan() {
+        return loan;
+    }
+
+    public void setLoan(Loan loan) {
+        this.loan = loan;
+    }
+
+    public Investor getInvestor() {
+        return investor;
+    }
+
+    public void setInvestor(Investor investor) {
+        this.investor = investor;
+    }
 }

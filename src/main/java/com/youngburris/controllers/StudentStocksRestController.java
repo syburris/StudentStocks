@@ -168,6 +168,7 @@ public class StudentStocksRestController {
 
 //        calculate the payment
         double payment = (r * presentValue) / (1 - Math.pow((1 + r), n));
+
     }
 
 }

@@ -2,6 +2,9 @@ package com.youngburris.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * Created by stevenburris on 11/16/16.
@@ -47,26 +50,15 @@ public class Loan {
     @OneToOne
     Student student;
 
-
-
-
+    @OneToMany
+    List<Portion> portions;
 
     public Loan() {
     }
 
-    public Loan(double goal, double pv, double apr, int numberOfPeriods, LocalDate initiationDate, Student student) {
-        this.goal = goal;
-        this.pv = pv;
-        this.apr = apr;
-        this.numberOfPeriods = numberOfPeriods;
-        this.initiationDate = initiationDate;
-
-
-    }
-
-    public Loan(double goal, double balance, double payment, double pv, double ratePerPeriod,
-                double apr, int numberOfPeriods, LocalDate initiationDate, LocalDate finishDate,
-                LocalDate paymentDate, Student student) {
+    public Loan(double goal, double balance, double payment, double pv, double ratePerPeriod, double apr,
+                int numberOfPeriods, LocalDate initiationDate, LocalDate finishDate, LocalDate paymentDate,
+                Student student, List<Portion> portions) {
         this.goal = goal;
         this.balance = balance;
         this.payment = payment;
@@ -77,8 +69,8 @@ public class Loan {
         this.initiationDate = initiationDate;
         this.finishDate = finishDate;
         this.paymentDate = paymentDate;
-
-
+        this.student = student;
+        this.portions = portions;
     }
 
     public int getId() {
@@ -167,5 +159,21 @@ public class Loan {
 
     public void setPaymentDate(LocalDate paymentDate) {
         this.paymentDate = paymentDate;
+    }
+
+    public Student getStudent() {
+        return student;
+    }
+
+    public void setStudent(Student student) {
+        this.student = student;
+    }
+
+    public List<Portion> getPortions() {
+        return portions;
+    }
+
+    public void setPortions(List<Portion> portions) {
+        this.portions = portions;
     }
 }
