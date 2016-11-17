@@ -44,6 +44,9 @@ public class Loan {
     @Column
     LocalDate paymentDate;
 
+    @OneToOne
+    Student student;
+
 
 
 
