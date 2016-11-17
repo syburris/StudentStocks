@@ -31,6 +31,9 @@ import java.util.ArrayList;
 @RestController
 public class StudentStocksRestController {
 
+
+
+
     @Autowired
     StudentRepository students;
 
@@ -195,17 +198,6 @@ public class StudentStocksRestController {
         return new ResponseEntity<ArrayList<Portion>>(portionArrayList, HttpStatus.OK);
     }
 
-    public void loanPaymentCalculator(int gracePeriod, double presentValue, double apr, double years) {
-//        get the periodic interest rate from the annual percentage rate
-        double decimal = apr / 100.00;
-        double r = apr / 12;
 
-//        get the periods in the loan from number of years
-        double n = years * 12;
-
-//        calculate the payment
-        double payment = (r * presentValue) / (1 - Math.pow((1 + r), n));
-
-    }
 
 }
