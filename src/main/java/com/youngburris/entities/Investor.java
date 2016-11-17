@@ -34,8 +34,7 @@ public class Investor {
     @Column
     double balance;
 
-    @ManyToMany
-    LoanPortion portion;
+
 
     public Investor() {
     }
@@ -51,17 +50,7 @@ public class Investor {
         this.balance = balance;
     }
 
-    public Investor(String username, String password, String firstName, String lastName, String ssn,
-                    String school, double balance, LoanPortion portion) {
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.ssn = ssn;
-        this.school = school;
-        this.balance = balance;
-        this.portion = portion;
-    }
+
 
     public int getId() {
         return id;
@@ -127,11 +116,5 @@ public class Investor {
         this.balance = balance;
     }
 
-    public LoanPortion getLoanPortion() {
-        return portion;
-    }
 
-    public void setLoanPortion(Loan loan) {
-        this.portion = portion;
-    }
 }

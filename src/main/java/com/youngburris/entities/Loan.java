@@ -44,29 +44,26 @@ public class Loan {
     @Column
     LocalDate paymentDate;
 
-    @ManyToMany
-    Investor investor;
 
-    @OneToMany
-    Student student;
+
+
 
     public Loan() {
     }
 
-    public Loan(double goal, double pv, double apr, int numberOfPeriods, LocalDate initiationDate,
-                Investor investor, Student student) {
+    public Loan(double goal, double pv, double apr, int numberOfPeriods, LocalDate initiationDate, Student student) {
         this.goal = goal;
         this.pv = pv;
         this.apr = apr;
         this.numberOfPeriods = numberOfPeriods;
         this.initiationDate = initiationDate;
-        this.investor = investor;
-        this.student = student;
+
+
     }
 
     public Loan(double goal, double balance, double payment, double pv, double ratePerPeriod,
                 double apr, int numberOfPeriods, LocalDate initiationDate, LocalDate finishDate,
-                LocalDate paymentDate, Investor investor, Student student) {
+                LocalDate paymentDate, Student student) {
         this.goal = goal;
         this.balance = balance;
         this.payment = payment;
@@ -77,8 +74,8 @@ public class Loan {
         this.initiationDate = initiationDate;
         this.finishDate = finishDate;
         this.paymentDate = paymentDate;
-        this.investor = investor;
-        this.student = student;
+
+
     }
 
     public int getId() {
