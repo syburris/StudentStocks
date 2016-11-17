@@ -24,8 +24,9 @@ dist/
 nbdist/
 .nb-gradle/
 
-main.mv.db
-main.trace.db
 
 ###Client###
 node_modules
+
+
+*.db
