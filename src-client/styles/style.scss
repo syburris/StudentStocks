@@ -1,13 +1,55 @@
+@import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
+@import "../../node_modules/font-awesome/scss/font-awesome.scss";
 * {
 	box-sizing: border-box;
 }
-
-body{
-	font-family: Helvetica, Arial, sans-serif;
+img{
+	width: 100%;
 }
 
-h1 {
-	font-size: 300px;
-	text-align: center;
-	color: fuchsia;
+body{
+	font-family: 'PT Sans', sans-serif;
+
+
+
+
+
+	#app-container{
+		.home-view{
+			.hdr-hero{
+				background: url('https://static.pexels.com/photos/2116/money-gold-coins-finance.jpg')center,center, no-repeat;
+				opacity: .4;
+				background-size: cover;
+				height: 100%;
+				width: 100%;
+
+			}
+			.apply-cont{
+				position: relative;
+				bottom: 0;
+				left: 0;
+			}
+
+			.abt-cont{
+				margin: 0;
+				background: #fff;
+				color: #5BC0DE;
+				.abt-col{
+					.abt-icon{
+						font-size: 100px;
+					}
+
+
+				}
+
+			}
+			.success-story{
+			}
+		}
+
+
+
+
+
+	}
 }
