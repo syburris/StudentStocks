@@ -5,7 +5,6 @@ const STORE = require('./store.js')
 
 
 
-
 const ACTIONS = {
 
 //    fetchHighScores: function(){
@@ -36,28 +35,23 @@ const ACTIONS = {
 //       })
 //    },
 //
-//    handleUserLogin: function(usrInfo){
-//       let usrLogin = new UserModel()
-//
-//       usrLogin.set(usrInfo)
-//       console.log( "hey" ,usrLogin)
-//
-//       usrLogin.save().then(function(serverRes){
-//
-//
-//          console.log( "tickle me" ,serverRes)
-//
-//          console.log(serverRes)
-//          STORE.setStore('currentUser', serverRes)
-//
-//       })
-//
-//
-//
-//
-//
-//
-//    },
+   handleUserLogin: function(usrInfo){
+      let invstLogin = new InvestorLoginModel()
+
+      invstLogin.set(usrInfo)
+
+      invstLogin.save().then(function(serverRes){
+
+
+
+         console.log(serverRes)
+         STORE.setStore('currentUser', serverRes)
+
+      })
+
+
+
+   },
 // // EXECUTE TO GRAB RANDOM ASSETS
 //    getObstacles: function(){
 //       let obst = new ObstacleCollection()
