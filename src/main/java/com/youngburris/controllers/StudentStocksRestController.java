@@ -1,8 +1,12 @@
 package com.youngburris.controllers;
 
 import com.youngburris.entities.Investor;
+import com.youngburris.entities.Loan;
+import com.youngburris.entities.Portion;
 import com.youngburris.entities.Student;
 import com.youngburris.services.InvestorRepository;
+import com.youngburris.services.LoanRepository;
+import com.youngburris.services.PortionRepository;
 import com.youngburris.services.StudentRepository;
 import com.youngburris.utilities.PasswordStorage;
 import org.h2.tools.Server;
@@ -19,6 +23,7 @@ import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * Created by stevenburris on 11/15/16.
@@ -31,6 +36,12 @@ public class StudentStocksRestController {
 
     @Autowired
     InvestorRepository investors;
+
+    @Autowired
+    LoanRepository loans;
+
+    @Autowired
+    PortionRepository portions;
 
     Server h2;
 
@@ -134,6 +145,7 @@ public class StudentStocksRestController {
         return new ResponseEntity<Student>(student, HttpStatus.OK);
     }
 
+
 //    create investor user route
     @RequestMapping(path = "/investor", method = RequestMethod.POST)
     public ResponseEntity<Investor> createInvestor(HttpSession session, @RequestBody Investor investor)
@@ -158,7 +170,32 @@ public class StudentStocksRestController {
         return new ResponseEntity<Investor>(investor, HttpStatus.OK);
     }
 
-    public void loanPaymentCalculator(double presentValue, double apr, double years) {
+
+    @RequestMapping(path = "/investors", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<Investor>> getInvestors() {
+        ArrayList<Investor> investorArrayList = (ArrayList<Investor>) investors.findAll();
+        return new ResponseEntity<ArrayList<Investor>>(investorArrayList, HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/students", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<Student>> getStudents() {
+        ArrayList<Student> studentArrayList = (ArrayList<Student>) students.findAll();
+        return new ResponseEntity<ArrayList<Student>>(studentArrayList, HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/loans", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<Loan>> getLoans() {
+        ArrayList<Loan> loanArrayList = (ArrayList<Loan>) loans.findAll();
+        return new ResponseEntity<ArrayList<Loan>>(loanArrayList, HttpStatus.OK);
+    }
+
+    @RequestMapping(path = "/portions", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<Portion>> getPortions() {
+        ArrayList<Portion> portionArrayList = (ArrayList<Portion>) portions.findAll();
+        return new ResponseEntity<ArrayList<Portion>>(portionArrayList, HttpStatus.OK);
+    }
+
+    public void loanPaymentCalculator(int gracePeriod, double presentValue, double apr, double years) {
 //        get the periodic interest rate from the annual percentage rate
         double decimal = apr / 100.00;
         double r = apr / 12;
