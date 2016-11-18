@@ -27,8 +27,8 @@ public class StudentStocksApplication {
 			System.err.println("Could not load Braintree configuration from config file or system environment.");
 			System.exit(1);
 		}
-        System.out.println(loanPaymentCalculator(4, 10000, 5, 10));
-//		SpringApplication.run(StudentStocksApplication.class, args);
+
+		SpringApplication.run(StudentStocksApplication.class, args);
 
 
 	}
