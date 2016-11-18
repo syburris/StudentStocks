@@ -1,4 +1,5 @@
 const React = require('react')
+const AppBarExampleIcon = require('./student-signup.js')
 
 
 
@@ -39,7 +40,7 @@ const NavView = React.createClass({
 
 
 
-   render: () =>{
+   render: function(){
       return(
          <nav className="navbar navbar-default">
             <div className="container-fluid">
@@ -50,7 +51,7 @@ const NavView = React.createClass({
                      <span className="icon-bar"></span>
                      <span className="icon-bar"></span>
                   </button>
-                  <a className="navbar-brand" href="#">Brand</a>
+                  <a className="navbar-brand" href="#/login">LOGIN</a>
                </div>
 
                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -89,11 +90,22 @@ const NavView = React.createClass({
 
 const HeaderHeros = React.createClass({
 
+   _handleClick: function(evt){
+      evt.preventDefault()
+      console.log(evt)
+
+      location.hash = "/signup/students"
 
 
 
 
-   render:() =>{
+   },
+
+
+
+
+
+   render: function(){
 
       return(
          <div className="row text-center apply-cont">
@@ -101,7 +113,7 @@ const HeaderHeros = React.createClass({
                <h3>Are you A Student?</h3>
                <p>Apply for a loan today</p>
                {/* route to student form page  */}
-               <button className="btn btn-primary">Apply Now</button>
+               <button className="btn btn-primary" onClick={this._handleClick} ref="student">Apply Now</button>
                <p>or</p>
                {/* page down to student about/testimonials */}
                <button className="btn btn-primary">Find out more</button>
@@ -112,7 +124,7 @@ const HeaderHeros = React.createClass({
                <h3>Become an Investor...</h3>
                <p>Invest in our future today</p>
                {/* route to student form page  */}
-               <button className="btn btn-primary">Apply Now</button>
+               <button className="btn btn-primary" href="#/signup/investor">Apply Now</button>
                <p>or</p>
                {/* page down to student about/testimonials */}
                <button className="btn btn-primary">Find out more</button>

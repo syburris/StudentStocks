@@ -20,7 +20,7 @@ const InvestorAppColl = Backbone.Collection.extend({
 })
 const InvestorLoginModel = Backbone.Model.extend({
 
-   url: "/studentlogin"
+   url: "/investorlogin"
 
 
 })
