@@ -1,5 +1,8 @@
 package com.youngburris.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 
 /**
@@ -8,7 +11,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "students")
 public class Student {
-    enum Level {
+    public enum Level {
         UNDERGRADUATE,
         GRADUATE
     }
@@ -20,6 +23,7 @@ public class Student {
     @Column(nullable = false, unique = true)
     String username;
 
+    @JsonIgnore
     @Column(nullable = false)
     String password;
 
@@ -57,7 +61,7 @@ public class Student {
     String ssn;
 
     @Column
-    double loanGoal;
+    String loanGoal;
 
     @Column
     double balance;
@@ -81,7 +85,7 @@ public class Student {
 
     public Student(String username, String password, String firstName, String lastName, String school,
                    Level level, String bio, String highSchool, String transcript, String gpa, String major,
-                   String minor, String ssn, double loanGoal, double balance, boolean isFunded, Loan loan) {
+                   String minor, String ssn, String loanGoal) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -96,9 +100,6 @@ public class Student {
         this.minor = minor;
         this.ssn = ssn;
         this.loanGoal = loanGoal;
-        this.balance = balance;
-        this.isFunded = isFunded;
-        this.loan = loan;
     }
 
     public int getId() {
@@ -117,6 +118,7 @@ public class Student {
         this.username = username;
     }
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
@@ -213,11 +215,11 @@ public class Student {
         this.ssn = ssn;
     }
 
-    public double getLoanGoal() {
+    public String getLoanGoal() {
         return loanGoal;
     }
 
-    public void setLoanGoal(double loanGoal) {
+    public void setLoanGoal(String loanGoal) {
         this.loanGoal = loanGoal;
     }
 
@@ -229,7 +231,7 @@ public class Student {
         this.balance = balance;
     }
 
-    public boolean isFunded() {
+    public boolean isFunded(boolean b) {
         return isFunded;
     }
 
@@ -244,4 +246,6 @@ public class Student {
     public void setLoan(Loan loan) {
         this.loan = loan;
     }
+
+
 }

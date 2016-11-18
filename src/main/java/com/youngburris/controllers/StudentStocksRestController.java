@@ -31,11 +31,14 @@ import java.util.ArrayList;
 @RestController
 public class StudentStocksRestController {
 
+
+
+
     @Autowired
     StudentRepository students;
 
     @Autowired
-    InvestorRepository investors;
+    public InvestorRepository investors;
 
     @Autowired
     LoanRepository loans;
@@ -51,9 +54,15 @@ public class StudentStocksRestController {
         h2 = Server.createWebServer().start();
         Investor defaultInvestor = new Investor("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"),
                 "Steven", "Burris", "219089-4322-32",
-                "College of Charleston", 1000.00);
+                "College of Charleston");
         if (investors.findFirstByUsername(defaultInvestor.getUsername()) == null) {
             investors.save(defaultInvestor);
+        }
+        Student student = new Student("stevenburris@gmail.com", "hunter2", "Steven", "Burris",
+                "College of Charleston", Student.Level.GRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
+                "Porter-Gaud", "url to transcript", "4", "Accounting", "French", "123456-1234-12", "1000000");
+        if (students.findFirstByUsername(student.getUsername()) == null) {
+            students.save(student);
         }
 
     }
@@ -86,7 +95,7 @@ public class StudentStocksRestController {
         session.setAttribute("username", student.getUsername());
         session.setAttribute("isInvestor", false);
         session.setAttribute("time", LocalDate.now());
-        return new ResponseEntity<Student>(student, HttpStatus.OK);
+        return new ResponseEntity<Student>(studentFromH2, HttpStatus.OK);
     }
 
 //    Investor login route
@@ -111,7 +120,7 @@ public class StudentStocksRestController {
         session.setAttribute("username", investor.getUsername());
         session.setAttribute("isInvestor", true);
         session.setAttribute("time", LocalDate.now());
-        return new ResponseEntity<Investor>(investor, HttpStatus.OK);
+        return new ResponseEntity<Investor>(investorFromH2, HttpStatus.OK);
     }
 
 //    logout route for students and investors
@@ -131,6 +140,8 @@ public class StudentStocksRestController {
         if (studentFromDB == null) {
             student.setPassword(PasswordStorage.createHash(student.getPassword()));
             student.setUsername(student.getUsername());
+            student.setBalance(0);
+            student.isFunded(false);
             students.save(student);
         }
 //        if the username already exists in the database, throw an error
@@ -156,6 +167,7 @@ public class StudentStocksRestController {
         if (investorFromDB == null) {
             investor.setPassword(PasswordStorage.createHash(investor.getPassword()));
             investor.setUsername(investor.getUsername());
+            investor.setBalance(0);
             investors.save(investor);
         }
 //        if the username already exists in the database, throw an error
@@ -195,17 +207,6 @@ public class StudentStocksRestController {
         return new ResponseEntity<ArrayList<Portion>>(portionArrayList, HttpStatus.OK);
     }
 
-    public void loanPaymentCalculator(int gracePeriod, double presentValue, double apr, double years) {
-//        get the periodic interest rate from the annual percentage rate
-        double decimal = apr / 100.00;
-        double r = apr / 12;
 
-//        get the periods in the loan from number of years
-        double n = years * 12;
-
-//        calculate the payment
-        double payment = (r * presentValue) / (1 - Math.pow((1 + r), n));
-
-    }
 
 }
