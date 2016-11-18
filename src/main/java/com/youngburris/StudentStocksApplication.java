@@ -30,24 +30,6 @@ public class StudentStocksApplication {
 
 		SpringApplication.run(StudentStocksApplication.class, args);
 
-
 	}
 
-    public static double loanPaymentCalculator(int gracePeriod, double principalBalance, double apr, double years) {
-//        get the periodic interest rate from the annual percentage rate
-        double decimal = apr / 100.00;
-        double r = decimal / 12;
-
-//        add interest accrued over the grace period to the principal balance
-        int nGracePeriod = gracePeriod * 12;
-        double newPrincipalBalance = (r * principalBalance) * nGracePeriod;
-        return newPrincipalBalance;
-
-////        get the periods in the loan from number of years
-//        double n = years * 12;
-//
-////        calculate the payment
-//        double payment = (r * principal) / (1 - Math.pow((1 + r), n));
-
-    }
 }

@@ -138,22 +138,27 @@ public class StudentStocksRestController {
 //        check the database for the student's username
         Student studentFromDB = students.findFirstByUsername(student.getUsername());
         if (studentFromDB == null) {
-            student.setPassword(PasswordStorage.createHash(student.getPassword()));
-            student.setUsername(student.getUsername());
-            student.setBalance(0);
-            student.isFunded(false);
-            students.save(student);
+            studentFromDB = new Student(student.getUsername(),PasswordStorage.createHash(student.getPassword()),
+                    student.getFirstName(), student.getLastName(), student.getSchool(), student.getLevel(),
+                    student.getBio(), student.getHighSchool(), student.getTranscript(), student.getGpa(),
+                    student.getMajor(), student.getMinor(), student.getSsn(), student.getLoanGoal());
+            studentFromDB.setBalance(0);
+            studentFromDB.isFunded(false);
+
+            students.save(studentFromDB);
+
         }
 //        if the username already exists in the database, throw an error
         else {
             return new ResponseEntity<Student>(HttpStatus.IM_USED);
         }
 
+
 //        set attributes and send 200
-        session.setAttribute("username", student.getUsername());
+        session.setAttribute("username", studentFromDB.getUsername());
         session.setAttribute("isInvestor", false);
         session.setAttribute("time", LocalDate.now());
-        return new ResponseEntity<Student>(student, HttpStatus.OK);
+        return new ResponseEntity<Student>(studentFromDB, HttpStatus.OK);
     }
 
 
@@ -165,10 +170,9 @@ public class StudentStocksRestController {
 //        check the database for the investor's username
         Investor investorFromDB = investors.findFirstByUsername(investor.getUsername());
         if (investorFromDB == null) {
-            investor.setPassword(PasswordStorage.createHash(investor.getPassword()));
-            investor.setUsername(investor.getUsername());
-            investor.setBalance(0);
-            investors.save(investor);
+            investorFromDB = new Investor(investor.getUsername(),PasswordStorage.createHash(investor.getPassword()),
+                    investor.getFirstName(),investor.getLastName(),investor.getSsn(),investor.getSchool(),0.00);
+            investors.save(investorFromDB);
         }
 //        if the username already exists in the database, throw an error
         else {
@@ -208,5 +212,27 @@ public class StudentStocksRestController {
     }
 
 
+//    method to calculate the monthly payment
+    public static double loanPaymentCalculator(int gracePeriod, double principalBalance, double apr, double years) {
+//        get the periodic interest rate from the annual percentage rate
+        double decimal = apr / 100.00;
+        double r = decimal / 12;
+
+//        add interest accrued over the grace period to the principal balance
+        int nGracePeriod = gracePeriod * 12;
+        double newPrincipalBalance = ((r * principalBalance) * nGracePeriod) + principalBalance;
+
+//        calculate the number of months the loan will be paid over
+        double nLoanLength = (years * 12);
+
+//        calculate the payment made each month
+        double monthlyPayment = (newPrincipalBalance * (r * (Math.pow((1 + r), nLoanLength)))) /
+                (Math.pow((1 + r), nLoanLength) - 1);
+
+//        round the payment to the nearest 100th place
+        double actualPayment = Math.round(monthlyPayment * 100.00) / 100.00;
+        return actualPayment;
+
+    }
 
 }
