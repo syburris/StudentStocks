@@ -3,7 +3,8 @@ package com.youngburris;
 		import java.io.File;
 		import com.braintreegateway.BraintreeGateway;
 
-        import com.youngburris.utilities.BraintreeGatewayFactory;
+		import com.youngburris.controllers.StudentStocksRestController;
+		import com.youngburris.utilities.BraintreeGatewayFactory;
         import org.springframework.boot.SpringApplication;
 		import org.springframework.boot.autoconfigure.SpringBootApplication;
 
@@ -11,9 +12,11 @@ package com.youngburris;
 public class StudentStocksApplication {
 	public static String DEFAULT_CONFIG_FILENAME = "config.properties";
 	public static BraintreeGateway gateway;
+//	public static double THISISATESTBRO = testingCalculator;
 
 	public static void main(String[] args) {
 		File configFile = new File(DEFAULT_CONFIG_FILENAME);
+
 		try {
 			if(configFile.exists() && !configFile.isDirectory()) {
 				gateway = BraintreeGatewayFactory.fromConfigFile(configFile);
@@ -26,5 +29,7 @@ public class StudentStocksApplication {
 		}
 
 		SpringApplication.run(StudentStocksApplication.class, args);
+
 	}
+
 }

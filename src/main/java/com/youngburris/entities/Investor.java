@@ -1,5 +1,7 @@
 package com.youngburris.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,6 +29,7 @@ public class Investor {
     @Column(nullable = false)
     String lastName;
 
+    @JsonIgnore
     @Column(nullable = false)
     String ssn;
 
@@ -44,7 +47,16 @@ public class Investor {
     }
 
     public Investor(String username, String password, String firstName, String lastName,
-                    String ssn, String school, double balance) {
+                    String ssn, String school) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.ssn = ssn;
+        this.school = school;
+    }
+
+    public Investor(String username, String password, String firstName, String lastName, String ssn, String school, double balance) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -53,8 +65,6 @@ public class Investor {
         this.school = school;
         this.balance = balance;
     }
-
-
 
     public int getId() {
         return id;
