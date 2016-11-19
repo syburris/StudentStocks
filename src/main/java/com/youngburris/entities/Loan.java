@@ -18,25 +18,25 @@ public class Loan {
     int id;
 
     @Column
-    double goal;
+    String goal;
 
     @Column
-    double balance;
+    String balance;
 
     @Column
-    double payment;
+    String payment;
 
     @Column
-    double pv;
+    String pv;
 
     @Column
-    double ratePerPeriod;
+    String ratePerPeriod;
 
     @Column
-    double apr;
+    String apr;
 
     @Column
-    int numberOfPeriods;
+    String numberOfPeriods;
 
     @Column
     LocalDate initiationDate;
@@ -56,21 +56,14 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(double goal, double balance, double payment, double pv, double ratePerPeriod, double apr,
-                int numberOfPeriods, LocalDate initiationDate, LocalDate finishDate, LocalDate paymentDate,
-                Student student, List<Portion> portions) {
-        this.goal = goal;
+    public Loan(String balance, String payment, String pv, String ratePerPeriod, String apr,
+                String numberOfPeriods) {
         this.balance = balance;
         this.payment = payment;
         this.pv = pv;
         this.ratePerPeriod = ratePerPeriod;
         this.apr = apr;
         this.numberOfPeriods = numberOfPeriods;
-        this.initiationDate = initiationDate;
-        this.finishDate = finishDate;
-        this.paymentDate = paymentDate;
-        this.student = student;
-        this.portions = portions;
     }
 
     public int getId() {
@@ -81,59 +74,59 @@ public class Loan {
         this.id = id;
     }
 
-    public double getGoal() {
+    public String getGoal() {
         return goal;
     }
 
-    public void setGoal(double goal) {
+    public void setGoal(String goal) {
         this.goal = goal;
     }
 
-    public double getBalance() {
+    public String getBalance() {
         return balance;
     }
 
-    public void setBalance(double balance) {
+    public void setBalance(String balance) {
         this.balance = balance;
     }
 
-    public double getPayment() {
+    public String getPayment() {
         return payment;
     }
 
-    public void setPayment(double payment) {
+    public void setPayment(String payment) {
         this.payment = payment;
     }
 
-    public double getPv() {
+    public String getPv() {
         return pv;
     }
 
-    public void setPv(double pv) {
+    public void setPv(String pv) {
         this.pv = pv;
     }
 
-    public double getRatePerPeriod() {
+    public String getRatePerPeriod() {
         return ratePerPeriod;
     }
 
-    public void setRatePerPeriod(double ratePerPeriod) {
+    public void setRatePerPeriod(String ratePerPeriod) {
         this.ratePerPeriod = ratePerPeriod;
     }
 
-    public double getApr() {
+    public String getApr() {
         return apr;
     }
 
-    public void setApr(double apr) {
+    public void setApr(String apr) {
         this.apr = apr;
     }
 
-    public int getNumberOfPeriods() {
+    public String getNumberOfPeriods() {
         return numberOfPeriods;
     }
 
-    public void setNumberOfPeriods(int numberOfPeriods) {
+    public void setNumberOfPeriods(String numberOfPeriods) {
         this.numberOfPeriods = numberOfPeriods;
     }
 

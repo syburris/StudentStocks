@@ -58,7 +58,7 @@ public class StudentStocksRestController {
         if (investors.findFirstByUsername(defaultInvestor.getUsername()) == null) {
             investors.save(defaultInvestor);
         }
-        Student student = new Student("stevenburris@gmail.com", "hunter2", "Steven", "Burris",
+        Student student = new Student("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"), "Steven", "Burris",
                 "College of Charleston", Student.Level.GRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
                 "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12", "1000000");
         if (students.findFirstByUsername(student.getUsername()) == null) {
@@ -159,6 +159,29 @@ public class StudentStocksRestController {
         session.setAttribute("isInvestor", false);
         session.setAttribute("time", LocalDate.now());
         return new ResponseEntity<Student>(studentFromDB, HttpStatus.OK);
+    }
+
+//    Route to create loan
+    @RequestMapping(path = "/postloan", method = RequestMethod.POST)
+    public ResponseEntity<Loan> createLoan (HttpSession session, @RequestBody Loan loan) {
+//        get the student's username
+        String name = (String) session.getAttribute("username");
+//        find the student from username
+        Student student = students.findFirstByUsername(name);
+
+//        if student isn't logged in, throw an error
+        if (student == null) {
+            return new ResponseEntity<Loan>(HttpStatus.FORBIDDEN);
+        }
+
+//        save the loan to the student, and save the student to the loan
+        student.setLoan(loan);
+        students.save(student);
+        loan.setGoal(student.getLoanGoal());
+        loan.setStudent(student);
+        loans.save(loan);
+
+        return new ResponseEntity<Loan>(loan, HttpStatus.OK);
     }
 
 
