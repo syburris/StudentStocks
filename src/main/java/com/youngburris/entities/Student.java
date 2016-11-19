@@ -67,9 +67,6 @@ public class Student {
     @Column(nullable = false)
     boolean isFunded;
 
-    @OneToOne
-    Loan loan;
-
     public Student() {
     }
 
@@ -229,13 +226,6 @@ public class Student {
         isFunded = funded;
     }
 
-    public Loan getLoan() {
-        return loan;
-    }
-
-    public void setLoan(Loan loan) {
-        this.loan = loan;
-    }
 
 
 }
