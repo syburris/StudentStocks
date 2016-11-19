@@ -1,9 +1,13 @@
 const React = require('react')
 const {HomeView} = require('./home-view.js')
-const {StudentForm} = require('./student-signup.js')
+const {StudentFormModal} = require('./student-signup.js')
 const ACTIONS = require("./actions.js")
 const STORE = require('./store.js')
+const {TestView} = require('./simple-components.js')
 const {LoginView} = require('./login-view.js')
+
+
+
 const AppView = React.createClass({
 
    getInitialState: function(){
@@ -23,12 +27,13 @@ const AppView = React.createClass({
 
    render: function(){
 
+
       switch (this.props.currentView) {
          case "home":
             return <HomeView/>
             break;
          case "signup/student":
-            return <StudentForm/>
+            return <StudentFormModal/>
             break;
          case "login":
             return <LoginView/>
@@ -37,7 +42,6 @@ const AppView = React.createClass({
          //    return <GameView crntUser={this.state.currentUser}/>
          //    break;
          default:
-
             break;
       }
 
