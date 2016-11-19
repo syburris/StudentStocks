@@ -13,7 +13,7 @@ const StudentFormModal = React.createClass ({
       evt.preventDefault()
 
       let newForm ={
-         email: this.refs.email.value,
+         username: this.refs.email.value,
          password: this.refs.password.value,
          gpa: this.refs.gpa.value,
          firstName: this.refs.firstName.value,
@@ -76,7 +76,7 @@ const StudentFormModal = React.createClass ({
                   <label htmlFor="highSchool" className="input-label">High School</label>
                   <input type="text" className="form-control" placeholder="High School" ref="highSchool"/>
                </div>
-               
+
                {/* level */}
                Graduate or Undergrad?
                <select className="form-control" id="select" ref="level">
