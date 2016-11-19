@@ -29,7 +29,6 @@ public class Investor {
     @Column(nullable = false)
     String lastName;
 
-    @JsonIgnore
     @Column(nullable = false)
     String ssn;
 
