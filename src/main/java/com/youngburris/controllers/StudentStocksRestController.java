@@ -175,8 +175,7 @@ public class StudentStocksRestController {
         }
 
 //        save the loan to the student, and save the student to the loan
-        student.setLoan(loan);
-        students.save(student);
+
         loan.setGoal(student.getLoanGoal());
         loan.setStudent(student);
         loans.save(loan);
