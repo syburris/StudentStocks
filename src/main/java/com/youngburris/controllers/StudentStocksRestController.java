@@ -60,7 +60,7 @@ public class StudentStocksRestController {
         }
         Student student = new Student("stevenburris@gmail.com", "hunter2", "Steven", "Burris",
                 "College of Charleston", Student.Level.GRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
-                "Porter-Gaud", "url to transcript", "4", "Accounting", "French", "123456-1234-12", "1000000");
+                "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12", "1000000");
         if (students.findFirstByUsername(student.getUsername()) == null) {
             students.save(student);
         }
@@ -140,7 +140,7 @@ public class StudentStocksRestController {
         if (studentFromDB == null) {
             studentFromDB = new Student(student.getUsername(),PasswordStorage.createHash(student.getPassword()),
                     student.getFirstName(), student.getLastName(), student.getSchool(), student.getLevel(),
-                    student.getBio(), student.getHighSchool(), student.getTranscript(), student.getGpa(),
+                    student.getBio(), student.getHighSchool(), student.getGpa(),
                     student.getMajor(), student.getMinor(), student.getSsn(), student.getLoanGoal());
             studentFromDB.setBalance(0);
             studentFromDB.isFunded(false);

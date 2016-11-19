@@ -45,8 +45,6 @@ public class Student {
     @Column
     String highSchool;
 
-    @Column
-    String transcript;
 
     @Column
     String gpa;
@@ -84,7 +82,7 @@ public class Student {
     }
 
     public Student(String username, String password, String firstName, String lastName, String school,
-                   Level level, String bio, String highSchool, String transcript, String gpa, String major,
+                   Level level, String bio, String highSchool, String gpa, String major,
                    String minor, String ssn, String loanGoal) {
         this.username = username;
         this.password = password;
@@ -94,7 +92,7 @@ public class Student {
         this.level = level;
         this.bio = bio;
         this.highSchool = highSchool;
-        this.transcript = transcript;
+
         this.gpa = gpa;
         this.major = major;
         this.minor = minor;
@@ -173,14 +171,6 @@ public class Student {
 
     public void setHighSchool(String highSchool) {
         this.highSchool = highSchool;
-    }
-
-    public String getTranscript() {
-        return transcript;
-    }
-
-    public void setTranscript(String transcript) {
-        this.transcript = transcript;
     }
 
     public String getGpa() {
