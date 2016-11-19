@@ -1,4 +1,6 @@
 const {InvestorAppModel, InvestorAppColl, InvestorLoginModel} = require('./investor-model.js')
+const {StudentAppModel, StudentAppColl,StudentLoginModel} = require("./student-model.js"
+)
 const STORE = require('./store.js')
 
 
@@ -25,15 +27,16 @@ const ACTIONS = {
 //
 //    },
 //
-//    getAllAvatars: function(){
-//       let avtrs = new AvatarCollection()
-//
-//        avtrs.fetch().then(function(){
-//          STORE.setStore('avatars', avtrs.models)
-//
-//
-//       })
-//    },
+   submitStudentForm: function(formInfo){
+      let formInst = new StudentAppModel
+
+      formInst.set(formInfo)
+
+      formInst.save().then(function(serverRes){
+         console.log(serverRes)
+         STORE.setStore('currentUser', serverRes)
+      })
+   },
 //
    handleUserLogin: function(usrInfo){
       let invstLogin = new InvestorLoginModel()
@@ -52,6 +55,7 @@ const ACTIONS = {
 
 
    },
+
 // // EXECUTE TO GRAB RANDOM ASSETS
 //    getObstacles: function(){
 //       let obst = new ObstacleCollection()
