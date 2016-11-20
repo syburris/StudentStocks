@@ -7,10 +7,7 @@ import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -18,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by stevenburris on 11/15/16.
@@ -238,6 +236,27 @@ public class StudentStocksRestController {
 //        return the payment object and a 200
         return new ResponseEntity<Payment>(payment, HttpStatus.OK);
 
+    }
+
+    @RequestMapping(path = "/portion", method = RequestMethod.POST)
+    public ResponseEntity<Portion> postPortion(HttpSession session, @RequestParam double amount,
+                                               @RequestParam String loanId) {
+//        get the username from session attribute
+        String name = (String) session.getAttribute("username");
+//        make sure the investor is logged in
+        Investor investor = investors.findFirstByUsername(name);
+        if (investor == null) {
+            return new ResponseEntity<Portion>(HttpStatus.FORBIDDEN);
+        }
+        Double portionAmount = amount;
+        Loan loan = loans.findOne(Integer.parseInt(loanId));
+        Portion portion = new Portion(portionAmount, loan, investor);
+        portions.save(portion);
+        List<Portion> myPortions = investor.getPortions();
+        myPortions.add(portion);
+        investor.setPortions(myPortions);
+        investors.save(investor);
+        return new ResponseEntity<Portion>(portion, HttpStatus.OK);
     }
 
 //  route to retrieve all of the investor objects as an array list
