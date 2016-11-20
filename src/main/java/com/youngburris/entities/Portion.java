@@ -19,9 +19,6 @@ public class Portion {
     @ManyToOne
     Loan loan;
 
-    @ManyToOne
-    Investor investor;
-
     public Portion() {
     }
 
@@ -29,10 +26,10 @@ public class Portion {
         this.amount = amount;
     }
 
-    public Portion(double amount, Loan loan, Investor investor) {
+    public Portion(double amount, Loan loan) {
         this.amount = amount;
         this.loan = loan;
-        this.investor = investor;
+
     }
 
     public int getId() {
@@ -59,11 +56,4 @@ public class Portion {
         this.loan = loan;
     }
 
-    public Investor getInvestor() {
-        return investor;
-    }
-
-    public void setInvestor(Investor investor) {
-        this.investor = investor;
-    }
 }

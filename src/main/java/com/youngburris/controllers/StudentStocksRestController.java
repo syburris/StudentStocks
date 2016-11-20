@@ -239,8 +239,7 @@ public class StudentStocksRestController {
     }
 
     @RequestMapping(path = "/portion", method = RequestMethod.POST)
-    public ResponseEntity<Portion> postPortion(HttpSession session, @RequestParam double amount,
-                                               @RequestParam String loanId) {
+    public ResponseEntity<Portion> postPortion(HttpSession session, String amount, String loanId) {
 //        get the username from session attribute
         String name = (String) session.getAttribute("username");
 //        make sure the investor is logged in
@@ -248,9 +247,9 @@ public class StudentStocksRestController {
         if (investor == null) {
             return new ResponseEntity<Portion>(HttpStatus.FORBIDDEN);
         }
-        Double portionAmount = amount;
+        Double portionAmount = Double.parseDouble(amount);
         Loan loan = loans.findOne(Integer.parseInt(loanId));
-        Portion portion = new Portion(portionAmount, loan, investor);
+        Portion portion = new Portion(portionAmount, loan);
         portions.save(portion);
         List<Portion> myPortions = investor.getPortions();
         myPortions.add(portion);
