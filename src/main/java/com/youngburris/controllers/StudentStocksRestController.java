@@ -38,6 +38,9 @@ public class StudentStocksRestController {
     @Autowired
     PaymentRepository payments;
 
+    @Autowired
+    SchoolRepository schools;
+
     Server h2;
 
 //    initiate the server and add a default student && default investor if they aren't already in the db
@@ -46,18 +49,43 @@ public class StudentStocksRestController {
 //        initiate h2 server
         h2 = Server.createWebServer().start();
 //        add seed data (investor)
-        Investor defaultInvestor = new Investor("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"),
-                "Steven", "Burris", "219089-4322-32",
-                "College of Charleston");
-        if (investors.findFirstByUsername(defaultInvestor.getUsername()) == null) {
+        if (investors.count() == 0) {
+            Investor defaultInvestor = new Investor("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"),
+                    "Steven", "Burris", "219089-4322-32",
+                    "College of Charleston");
             investors.save(defaultInvestor);
         }
+
 //        add seed data (student)
-        Student student = new Student("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"), "Steven", "Burris",
-                "College of Charleston", Student.Level.GRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
-                "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12", "1000000");
-        if (students.findFirstByUsername(student.getUsername()) == null) {
+        if (students.count() == 0) {
+            Student student = new Student("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"), "Steven", "Burris",
+                    "College of Charleston", Student.Level.GRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
+                    "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12", "1000000");
             students.save(student);
+        }
+
+//        add seed data (schools)
+        if (schools.count() == 0) {
+            School school = new School("College of Charleston", "66 George Street", "Charleston", "SC", "29424", "USA",
+                    "843.805.5507", "public/images/cofc.jpg", "http://www.cofc.edu/");
+            School school1 = new School("University of South Carolina", "816 Bull Street", "Columbia", "SC", "29208", "USA",
+                    "803.777.0169", "public/images/carolina.jpg", "http://www.sc.edu/");
+            School school2 = new School("Harvard University", "86 Brattle Street", "Cambridge", "MA", "02138", "USA",
+                    "617.495.1000", "public/images/harvard.jpg", "http://www.harvard.edu/");
+            School school3 = new School("University of Virginia", "190 McCormick Road", "Charlottesville", "VA", "22903", "USA",
+                    "434.924.0311", "public/images/uva.png", "http://www.virginia.edu/");
+            School school4 = new School("University of Oxford", "University Offices", "Wellington Square", "Oxford", "OX1 2JD", "United Kingdom",
+                    "44.1865.270000", "public/images/oxford.jpg", "http://www.ox.ac.uk/");
+            School school5 = new School("Pepperdine University", "24255 Pacific Coast Hwy", "Malibu", "CA", "90263", "USA",
+                    "310.506.4000", "public/images/pepperdine.png", "https://www.pepperdine.edu/");
+            School school6 = new School("Massachusetts Institute of Technology", "77 Massachusetts Ave", "Cambridge", "MA", "02139", "USA",
+                    "617.253.1000", "public/images/mit.png", "http://web.mit.edu/");
+            School school7 = new School("Dartmouth College", "10 North Main Street", "Hanover", "New Hampshire", "03755", "USA",
+                    "603.646.2875", "public/images/dartmouth.png", "http://dartmouth.edu/");
+            School school8 = new School("Rhode Island School of Design", "2 College St", "Providence", "RI", "02903", "USA",
+                    "401.454.6100", "public/images/risd-logo.png", "http://www.risd.edu/");
+            School school9 = new School("Brown University", "69 Brown Street", "Providence", "RI", "02912", "USA",
+                    "401.863.1000", "public/images/brown-logo.png", "https://www.brown.edu/");
         }
     }
 
@@ -283,6 +311,12 @@ public class StudentStocksRestController {
         return new ResponseEntity<ArrayList<Portion>>(portionArrayList, HttpStatus.OK);
     }
 
+//    route to retrieve all of the school objects
+    @RequestMapping(path = "/schools", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<School>> getSchools() {
+        ArrayList<School> schoolArrayList = (ArrayList<School>) schools.findAll();
+        return new ResponseEntity<ArrayList<School>>(schoolArrayList, HttpStatus.OK);
+    }
 
 //    method to calculate the monthly payment
     public static double loanPaymentCalculator(Loan loan) {
