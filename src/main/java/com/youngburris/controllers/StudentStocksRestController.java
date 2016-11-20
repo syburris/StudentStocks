@@ -86,6 +86,16 @@ public class StudentStocksRestController {
                     "401.454.6100", "public/images/risd-logo.png", "http://www.risd.edu/");
             School school9 = new School("Brown University", "69 Brown Street", "Providence", "RI", "02912", "USA",
                     "401.863.1000", "public/images/brown-logo.png", "https://www.brown.edu/");
+            schools.save(school);
+            schools.save(school1);
+            schools.save(school2);
+            schools.save(school3);
+            schools.save(school4);
+            schools.save(school5);
+            schools.save(school6);
+            schools.save(school7);
+            schools.save(school8);
+            schools.save(school9);
         }
     }
 
