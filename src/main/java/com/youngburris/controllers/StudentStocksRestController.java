@@ -46,24 +46,26 @@ public class StudentStocksRestController {
 //    initiate the server and add a default student && default investor if they aren't already in the db
     @PostConstruct
     public void init() throws PasswordStorage.CannotPerformOperationException, SQLException {
+//        initiate h2 server
         h2 = Server.createWebServer().start();
+//        add seed data (investor)
         Investor defaultInvestor = new Investor("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"),
                 "Steven", "Burris", "219089-4322-32",
                 "College of Charleston");
         if (investors.findFirstByUsername(defaultInvestor.getUsername()) == null) {
             investors.save(defaultInvestor);
         }
+//        add seed data (student)
         Student student = new Student("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"), "Steven", "Burris",
                 "College of Charleston", Student.Level.GRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
                 "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12", "1000000");
-
         if (students.findFirstByUsername(student.getUsername()) == null) {
             students.save(student);
         }
-
     }
 
     @PreDestroy
+//    kill h2 server
     public void destroy() {
         h2.stop();
     }
@@ -177,7 +179,6 @@ public class StudentStocksRestController {
 
         return new ResponseEntity<Loan>(loan, HttpStatus.OK);
     }
-
 
 //    create investor user route
     @RequestMapping(path = "/investor", method = RequestMethod.POST)
