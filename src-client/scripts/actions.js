@@ -33,6 +33,16 @@ const ACTIONS = {
       formInst.set(formInfo)
 
       formInst.save().then(function(serverRes){
+         console.log('this is serverresponse ', serverRes)
+         STORE.setStore('currentUser', serverRes)
+      })
+   },
+   submitInvestorForm: function(formInfo){
+      let formInvstForm = new InvestorAppModel
+
+      formInvstForm.set(formInfo)
+
+      formInvstForm.save().then(function(serverRes){
          console.log(serverRes)
          STORE.setStore('currentUser', serverRes)
       })
@@ -47,6 +57,9 @@ const ACTIONS = {
 
          console.log(serverRes)
          STORE.setStore('currentUser', serverRes)
+         localStorage.setItem("user_id", serverRes.id);
+         localStorageld
+         console.log(localStorage.getItem("user_id"))
 
       })
 

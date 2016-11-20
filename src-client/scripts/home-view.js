@@ -72,7 +72,7 @@ const NavView = React.createClass({
                      <span className="icon-bar"></span>
                      <span className="icon-bar"></span>
                   </button>
-                  <a className="navbar-brand" href="#/login">LOGIN</a>
+                  <a className="navbar-brand" href="#/login">INVESTOR LOGIN</a>
                </div>
 
                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -113,7 +113,6 @@ const HeaderHeros = React.createClass({
 
    _handleClick: function(evt){
       evt.preventDefault()
-      console.log(evt)
 
       location.hash = "/signup/students"
 
