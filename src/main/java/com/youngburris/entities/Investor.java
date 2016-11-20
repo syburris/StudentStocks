@@ -1,6 +1,7 @@
 package com.youngburris.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -20,6 +21,7 @@ public class Investor {
     @Column(nullable = false, unique = true)
     String username;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false)
     String password;
 
@@ -29,6 +31,7 @@ public class Investor {
     @Column(nullable = false)
     String lastName;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false)
     String ssn;
 

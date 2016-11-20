@@ -324,5 +324,4 @@ public class StudentStocksRestController {
                 (Math.pow((1 + r), n) - 1);
         return Math.round(balance * 100.00) / 100.00;
     }
-
 }
