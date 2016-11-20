@@ -7,10 +7,7 @@ import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
@@ -18,6 +15,7 @@ import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by stevenburris on 11/15/16.
@@ -144,13 +142,11 @@ public class StudentStocksRestController {
             studentFromDB.isFunded(false);
 
             students.save(studentFromDB);
-
         }
 //        if the username already exists in the database, throw an error
         else {
             return new ResponseEntity<Student>(HttpStatus.IM_USED);
         }
-
 
 //        set attributes and send 200
         session.setAttribute("username", studentFromDB.getUsername());
@@ -173,9 +169,7 @@ public class StudentStocksRestController {
         }
 
 //        save the loan to the student
-
         loan.setGoal(student.getLoanGoal());
-//        loan.setStudent(student);
         loans.save(loan);
         Loan theLoan = loans.findOne(loan.getId());
         student.setLoan(theLoan);
@@ -222,7 +216,6 @@ public class StudentStocksRestController {
 //      get the loan from the student
         Loan loan = student.getLoan();
 
-//
 //        get the payment balance, add the new payment to it and save the new payments balance
         double paymentBalance = loan.getPaymentBalance();
         double thePayment = Double.parseDouble(payment.getPayment());
@@ -245,25 +238,48 @@ public class StudentStocksRestController {
 
     }
 
+    @RequestMapping(path = "/portion", method = RequestMethod.POST)
+    public ResponseEntity<Portion> postPortion(HttpSession session, String amount, String loanId) {
+//        get the username from session attribute
+        String name = (String) session.getAttribute("username");
+//        make sure the investor is logged in
+        Investor investor = investors.findFirstByUsername(name);
+        if (investor == null) {
+            return new ResponseEntity<Portion>(HttpStatus.FORBIDDEN);
+        }
+        Double portionAmount = Double.parseDouble(amount);
+        Loan loan = loans.findOne(Integer.parseInt(loanId));
+        Portion portion = new Portion(portionAmount, loan);
+        portions.save(portion);
+        List<Portion> myPortions = investor.getPortions();
+        myPortions.add(portion);
+        investor.setPortions(myPortions);
+        investors.save(investor);
+        return new ResponseEntity<Portion>(portion, HttpStatus.OK);
+    }
 
+//  route to retrieve all of the investor objects as an array list
     @RequestMapping(path = "/investors", method = RequestMethod.GET)
     public ResponseEntity<ArrayList<Investor>> getInvestors() {
         ArrayList<Investor> investorArrayList = (ArrayList<Investor>) investors.findAll();
         return new ResponseEntity<ArrayList<Investor>>(investorArrayList, HttpStatus.OK);
     }
 
+//    route to retrieve all of the students in an array list
     @RequestMapping(path = "/students", method = RequestMethod.GET)
     public ResponseEntity<ArrayList<Student>> getStudents() {
         ArrayList<Student> studentArrayList = (ArrayList<Student>) students.findAll();
         return new ResponseEntity<ArrayList<Student>>(studentArrayList, HttpStatus.OK);
     }
 
+//    route to retrieve all of the loans in an array list
     @RequestMapping(path = "/loans", method = RequestMethod.GET)
     public ResponseEntity<ArrayList<Loan>> getLoans() {
         ArrayList<Loan> loanArrayList = (ArrayList<Loan>) loans.findAll();
         return new ResponseEntity<ArrayList<Loan>>(loanArrayList, HttpStatus.OK);
     }
 
+//    route to retrieve all of the loan investment portions in an array list
     @RequestMapping(path = "/portions", method = RequestMethod.GET)
     public ResponseEntity<ArrayList<Portion>> getPortions() {
         ArrayList<Portion> portionArrayList = (ArrayList<Portion>) portions.findAll();
