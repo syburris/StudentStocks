@@ -23,9 +23,6 @@ import java.util.List;
 @RestController
 public class StudentStocksRestController {
 
-
-
-
     @Autowired
     StudentRepository students;
 
@@ -236,7 +233,6 @@ public class StudentStocksRestController {
 
 //        return the payment object and a 200
         return new ResponseEntity<Payment>(payment, HttpStatus.OK);
-
     }
 
     @RequestMapping(path = "/portion", method = RequestMethod.POST)
@@ -310,7 +306,6 @@ public class StudentStocksRestController {
 //        round the payment to the nearest 100th place
         double actualPayment = Math.round(monthlyPayment * 100.00) / 100.00;
         return actualPayment;
-
     }
 
     public static double newBalanceCalculation(Loan loan) {
