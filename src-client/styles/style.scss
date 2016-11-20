@@ -1,5 +1,6 @@
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 @import "../../node_modules/font-awesome/scss/font-awesome.scss";
+// @import "../../node_modules/@blueprintjs/core/dist/blueprint.scss";
 * {
 	box-sizing: border-box;
 }
@@ -8,6 +9,10 @@ img{
 }
 
 body{
+	// background: url('../images/476079.jpg')center, center, no-repeat;
+	// background-size: cover;
+	background: #2B3E50;
+	color: #fff;
 	font-family: 'PT Sans', sans-serif;
 
 

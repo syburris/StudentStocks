@@ -1,12 +1,32 @@
 const React = require('react')
 const AppBarExampleIcon = require('./student-signup.js')
 
+// const menu = (
+//     <Menu>
+//         <MenuItem text="New" />
+//         <MenuItem text="Open" />
+//         <MenuItem text="Save" />
+//         <MenuDivider />
+//         <MenuItem text="Settings..." />
+//     </Menu>
+// );
+//
+// <Popover content={menu} position={Position.BOTTOM_RIGHT}>
+//     <Button text="Actions" />
+// </Popover>
+// 3
+
 
 
 
 const HomeView = React.createClass({
 
+   _handleClick: function(evt){
+      console.log(evt)
+      console.log(this.refs)
 
+
+   },
 
    render: () =>{
 
@@ -20,6 +40,7 @@ const HomeView = React.createClass({
             <HeaderHeros/>
             <AboutStocks/>
             <StudentSuccess/>
+
 
          </div>
       )
