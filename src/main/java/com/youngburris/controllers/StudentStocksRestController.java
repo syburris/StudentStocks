@@ -1,13 +1,7 @@
 package com.youngburris.controllers;
 
-import com.youngburris.entities.Investor;
-import com.youngburris.entities.Loan;
-import com.youngburris.entities.Portion;
-import com.youngburris.entities.Student;
-import com.youngburris.services.InvestorRepository;
-import com.youngburris.services.LoanRepository;
-import com.youngburris.services.PortionRepository;
-import com.youngburris.services.StudentRepository;
+import com.youngburris.entities.*;
+import com.youngburris.services.*;
 import com.youngburris.utilities.PasswordStorage;
 import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +40,9 @@ public class StudentStocksRestController {
     @Autowired
     PortionRepository portions;
 
+    @Autowired
+    PaymentRepository payments;
+
     Server h2;
 
 //    initiate the server and add a default student && default investor if they aren't already in the db
@@ -61,6 +58,7 @@ public class StudentStocksRestController {
         Student student = new Student("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"), "Steven", "Burris",
                 "College of Charleston", Student.Level.GRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
                 "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12", "1000000");
+
         if (students.findFirstByUsername(student.getUsername()) == null) {
             students.save(student);
         }
@@ -174,11 +172,14 @@ public class StudentStocksRestController {
             return new ResponseEntity<Loan>(HttpStatus.FORBIDDEN);
         }
 
-//        save the loan to the student, and save the student to the loan
+//        save the loan to the student
 
         loan.setGoal(student.getLoanGoal());
-        loan.setStudent(student);
+//        loan.setStudent(student);
         loans.save(loan);
+        Loan theLoan = loans.findOne(loan.getId());
+        student.setLoan(theLoan);
+        students.save(student);
 
         return new ResponseEntity<Loan>(loan, HttpStatus.OK);
     }
@@ -208,6 +209,42 @@ public class StudentStocksRestController {
         return new ResponseEntity<Investor>(investor, HttpStatus.OK);
     }
 
+//    route for posting payments on loan
+    @RequestMapping(path = "/payment", method = RequestMethod.POST)
+    public ResponseEntity<Payment> makePayment(HttpSession session, @RequestBody Payment payment) {
+//        retrieve username from session attribute
+        String name = (String) session.getAttribute("username");
+//        make sure the student is logged in
+        Student student = students.findFirstByUsername(name);
+        if (student == null) {
+            return new ResponseEntity<Payment>(HttpStatus.FORBIDDEN);
+        }
+//      get the loan from the student
+        Loan loan = student.getLoan();
+
+//
+//        get the payment balance, add the new payment to it and save the new payments balance
+        double paymentBalance = loan.getPaymentBalance();
+        double thePayment = Double.parseDouble(payment.getPayment());
+        double newPaymentBalance = paymentBalance + thePayment;
+        loan.setPaymentBalance(newPaymentBalance);
+
+//        calculate new loan balance and save it to the loan
+        double newBalance = newBalanceCalculation(loan);
+        loan.setBalance(String.valueOf(newBalance));
+
+//        Set the new loan balance in the payment, so that it can be retrieved when the payment object
+//        is returned
+        payment.setNewBalance(String.valueOf(newBalance));
+
+//        save the payment
+        payments.save(payment);
+
+//        return the payment object and a 200
+        return new ResponseEntity<Payment>(payment, HttpStatus.OK);
+
+    }
+
 
     @RequestMapping(path = "/investors", method = RequestMethod.GET)
     public ResponseEntity<ArrayList<Investor>> getInvestors() {
@@ -235,26 +272,45 @@ public class StudentStocksRestController {
 
 
 //    method to calculate the monthly payment
-    public static double loanPaymentCalculator(int gracePeriod, double principalBalance, double apr, double years) {
+    public static double loanPaymentCalculator(Loan loan) {
+//        get the necessary fields
+        double apr = Double.parseDouble(loan.getApr());
+        double gracePeriod = Double.parseDouble(loan.getGracePeriod());
+        double n = Double.parseDouble(loan.getNumberOfPeriods());
+        double principalBalance = Double.parseDouble(loan.getBalance());
 //        get the periodic interest rate from the annual percentage rate
         double decimal = apr / 100.00;
         double r = decimal / 12;
 
 //        add interest accrued over the grace period to the principal balance
-        int nGracePeriod = gracePeriod * 12;
+        double nGracePeriod = gracePeriod * 12;
         double newPrincipalBalance = ((r * principalBalance) * nGracePeriod) + principalBalance;
 
-//        calculate the number of months the loan will be paid over
-        double nLoanLength = (years * 12);
-
 //        calculate the payment made each month
-        double monthlyPayment = (newPrincipalBalance * (r * (Math.pow((1 + r), nLoanLength)))) /
-                (Math.pow((1 + r), nLoanLength) - 1);
+        double monthlyPayment = (newPrincipalBalance * (r * (Math.pow((1 + r), n)))) /
+                (Math.pow((1 + r), n) - 1);
 
 //        round the payment to the nearest 100th place
         double actualPayment = Math.round(monthlyPayment * 100.00) / 100.00;
         return actualPayment;
 
+    }
+
+    public static double newBalanceCalculation(Loan loan) {
+//        get the necessary fields out of the loan
+        double apr = Double.parseDouble(loan.getApr());
+        double n = Double.parseDouble(loan.getNumberOfPeriods());
+        double loanAmount = Double.parseDouble(loan.getGoal());
+        double monthsPassed = loan.getMonthsPassed() + 1;
+
+//        get the periodic interest rate from the annual percentage rate
+        double decimal = apr /100.00;
+        double r = decimal / 12;
+
+//        calculate the new balance
+        double balance = (loanAmount * (Math.pow((1 + r), n)) - Math.pow((1 + r), monthsPassed)) /
+                (Math.pow((1 + r), n) - 1);
+        return Math.round(balance * 100.00) / 100.00;
     }
 
 }
