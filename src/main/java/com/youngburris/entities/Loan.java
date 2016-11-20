@@ -4,6 +4,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.DoubleSummaryStatistics;
 import java.util.List;
 
 /**
@@ -30,6 +31,9 @@ public class Loan {
     String pv;
 
     @Column
+    String years;
+
+    @Column
     String ratePerPeriod;
 
     @Column
@@ -47,8 +51,14 @@ public class Loan {
     @Column
     LocalDate paymentDate;
 
-    @OneToOne
-    Student student;
+    @Column
+    Double paymentBalance;
+
+    @Column
+    int monthsPassed;
+
+    @Column
+    String gracePeriod;
 
     @OneToMany
     List<Portion> portions;
@@ -57,13 +67,15 @@ public class Loan {
     }
 
     public Loan(String balance, String payment, String pv, String ratePerPeriod, String apr,
-                String numberOfPeriods) {
+                String numberOfPeriods, String gracePeriod, String years) {
         this.balance = balance;
         this.payment = payment;
         this.pv = pv;
         this.ratePerPeriod = ratePerPeriod;
         this.apr = apr;
         this.numberOfPeriods = numberOfPeriods;
+        this.gracePeriod = gracePeriod;
+        this.years = years;
     }
 
     public int getId() {
@@ -154,12 +166,12 @@ public class Loan {
         this.paymentDate = paymentDate;
     }
 
-    public Student getStudent() {
-        return student;
+    public String getGracePeriod() {
+        return gracePeriod;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setGracePeriod(String gracePeriod) {
+        this.gracePeriod = gracePeriod;
     }
 
     public List<Portion> getPortions() {
@@ -168,5 +180,29 @@ public class Loan {
 
     public void setPortions(List<Portion> portions) {
         this.portions = portions;
+    }
+
+    public int getMonthsPassed() {
+        return monthsPassed;
+    }
+
+    public void setMonthsPassed(int monthsPassed) {
+        this.monthsPassed = monthsPassed;
+    }
+
+    public String getYears() {
+        return years;
+    }
+
+    public void setYears(String years) {
+        this.years = years;
+    }
+
+    public Double getPaymentBalance() {
+        return paymentBalance;
+    }
+
+    public void setPaymentBalance(Double paymentBalance) {
+        this.paymentBalance = paymentBalance;
     }
 }
