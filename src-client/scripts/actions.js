@@ -33,12 +33,21 @@ const ACTIONS = {
       formInst.set(formInfo)
 
       formInst.save().then(function(serverRes){
-         console.log(serverRes)
+         console.log('this is serverresponse ', serverRes)
          STORE.setStore('currentUser', serverRes)
       })
    },
+   // submitInvestorForm: function(formInfo){
+   //    let formInvstForm = new StudentAppModel
+   //
+   //    formInvstForm.set(formInfo)
+   //
+   //    formInvstForm.save().then(function(serverRes){
+   //       console.log(serverRes)
+   //       STORE.setStore('currentUser', serverRes)
+   // },
 //
-   handleUserLogin: function(usrInfo){
+   handleInvestorLogin: function(usrInfo){
       let invstLogin = new InvestorLoginModel()
 
       invstLogin.set(usrInfo)

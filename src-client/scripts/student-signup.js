@@ -11,27 +11,39 @@ const StudentFormModal = React.createClass ({
 
    _handleClick: function(evt){
       evt.preventDefault()
+      console.log('this is the state you want to send to your backend>', this.state)
+      let newForm = this.state;
 
-      let newForm ={
-         username: this.refs.email.value,
-         password: this.refs.password.value,
-         gpa: this.refs.gpa.value,
-         firstName: this.refs.firstName.value,
-         highSchool: this.refs.highSchool.value,
-         lastName: this.refs.last.value,
-         level: this.refs.level.value,
-         loanGoal: this.refs.loanGoal.value,
-         major: this.refs.major.value,
-         minor: this.refs.minor.value,
-         school: this.refs.school.value,
-         ssn: this.refs.ssn.value,
-         bio: this.refs.bio.value
-      }
+      // let newForm ={
+      //    username: this.refs.email.value,
+      //    password: this.refs.password.value,
+      //    gpa: this.refs.gpa.value,
+      //    firstName: this.refs.firstName.value,
+      //    highSchool: this.refs.highSchool.value,
+      //    lastName: this.refs.last.value,
+      //    level: this.refs.level.value,
+      //    loanGoal: this.refs.loanGoal.value,
+      //    major: this.refs.major.value,
+      //    minor: this.refs.minor.value,
+      //    school: this.refs.school.value,
+      //    ssn: this.refs.ssn.value,
+      //    bio: this.refs.bio.value
+      // }
       console.log(newForm)
       ACTIONS.submitStudentForm(newForm)
 
 
 
+   },
+
+   handleChange: function(data, name) {
+      let newState = {};
+
+      newState[name] = data;
+
+      this.setState(newState, () => {
+         console.log('current state', this.state);
+      });
    },
 
 
@@ -108,6 +120,13 @@ const StudentFormModal = React.createClass ({
                   <label htmlFor="loanGoal" className="input-label">Loan Amount</label>
                   <input type="text" className="form-control" placeholder="Loan Amount" ref="loanGoal"/>
                </div>
+               <NewComp title="email" name="email" handleChange={this.handleChange} />
+
+               <NewComp title="username" name="username" handleChange={this.handleChange} />
+
+               <NewComp title="password" name="password" handleChange={this.handleChange} />
+
+               <NewComp title="facebook" name="facebook" handleChange={this.handleChange} />
 
                <button className="btn button-primary" onClick={this._handleClick}>Submit Form</button>
             </form>
@@ -115,13 +134,40 @@ const StudentFormModal = React.createClass ({
          </div>
 
 
-               )
-               }
+         )
+   }
 
 
 
 
-               })
+})
+const NewComp = React.createClass({
+
+   changeHandler: function(event) {
+      const {
+         value: value,
+         name: name,
+      } = event.currentTarget;
+      console.log(value);
+
+      this.props.handleChange(value, name);
+   },
+
+   render: function(){
+
+      return(
+         // <div className="input-group simp-input">
+         //    <label htmlFor="gpa" className="input-label">G.P.A</label>
+         //    <input type="text" className="form-control" placeholder="G.P.A" ref="gpa"/>
+         // </div>
+
+         <div className="container">
+            <label htmlFor={this.props.title}>{this.props.title}</label>
+            <input type="text" placeholder="email" name={this.props.name} onChange={this.changeHandler}/>
+         </div>
+      )
+   }
+})
 
 
 module.exports = {StudentFormModal}
