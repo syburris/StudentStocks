@@ -23,7 +23,7 @@ public class Student {
     @Column(nullable = false, unique = true)
     String username;
 
-
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false)
     String password;
 
@@ -45,7 +45,6 @@ public class Student {
     @Column
     String highSchool;
 
-
     @Column
     String gpa;
 
@@ -55,6 +54,7 @@ public class Student {
     @Column
     String minor;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(nullable = false)
     String ssn;
 
