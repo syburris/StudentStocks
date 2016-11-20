@@ -113,7 +113,6 @@ const HeaderHeros = React.createClass({
 
    _handleClick: function(evt){
       evt.preventDefault()
-      console.log(evt)
 
       location.hash = "/signup/students"
 

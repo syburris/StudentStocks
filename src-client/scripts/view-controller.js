@@ -1,6 +1,7 @@
 const React = require('react')
 const {HomeView} = require('./home-view.js')
-const {StudentFormModal} = require('./student-signup.js')
+const {StudentFormModal, SimpInput} = require('./student-signup.js')
+const InvestorForm = require('./investor-signup.js')
 const ACTIONS = require("./actions.js")
 const STORE = require('./store.js')
 const {TestView} = require('./simple-components.js')
@@ -32,8 +33,11 @@ const AppView = React.createClass({
          case "home":
             return <HomeView/>
             break;
-         case "signup/student":
+         case "signup/students":
             return <StudentFormModal/>
+            break;
+         case "signup/investor":
+            return <InvestorForm/>
             break;
          case "login":
             return <LoginView/>

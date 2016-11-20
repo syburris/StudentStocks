@@ -10,7 +10,7 @@ const AppRouter = Backbone.Router.extend({
    routes: {
       'login': "showLogin",
       'about': "showAbout",
-      'signup/:usertype': "showSignup",
+      'signup/:type': "showSignup",
       '': "showHome"
 
    },
@@ -24,9 +24,11 @@ const AppRouter = Backbone.Router.extend({
       ReactDOM.render(<AppView currentView="about"/>, document.querySelector("#app-container"))
    },
 
-   showSignup: function(usrType){
+   showSignup: function(type){
+      let crntView = "signup/"+type;
+      console.log(crntView)
 
-      ReactDOM.render(<AppView currentView="signup/student"/>, document.querySelector("#app-container"))
+      ReactDOM.render(<AppView currentView={crntView}/>, document.querySelector("#app-container"))
    },
 
    showLogin: function(){

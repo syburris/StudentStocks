@@ -1,5 +1,6 @@
 const React = require('react')
 const ACTIONS = require('./actions.js')
+const {StudentFormModal, SimpInput} = require("./student-signup.js")
 
 
 
@@ -16,19 +17,20 @@ const InvestorForm = React.createClass({
    _handleClick: function(evt){
       evt.preventDefault()
 
-      let newForm = {
-         username: this.refs.email.value,
-         password: this.refs.password.value,
-         firstName: this.refs.firstName.value,
-         lastName: this.refs.last.value,
-         ssn: this.refs.ssn.value,
-         school: this.refs.school.value,
+      let newForm = this.state;
 
-
-      }
       ACTIONS.submitInvestorForm(newForm)
 
 
+   },
+   handleChange: function(data, name) {
+      let newState = {};
+
+      newState[name] = data;
+
+      this.setState(newState, () => {
+         console.log('current state', this.state);
+      });
    },
 
 
@@ -40,37 +42,20 @@ const InvestorForm = React.createClass({
          <div className="form-cont">
             <form action="" className="form-horizontal">
                {/* username */}
-               <div className="input-group simp-input">
-                  <label htmlFor="email" className="input-label">Email</label>
-                  <input type="text" className="form-control" placeholder="Email" ref="email"/>
-               </div>
+               <SimpInput title="Email" name="username" handleChange={this.handleChange} />
                {/* password */}
-               <div className="input-group simp-input">
-                  <label htmlFor="password" className="input-label">Password</label>
-                  <input type="password" className="form-control" placeholder="Password" ref="password"/>
-               </div>
+               <SimpInput textType="password" title="Password" name="password" handleChange={this.handleChange} />
                {/* firstName */}
-               <div className="input-group simp-input">
-                  <label htmlFor="first" className="input-label">Fist Name</label>
-                  <input type="text" className="form-control" placeholder="First Name" ref="firstName"/>
-               </div>
+               <SimpInput title="First Name" name="firstName" handleChange={this.handleChange} />
                {/* lastName */}
-               <div className="input-group simp-input">
-                  <label htmlFor="last" className="input-label">Last Name</label>
-                  <input type="text" className="form-control" placeholder="Last Name" ref="last"/>
-               </div>
+               <SimpInput title="Last Name" name="lastName" handleChange={this.handleChange} />
                {/* ssn */}
-               <div className="input-group simp-input">
-                  <label htmlFor="ssn" className="input-label">SSN</label>
-                  <input type="text" className="form-control" placeholder="SSN" ref="ssn"/>
-               </div>
+               <SimpInput title="SSN" name="ssn" handleChange={this.handleChange} />
                {/* school */}
-               <div className="input-group simp-input">
-                  <label htmlFor="school" className="input-label">School Attending</label>
-                  <input type="text" className="form-control" placeholder="School Attending" ref="school"/>
-               </div>
+               <SimpInput title="School Attending" name="school" handleChange={this.handleChange} />
+
                <button className="btn button-primary" onClick={this._handleClick}>Submit Form</button>
-               
+
             </form>
          </div>
 
@@ -78,3 +63,5 @@ const InvestorForm = React.createClass({
       )
    }
 })
+
+module.exports = InvestorForm
