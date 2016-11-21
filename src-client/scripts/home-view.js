@@ -203,7 +203,7 @@ const AboutStocks = React.createClass({
                <h3>Easy Signup</h3>
                {/* <i className="fa fa-file-text-o abt-icon" aria-hidden="true"></i> */}
                <div>
-                  <img src="public/images/Untitled-4.png" alt=""/>
+                  <img src="/images/Untitled-4.png" alt=""/>
                </div>
                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate nulla beatae ratione itaque fuga veritatis accusantium, debitis ab, voluptatem voluptatum quis suscipit similique tempora blanditiis sint in! Id, doloribus, aliquam!</p>
 
