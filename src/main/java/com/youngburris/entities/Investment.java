@@ -6,8 +6,8 @@ import javax.persistence.*;
  * Created by stevenburris on 11/17/16.
  */
 @Entity
-@Table(name = "portions")
-public class Portion {
+@Table(name = "investments")
+public class Investment {
 
     @Id
     @GeneratedValue
@@ -19,14 +19,14 @@ public class Portion {
     @ManyToOne
     Loan loan;
 
-    public Portion() {
+    public Investment() {
     }
 
-    public Portion(double amount) {
+    public Investment(double amount) {
         this.amount = amount;
     }
 
-    public Portion(double amount, Loan loan) {
+    public Investment(double amount, Loan loan) {
         this.amount = amount;
         this.loan = loan;
 

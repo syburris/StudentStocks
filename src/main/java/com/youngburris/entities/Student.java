@@ -67,9 +67,6 @@ public class Student {
     @OneToOne
     Loan loan;
 
-    @Column(nullable = false)
-    boolean isFunded;
-
     @ManyToOne
     School mySchool;
 
@@ -95,7 +92,6 @@ public class Student {
         this.level = level;
         this.bio = bio;
         this.highSchool = highSchool;
-
         this.gpa = gpa;
         this.major = major;
         this.minor = minor;
@@ -224,24 +220,12 @@ public class Student {
         this.balance = balance;
     }
 
-    public boolean isFunded(boolean b) {
-        return isFunded;
-    }
-
-    public void setFunded(boolean funded) {
-        isFunded = funded;
-    }
-
     public Loan getLoan() {
         return loan;
     }
 
     public void setLoan(Loan loan) {
         this.loan = loan;
-    }
-
-    public boolean isFunded() {
-        return isFunded;
     }
 
     public School getMySchool() {
