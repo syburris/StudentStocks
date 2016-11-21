@@ -70,6 +70,9 @@ public class Student {
     @Column(nullable = false)
     boolean isFunded;
 
+    @ManyToOne
+    School mySchool;
+
     public Student() {
     }
 
@@ -241,5 +244,11 @@ public class Student {
         return isFunded;
     }
 
+    public School getMySchool() {
+        return mySchool;
+    }
 
+    public void setMySchool(School mySchool) {
+        this.mySchool = mySchool;
+    }
 }
