@@ -16,11 +16,11 @@ const AppView = React.createClass({
       return STORE.getStoreData()
    },
 
+
    componentWillMount: function(){
       let self = this
       ACTIONS.fetchSchoolData()
       ACTIONS.fetchALlStudents()
-
 
 
 
