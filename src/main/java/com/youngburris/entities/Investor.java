@@ -44,6 +44,9 @@ public class Investor {
     @OneToMany
     List<Portion> portions;
 
+    @ManyToOne
+    School mySchool;
+
 
     public Investor() {
     }
@@ -140,4 +143,11 @@ public class Investor {
         this.portions = portions;
     }
 
+    public School getMySchool() {
+        return mySchool;
+    }
+
+    public void setMySchool(School mySchool) {
+        this.mySchool = mySchool;
+    }
 }

@@ -186,6 +186,7 @@ public class StudentStocksRestController {
                     student.getFirstName(), student.getLastName(), student.getSchool(), student.getLevel(),
                     student.getBio(), student.getHighSchool(), student.getGpa(),
                     student.getMajor(), student.getMinor(), student.getSsn(), student.getLoanGoal());
+            studentFromDB.setMySchool(schools.findFirstByName(student.getSchool()));
             studentFromDB.setBalance(0);
             studentFromDB.isFunded(false);
             students.save(studentFromDB);
@@ -235,6 +236,7 @@ public class StudentStocksRestController {
         if (investorFromDB == null) {
             investorFromDB = new Investor(investor.getUsername(),PasswordStorage.createHash(investor.getPassword()),
                     investor.getFirstName(),investor.getLastName(),investor.getSsn(),investor.getSchool(),0.00);
+            investorFromDB.setMySchool(schools.findFirstByName(investor.getSchool()));
             investors.save(investorFromDB);
         }
 //        if the username already exists in the database, throw an error
