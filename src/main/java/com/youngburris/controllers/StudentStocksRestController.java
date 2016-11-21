@@ -3,6 +3,7 @@ package com.youngburris.controllers;
 import com.youngburris.entities.*;
 import com.youngburris.services.*;
 import com.youngburris.utilities.PasswordStorage;
+import org.apache.commons.logging.Log;
 import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -56,6 +57,7 @@ public class StudentStocksRestController {
             File dir = new File("public/images");
             dir.mkdir();
         }
+
 //        add seed data (investor)
         if (investors.count() == 0) {
             Investor defaultInvestor = new Investor("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"),
@@ -72,28 +74,29 @@ public class StudentStocksRestController {
             students.save(student);
         }
 
+
 //        add seed data (schools)
         if (schools.count() == 0) {
             School school = new School("College of Charleston", "66 George Street", "Charleston", "SC", "29424", "USA",
-                    "843.805.5507", "public/images/cofc.jpg", "http://www.cofc.edu/");
+                    "843.805.5507", "images/cofc.jpg", "http://www.cofc.edu/");
             School school1 = new School("University of South Carolina", "816 Bull Street", "Columbia", "SC", "29208", "USA",
-                    "803.777.0169", "public/images/carolina.jpg", "http://www.sc.edu/");
+                    "803.777.0169", "images/carolina.jpg", "http://www.sc.edu/");
             School school2 = new School("Harvard University", "86 Brattle Street", "Cambridge", "MA", "02138", "USA",
-                    "617.495.1000", "public/images/harvard.jpg", "http://www.harvard.edu/");
+                    "617.495.1000", "images/harvard.jpg", "http://www.harvard.edu/");
             School school3 = new School("University of Virginia", "190 McCormick Road", "Charlottesville", "VA", "22903", "USA",
-                    "434.924.0311", "public/images/uva.png", "http://www.virginia.edu/");
+                    "434.924.0311", "images/uva.png", "http://www.virginia.edu/");
             School school4 = new School("University of Oxford", "University Offices", "Wellington Square", "Oxford", "OX1 2JD", "United Kingdom",
-                    "44.1865.270000", "public/images/oxford.jpg", "http://www.ox.ac.uk/");
+                    "44.1865.270000", "images/oxford.jpg", "http://www.ox.ac.uk/");
             School school5 = new School("Pepperdine University", "24255 Pacific Coast Hwy", "Malibu", "CA", "90263", "USA",
-                    "310.506.4000", "public/images/pepperdine.png", "https://www.pepperdine.edu/");
+                    "310.506.4000", "images/pepperdine.png", "https://www.pepperdine.edu/");
             School school6 = new School("Massachusetts Institute of Technology", "77 Massachusetts Ave", "Cambridge", "MA", "02139", "USA",
-                    "617.253.1000", "public/images/mit.png", "http://web.mit.edu/");
+                    "617.253.1000", "images/mit.png", "http://web.mit.edu/");
             School school7 = new School("Dartmouth College", "10 North Main Street", "Hanover", "New Hampshire", "03755", "USA",
-                    "603.646.2875", "public/images/dartmouth.png", "http://dartmouth.edu/");
+                    "603.646.2875", "images/dartmouth.png", "http://dartmouth.edu/");
             School school8 = new School("Rhode Island School of Design", "2 College St", "Providence", "RI", "02903", "USA",
-                    "401.454.6100", "public/images/risd-logo.png", "http://www.risd.edu/");
+                    "401.454.6100", "images/risd-logo.png", "http://www.risd.edu/");
             School school9 = new School("Brown University", "69 Brown Street", "Providence", "RI", "02912", "USA",
-                    "401.863.1000", "public/images/brown-logo.png", "https://www.brown.edu/");
+                    "401.863.1000", "images/brown-logo.png", "https://www.brown.edu/");
             schools.save(school);
             schools.save(school1);
             schools.save(school2);
@@ -185,7 +188,6 @@ public class StudentStocksRestController {
                     student.getMajor(), student.getMinor(), student.getSsn(), student.getLoanGoal());
             studentFromDB.setBalance(0);
             studentFromDB.isFunded(false);
-
             students.save(studentFromDB);
         }
 //        if the username already exists in the database, throw an error

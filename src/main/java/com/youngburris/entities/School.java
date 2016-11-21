@@ -1,5 +1,6 @@
 package com.youngburris.entities;
 
+import org.springframework.social.facebook.api.AchievementType;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
@@ -37,10 +38,10 @@ public class School {
     String phone;
 
     @Column(nullable = false)
-    String logo;
-
-    @Column(nullable = false)
     String website;
+
+    @Column
+    String logo;
 
     public School() {
     }
