@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.servlet.http.HttpSession;
+import java.io.File;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -48,6 +49,13 @@ public class StudentStocksRestController {
     public void init() throws PasswordStorage.CannotPerformOperationException, SQLException {
 //        initiate h2 server
         h2 = Server.createWebServer().start();
+
+//        if images folder doesn't exist, create it
+        File f = new File("public/images");
+        if (!f.exists()) {
+            File dir = new File("public/images");
+            dir.mkdir();
+        }
 //        add seed data (investor)
         if (investors.count() == 0) {
             Investor defaultInvestor = new Investor("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"),
