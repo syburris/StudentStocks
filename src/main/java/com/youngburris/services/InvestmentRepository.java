@@ -1,10 +1,10 @@
 package com.youngburris.services;
 
-import com.youngburris.entities.Portion;
+import com.youngburris.entities.Investment;
 import org.springframework.data.repository.CrudRepository;
 
 /**
  * Created by stevenburris on 11/17/16.
  */
-public interface PortionRepository extends CrudRepository<Portion, Integer> {
+public interface InvestmentRepository extends CrudRepository<Investment, Integer> {
 }

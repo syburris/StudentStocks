@@ -2,9 +2,6 @@ package com.youngburris.entities;
 
 import javax.persistence.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.DoubleSummaryStatistics;
 import java.util.List;
 
 /**
@@ -58,16 +55,19 @@ public class Loan {
     int monthsPassed;
 
     @Column
-    String gracePeriod;
+    int gracePeriod;
 
     @OneToMany
-    List<Portion> portions;
+    List<Investment> investments;
+
+    @Column
+    boolean isFunded;
 
     public Loan() {
     }
 
     public Loan(String balance, String payment, String pv, String ratePerPeriod, String apr,
-                String numberOfPeriods, String gracePeriod, String years) {
+                String numberOfPeriods, int gracePeriod, String years) {
         this.balance = balance;
         this.payment = payment;
         this.pv = pv;
@@ -166,20 +166,20 @@ public class Loan {
         this.paymentDate = paymentDate;
     }
 
-    public String getGracePeriod() {
+    public int getGracePeriod() {
         return gracePeriod;
     }
 
-    public void setGracePeriod(String gracePeriod) {
+    public void setGracePeriod(int gracePeriod) {
         this.gracePeriod = gracePeriod;
     }
 
-    public List<Portion> getPortions() {
-        return portions;
+    public List<Investment> getInvestments() {
+        return investments;
     }
 
-    public void setPortions(List<Portion> portions) {
-        this.portions = portions;
+    public void setInvestments(List<Investment> investments) {
+        this.investments = investments;
     }
 
     public int getMonthsPassed() {
@@ -204,5 +204,13 @@ public class Loan {
 
     public void setPaymentBalance(Double paymentBalance) {
         this.paymentBalance = paymentBalance;
+    }
+
+    public boolean isFunded() {
+        return isFunded;
+    }
+
+    public void setFunded(boolean funded) {
+        isFunded = funded;
     }
 }

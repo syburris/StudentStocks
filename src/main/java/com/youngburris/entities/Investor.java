@@ -1,10 +1,8 @@
 package com.youngburris.entities;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -42,7 +40,10 @@ public class Investor {
     double balance;
 
     @OneToMany
-    List<Portion> portions;
+    List<Investment> investments;
+
+    @ManyToOne
+    School mySchool;
 
 
     public Investor() {
@@ -132,12 +133,19 @@ public class Investor {
         this.balance = balance;
     }
 
-    public List<Portion> getPortions() {
-        return portions;
+    public List<Investment> getInvestments() {
+        return investments;
     }
 
-    public void setPortions(List<Portion> portions) {
-        this.portions = portions;
+    public void setInvestments(List<Investment> investments) {
+        this.investments = investments;
     }
 
+    public School getMySchool() {
+        return mySchool;
+    }
+
+    public void setMySchool(School mySchool) {
+        this.mySchool = mySchool;
+    }
 }

@@ -3,7 +3,6 @@ package com.youngburris.controllers;
 import com.youngburris.entities.*;
 import com.youngburris.services.*;
 import com.youngburris.utilities.PasswordStorage;
-import org.apache.commons.logging.Log;
 import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +15,9 @@ import javax.servlet.http.HttpSession;
 import java.io.File;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class StudentStocksRestController {
     LoanRepository loans;
 
     @Autowired
-    PortionRepository portions;
+    InvestmentRepository investments;
 
     @Autowired
     PaymentRepository payments;
@@ -186,8 +187,8 @@ public class StudentStocksRestController {
                     student.getFirstName(), student.getLastName(), student.getSchool(), student.getLevel(),
                     student.getBio(), student.getHighSchool(), student.getGpa(),
                     student.getMajor(), student.getMinor(), student.getSsn(), student.getLoanGoal());
+            studentFromDB.setMySchool(schools.findFirstByName(student.getSchool()));
             studentFromDB.setBalance(0);
-            studentFromDB.isFunded(false);
             students.save(studentFromDB);
         }
 //        if the username already exists in the database, throw an error
@@ -217,6 +218,7 @@ public class StudentStocksRestController {
 
 //        save the loan to the student
         loan.setGoal(student.getLoanGoal());
+        loan.setFunded(false);
         loans.save(loan);
         Loan theLoan = loans.findOne(loan.getId());
         student.setLoan(theLoan);
@@ -235,6 +237,7 @@ public class StudentStocksRestController {
         if (investorFromDB == null) {
             investorFromDB = new Investor(investor.getUsername(),PasswordStorage.createHash(investor.getPassword()),
                     investor.getFirstName(),investor.getLastName(),investor.getSsn(),investor.getSchool(),0.00);
+            investorFromDB.setMySchool(schools.findFirstByName(investor.getSchool()));
             investors.save(investorFromDB);
         }
 //        if the username already exists in the database, throw an error
@@ -283,24 +286,48 @@ public class StudentStocksRestController {
         return new ResponseEntity<Payment>(payment, HttpStatus.OK);
     }
 
-    @RequestMapping(path = "/portion", method = RequestMethod.POST)
-    public ResponseEntity<Portion> postPortion(HttpSession session, String amount, String loanId) {
+    @RequestMapping(path = "/investment", method = RequestMethod.POST)
+    public ResponseEntity<Investor> postInvestment(HttpSession session, String amount, String loanId) {
 //        get the username from session attribute
         String name = (String) session.getAttribute("username");
 //        make sure the investor is logged in
         Investor investor = investors.findFirstByUsername(name);
         if (investor == null) {
-            return new ResponseEntity<Portion>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<Investor>(HttpStatus.FORBIDDEN);
         }
-        Double portionAmount = Double.parseDouble(amount);
+//        if the investor is logged in, let them invest in a loan
+//        first parse the investment amount as a double and find the loan they're investing in
+        Double investmentAmount = Double.parseDouble(amount);
         Loan loan = loans.findOne(Integer.parseInt(loanId));
-        Portion portion = new Portion(portionAmount, loan);
-        portions.save(portion);
-        List<Portion> myPortions = investor.getPortions();
-        myPortions.add(portion);
-        investor.setPortions(myPortions);
+//        after the loan has been found, parse the available investment amount as a double
+//        and make sure that the amount they want to invest is not larger than the available investment amount
+        Double loanGoal = Double.parseDouble(loan.getGoal());
+        Double availableBalance = loanGoal - Double.parseDouble(loan.getBalance());
+        if (investmentAmount > availableBalance) {
+            return new ResponseEntity<Investor>(HttpStatus.CONFLICT);
+        }
+//        if the portion amount is not larger than the available investment balance,
+//        allow the investor to make an investment
+        Double newLoanBalance = Double.parseDouble(loan.getBalance()) + investmentAmount;
+        if ((loanGoal - newLoanBalance) == 0) {
+            loan.setFunded(true);
+            loan.setInitiationDate(LocalDate.now());
+            LocalDate today = LocalDate.now();
+            LocalDate gracePeriod = today.plusYears(4);
+            loan.setGracePeriod(today.until(gracePeriod).getMonths());
+            LocalDate finishDate = today.plusYears(14);
+            loan.setFinishDate(finishDate);
+        }
+        loan.setBalance(String.valueOf(newLoanBalance));
+        loans.save(loan);
+        Investment investment = new Investment(investmentAmount, loan);
+        investments.save(investment);
+        List<Investment> myInvestments = investor.getInvestments();
+        myInvestments.add(investment);
+        investor.setInvestments(myInvestments);
         investors.save(investor);
-        return new ResponseEntity<Portion>(portion, HttpStatus.OK);
+
+        return new ResponseEntity<Investor>(investor, HttpStatus.OK);
     }
 
 //  route to retrieve all of the investor objects as an array list
@@ -325,10 +352,10 @@ public class StudentStocksRestController {
     }
 
 //    route to retrieve all of the loan investment portions in an array list
-    @RequestMapping(path = "/portions", method = RequestMethod.GET)
-    public ResponseEntity<ArrayList<Portion>> getPortions() {
-        ArrayList<Portion> portionArrayList = (ArrayList<Portion>) portions.findAll();
-        return new ResponseEntity<ArrayList<Portion>>(portionArrayList, HttpStatus.OK);
+    @RequestMapping(path = "/investments", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<Investment>> getPortions() {
+        ArrayList<Investment> investmentArrayList = (ArrayList<Investment>) investments.findAll();
+        return new ResponseEntity<ArrayList<Investment>>(investmentArrayList, HttpStatus.OK);
     }
 
 //    route to retrieve all of the school objects
@@ -342,7 +369,7 @@ public class StudentStocksRestController {
     public static double loanPaymentCalculator(Loan loan) {
 //        get the necessary fields
         double apr = Double.parseDouble(loan.getApr());
-        double gracePeriod = Double.parseDouble(loan.getGracePeriod());
+        double gracePeriod = loan.getGracePeriod();
         double n = Double.parseDouble(loan.getNumberOfPeriods());
         double principalBalance = Double.parseDouble(loan.getBalance());
 //        get the periodic interest rate from the annual percentage rate
