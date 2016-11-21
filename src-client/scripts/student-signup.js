@@ -92,66 +92,6 @@ const StudentFormModal = React.createClass ({
                <SimpInput title="Loan Amount" name="loanGoal" handleChange={this.handleChange} />
 
 
-
-
-
-
-               {/* <div className="input-group simp-input">
-                  <label htmlFor="email" className="input-label">Email</label>
-                  <input type="text" className="form-control" placeholder="Email" ref="email"/>
-               </div> */}
-               {/* <div className="input-group simp-input">
-                  <label htmlFor="password" className="input-label">Password</label>
-                  <input type="password" className="form-control" placeholder="Password" ref="password"/>
-               </div> */}
-               {/* <div className="input-group simp-input">
-                  <label htmlFor="first" className="input-label">Fist Name</label>
-                  <input type="text" className="form-control" placeholder="First Name" ref="firstName"/>
-                  </div>
-                  <div className="input-group simp-input">
-                  <label htmlFor="last" className="input-label">Last Name</label>
-                  <input type="text" className="form-control" placeholder="Last Name" ref="last"/>
-               </div> */}
-               {/*
-                  <div className="input-group simp-input">
-                  <label htmlFor="school" className="input-label">School Attending</label>
-                  <input type="text" className="form-control" placeholder="School Attending" ref="school"/>
-               </div> */}
-               {/*
-                  <div className="input-group simp-input">
-                  <label htmlFor="highSchool" className="input-label">High School</label>
-                  <input type="text" className="form-control" placeholder="High School" ref="highSchool"/>
-                  </div>
-
-
-                  <div className="input-group simp-input">
-                  <label htmlFor="gpa" className="input-label">G.P.A</label>
-                  <input type="text" className="form-control" placeholder="G.P.A" ref="gpa"/>
-               </div> */}
-               {/* <div className="input-group simp-input">
-                  <label htmlFor="major" className="input-label">Major</label>
-                  <input type="text" className="form-control" placeholder="Major" ref="major"/>
-               </div> */}
-               {/* minor */}
-               {/* <div className="input-group simp-input">
-                  <label htmlFor="password" className="input-label">Minor</label>
-                  <input type="text" className="form-control" placeholder="Minor" ref="minor"/>
-               </div> */}
-               {/* <div className="input-group simp-input">
-                  <label htmlFor="ssn" className="input-label">SSN</label>
-                  <input type="text" className="form-control" placeholder="SSN" ref="ssn"/>
-                  </div>
-                  <div className="input-group simp-input">
-                  <label htmlFor="loanGoal" className="input-label">Loan Amount</label>
-                  <input type="text" className="form-control" placeholder="Loan Amount" ref="loanGoal"/>
-                  </div>
-                  <SimpInput title="email" name="email" handleChange={this.handleChange} />
-
-                  <SimpInput title="username" name="username" handleChange={this.handleChange} />
-
-
-               <SimpInput title="facebook" name="facebook" handleChange={this.handleChange} /> */}
-
                <button className="btn button-primary" onClick={this._handleClick}>Submit Form</button>
             </form>
 
