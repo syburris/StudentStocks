@@ -18,6 +18,17 @@ const StudentAppColl = Backbone.Collection.extend({
 
 
 })
+const SingleStudentModel = Backbone.Model.extend({
+   url:"/students"
+})
+
+const AllStudentsColl = Backbone.Collection.extend({
+   model: SingleStudentModel,
+   url: "/students"
+
+
+
+})
 
 
 
@@ -28,4 +39,4 @@ const StudentLoginModel = Backbone.Model.extend({
 
 })
 
-module.exports = {StudentAppModel, StudentAppColl,StudentLoginModel}
+module.exports = {AllStudentsColl, StudentAppModel, StudentAppColl,StudentLoginModel}

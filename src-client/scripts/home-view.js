@@ -1,25 +1,15 @@
 const React = require('react')
 const AppBarExampleIcon = require('./student-signup.js')
-
-// const menu = (
-//     <Menu>
-//         <MenuItem text="New" />
-//         <MenuItem text="Open" />
-//         <MenuItem text="Save" />
-//         <MenuDivider />
-//         <MenuItem text="Settings..." />
-//     </Menu>
-// );
-//
-// <Popover content={menu} position={Position.BOTTOM_RIGHT}>
-//     <Button text="Actions" />
-// </Popover>
-// 3
+const ACTIONS = require("./actions.js")
 
 
 
 
 const HomeView = React.createClass({
+
+   componentWillMount: function(){
+      ACTIONS.fetchSchoolData()
+   },
 
    _handleClick: function(evt){
       console.log(evt)
@@ -28,7 +18,8 @@ const HomeView = React.createClass({
 
    },
 
-   render: () =>{
+   render: function(){
+      console.log(this.props)
 
 
       return(
@@ -40,6 +31,16 @@ const HomeView = React.createClass({
             <HeaderHeros/>
             <AboutStocks/>
             <StudentSuccess/>
+            <div className="row">
+               {/* {this.props.schoolData.models.map((obj, i) =>{
+
+                  return (
+                  <SchoolItem imgSrc={obj.get('logo')} key={i}/>
+                  )
+               })} */}
+            </div>
+
+
 
 
          </div>
@@ -51,6 +52,23 @@ const HomeView = React.createClass({
 
 
 })
+
+const SchoolItem = React.createClass({
+
+
+
+
+   render: function(){
+
+      return(
+         <div className="col-xs-6 col-sm-3 schoolCard">
+            <img src={this.props.imgSrc} alt=""/>
+
+         </div>
+      )
+   }
+})
+
 
 module.exports = {HomeView}
 
@@ -72,12 +90,12 @@ const NavView = React.createClass({
                      <span className="icon-bar"></span>
                      <span className="icon-bar"></span>
                   </button>
-                  <a className="navbar-brand" href="#/login">INVESTOR LOGIN</a>
+                  <a className="navbar-brand" href="#/login/investors">INVESTOR LOGIN</a>
                </div>
 
                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul className="nav navbar-nav">
-                     <li className="active"><a href="#">Link <span className="sr-only">(current)</span></a></li>
+                     <li className="active"><a href="#/login/students">STUDENT LOGIN <span className="sr-only">(current)</span></a></li>
                      <li><a href="#">Link</a></li>
                      <li className="dropdown">
                         <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span className="caret"></span></a>
@@ -111,13 +129,21 @@ const NavView = React.createClass({
 
 const HeaderHeros = React.createClass({
 
-   _handleClick: function(evt){
+   _handleStudentForm: function(evt){
       evt.preventDefault()
+      console.log(evt)
 
       location.hash = "/signup/students"
 
 
 
+
+   },
+
+   _handleInvestorForm: function(evt){
+      evt.preventDefault()
+
+      location.hash = "/signup/investors"
 
    },
 
@@ -133,7 +159,7 @@ const HeaderHeros = React.createClass({
                <h3>Are you A Student?</h3>
                <p>Apply for a loan today</p>
                {/* route to student form page  */}
-               <button className="btn btn-primary" onClick={this._handleClick} ref="student">Apply Now</button>
+               <button className="btn btn-primary" onClick={this._handleStudentForm} ref="student">Apply Now</button>
                <p>or</p>
                {/* page down to student about/testimonials */}
                <button className="btn btn-primary">Find out more</button>
@@ -144,7 +170,7 @@ const HeaderHeros = React.createClass({
                <h3>Become an Investor...</h3>
                <p>Invest in our future today</p>
                {/* route to student form page  */}
-               <button className="btn btn-primary" href="#/signup/investor">Apply Now</button>
+               <button className="btn btn-primary" onClick={this._handleInvestorForm}>Apply Now</button>
                <p>or</p>
                {/* page down to student about/testimonials */}
                <button className="btn btn-primary">Find out more</button>
@@ -167,7 +193,7 @@ const AboutStocks = React.createClass({
 
 
 
-   render: () =>{
+   render: function(){
 
       return (
          <div className="row abt-cont text-center">
@@ -212,7 +238,7 @@ const StudentSuccess = React.createClass ({
 
 
 
-   render: ()=>{
+   render: function(){
 
 
       return (

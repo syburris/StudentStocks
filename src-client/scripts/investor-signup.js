@@ -52,7 +52,7 @@ const InvestorForm = React.createClass({
                {/* ssn */}
                <SimpInput title="SSN" name="ssn" handleChange={this.handleChange} />
                {/* school */}
-               <SimpInput title="School Attending" name="school" handleChange={this.handleChange} />
+               <SimpInput title="School Attended" name="school" handleChange={this.handleChange} />
 
                <button className="btn button-primary" onClick={this._handleClick}>Submit Form</button>
 

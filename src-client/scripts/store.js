@@ -4,7 +4,8 @@ const ACTIONS = require('./actions.js')
 const STORE = {
 
    data: {
-      currentUserType: "",
+      "schools": [],
+      allStudents: [],
       currentUser: {},
       studentsSearched: [],
       currentView: "",

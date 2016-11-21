@@ -1,6 +1,6 @@
 const {InvestorAppModel, InvestorAppColl, InvestorLoginModel} = require('./investor-model.js')
-const {StudentAppModel, StudentAppColl,StudentLoginModel} = require("./student-model.js"
-)
+const {AllStudentsColl, StudentAppModel, StudentAppColl,StudentLoginModel} = require("./student-model.js")
+const {SchoolColl, SchoolModel} = require("./schools-model.js")
 const STORE = require('./store.js')
 
 
@@ -9,24 +9,23 @@ const STORE = require('./store.js')
 
 const ACTIONS = {
 
-//    fetchHighScores: function(){
-//       let scores = new HighScoreCollection()
-//
-//        scores.fetch().then(function(){
-//          STORE.setStore('highscore', scores.models)
-//
-//
-//       })
-//    },
-//
-//    fetchUserData: function(){
-//       let userCollInst = new UserModel()
-//       return userCollInst.fetch().then(function(){
-//          STORE.setStore('all_users', userCollInst)
-//       })
-//
-//    },
-//
+   fetchALlStudents: function(){
+      let allStudents = new AllStudentsColl()
+
+      allStudents.fetch().then(function(){
+         STORE.setStore('allStudents', allStudents.models)
+      })
+   },
+
+
+   fetchSchoolData: function(){
+      let schoolInst = new SchoolColl()
+
+      schoolInst.fetch().then(function(){
+         STORE.setStore('schools', schoolInst.models)
+      })
+   },
+
    submitStudentForm: function(formInfo){
       let formInst = new StudentAppModel
 
@@ -37,6 +36,7 @@ const ACTIONS = {
          STORE.setStore('currentUser', serverRes)
       })
    },
+
    submitInvestorForm: function(formInfo){
       let formInvstForm = new InvestorAppModel
 
@@ -48,17 +48,33 @@ const ACTIONS = {
       })
    },
 //
-   handleUserLogin: function(usrInfo){
-      let invstLogin = new InvestorLoginModel()
+   handleInvestorLogin: function(usrInfo){
+      let InvstLogin = new InvestorLoginModel()
 
-      invstLogin.set(usrInfo)
+      InvstLogin.set(usrInfo)
 
-      invstLogin.save().then(function(serverRes){
+      InvstLogin.save().then(function(serverRes){
 
          console.log(serverRes)
          STORE.setStore('currentUser', serverRes)
          localStorage.setItem("user_id", serverRes.id);
-         localStorageld
+         console.log(localStorage.getItem("user_id"))
+
+      })
+
+
+
+   },
+   handleStudentLogin: function(usrInfo){
+      let stdntLogin = new StudentLoginModel()
+
+      stdntLogin.set(usrInfo)
+
+      stdntLogin.save().then(function(serverRes){
+
+         console.log(serverRes)
+         STORE.setStore('currentUser', serverRes)
+         localStorage.setItem("user_id", serverRes.id);
          console.log(localStorage.getItem("user_id"))
 
       })
