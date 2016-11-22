@@ -76,9 +76,7 @@ const ACTIONS = {
 
       stdntLogin.save().then(function(serverRes){
 
-         console.log(serverRes)
-         STORE.setStore('currentUser', serverRes)
-         localStorage.setItem("user", serverRes);
+
          location.hash = "/dash/students"
 
          // console.log(localStorage.getItem("user_id"))
@@ -87,12 +85,9 @@ const ACTIONS = {
    },
 
    fetchCurrentStudent: function(){
-      let newModel = new StudentModel()
+      let newModel = new StudentModel("/currentstudent")
       console.log("thisone?", newModel)
-      newModel.fetch().then(function(servRes){
-         console.log(serverRes, "?????")
-         console.log("helloooo???", newModel)
-         console.log(newModel)
+      newModel.checkAuth("/currentstudent").then(function(){
 
          STORE.setStore('currentUser', newModel)
       }).fail(function(){

@@ -19,9 +19,11 @@ const AppView = React.createClass({
 
    componentWillMount: function(){
       let self = this
+
       ACTIONS.fetchSchoolData()
       ACTIONS.fetchAllStudents()
       ACTIONS.fetchCurrentStudent()
+
 
       STORE.onChange(function(){
          self.setState(STORE.getStoreData())
@@ -31,12 +33,14 @@ const AppView = React.createClass({
    },
 
    render: function(){
-      console.log(this.state)
+      let countMe = 1
+      console.log((countMe += 1), this.state)
       switch (this.props.currentView) {
          case "home":
             return <HomeView schoolData={this.state.schools}/>
             break;
          case "dash/students":
+            console.log(this.state.currentUser)
             return <StudentView user={this.state.currentUser}/>
             break;
          case "signup/students":

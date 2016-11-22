@@ -8,7 +8,7 @@ const ACTIONS = require("./actions.js")
 const HomeView = React.createClass({
 
    componentWillMount: function(){
-      ACTIONS.fetchSchoolData()
+      // ACTIONS.fetchSchoolData()
    },
 
    _handleClick: function(evt){

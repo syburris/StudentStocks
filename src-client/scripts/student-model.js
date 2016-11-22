@@ -2,12 +2,11 @@ const Backbone = require('backbone')
 
 const StudentModel = Backbone.Model.extend({
 
-   url: "/currentstudent",
-   // initialize: function(newUrl){
-   //    console.log("auth executing", newUrl)
-   //    this.url = newUrl
-   //    console.log(this.url)
-   // },
+   url: "/student",
+   checkAuth: function(newUrl){
+      this.url = newUrl
+      return this.fetch()
+   },
 
 
 
