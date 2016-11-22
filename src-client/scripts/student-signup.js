@@ -10,28 +10,18 @@ const StudentFormModal = React.createClass ({
 
 
    _handleClick: function(evt){
+      console.log("??????")
       evt.preventDefault()
       console.log('this is the state you want to send to your backend>', this.state)
       let newForm = this.state;
          newForm["level"] = this.refs.level.value
          newForm["bio"] = this.refs.bio.value
-      // let newForm ={
-      //    username: this.refs.email.value,
-      //    password: this.refs.password.value,
-      //    gpa: this.refs.gpa.value,
-      //    firstName: this.refs.firstName.value,
-      //    highSchool: this.refs.highSchool.value,
-      //    lastName: this.refs.last.value,
-      //    level: this.refs.level.value,
-      //    loanGoal: this.refs.loanGoal.value,
-      //    major: this.refs.major.value,
-      //    minor: this.refs.minor.value,
-      //    school: this.refs.school.value,
-      //    ssn: this.refs.ssn.value,
-      //    bio: this.refs.bio.value
-      // }
+
       console.log(newForm)
       ACTIONS.submitStudentForm(newForm)
+      console.log(window.location.hash)
+
+      window.location.hash = "/dash/students"
 
 
 
