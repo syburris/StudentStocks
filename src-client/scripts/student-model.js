@@ -1,19 +1,19 @@
 const Backbone = require('backbone')
 
-const StudentAppModel = Backbone.Model.extend({
+const StudentModel = Backbone.Model.extend({
 
-   urlRoot: "/student",
-   checkAuth: function(){
-      this.url = "/currentstudent"
-      return this.fetch()
-   },
+   url: "/currentstudent",
+   // initialize: function(newUrl){
+   //    console.log("auth executing", newUrl)
+   //    this.url = newUrl
+   //    console.log(this.url)
+   // },
 
-   // initialize: function(configObj){
-   //    this.set(configObj)
-   // }
 
 
 })
+
+
 
 
 // newModel = new StudentAppModel()
@@ -23,7 +23,7 @@ const StudentAppModel = Backbone.Model.extend({
 
 const StudentAppColl = Backbone.Collection.extend({
 
-   model: StudentAppModel,
+   model: StudentModel,
    url: "/student",
 
 
@@ -50,4 +50,4 @@ const StudentLoginModel = Backbone.Model.extend({
 
 })
 
-module.exports = {AllStudentsColl, StudentAppModel, StudentAppColl,StudentLoginModel}
+module.exports = {AllStudentsColl, StudentModel, StudentAppColl,StudentLoginModel}

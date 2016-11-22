@@ -21,6 +21,7 @@ const AppView = React.createClass({
       let self = this
       ACTIONS.fetchSchoolData()
       ACTIONS.fetchAllStudents()
+      ACTIONS.fetchCurrentStudent()
 
       STORE.onChange(function(){
          self.setState(STORE.getStoreData())

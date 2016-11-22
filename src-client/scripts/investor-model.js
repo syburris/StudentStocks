@@ -2,7 +2,11 @@ const Backbone = require('backbone')
 
 const InvestorAppModel = Backbone.Model.extend({
 
-   url: "/investor"
+   url: "/investor",
+   checkAuth: function(){
+      this.url = "/currentstudent"
+      return this.fetch()
+   },
 
 
 })

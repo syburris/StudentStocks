@@ -29,15 +29,13 @@ const StudentView = React.createClass({
 
    componentWillMount: function(){
 
-      STORE.setStore("currentUser", this.props.user)
-
    },
 
    render: function(){
       console.log(this.props)
 
       return(
-         <div className="container student-view">
+         <div className="fluid-container student-view">
             <NavView/>
             <div className="row">
                <h1>Welcome <span>{this.props.user.firstName}</span></h1>
