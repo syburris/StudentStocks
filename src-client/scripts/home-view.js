@@ -19,7 +19,7 @@ const HomeView = React.createClass({
    },
 
    render: function(){
-      console.log(this.props)
+      console.log('school data', this.props.schoolData)
 
 
       return(
@@ -32,12 +32,12 @@ const HomeView = React.createClass({
             <AboutStocks/>
             <StudentSuccess/>
             <div className="row">
-               {/* {this.props.schoolData.models.map((obj, i) =>{
+               {this.props.schoolData.map((obj, i) =>{
 
                   return (
-                  <SchoolItem imgSrc={obj.get('logo')} key={i}/>
+                     <SchoolItem imgSrc={obj.get('logo')} key={i}/>
                   )
-               })} */}
+               })}
             </div>
 
 

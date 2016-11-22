@@ -20,7 +20,7 @@ const AppView = React.createClass({
    componentWillMount: function(){
       let self = this
       ACTIONS.fetchSchoolData()
-      ACTIONS.fetchALlStudents()
+      ACTIONS.fetchAllStudents()
 
 
 

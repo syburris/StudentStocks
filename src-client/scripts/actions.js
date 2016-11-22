@@ -1,6 +1,7 @@
 const {InvestorAppModel, InvestorAppColl, InvestorLoginModel} = require('./investor-model.js')
 const {AllStudentsColl, StudentAppModel, StudentAppColl,StudentLoginModel} = require("./student-model.js")
 const {SchoolColl, SchoolModel} = require("./schools-model.js")
+const {StockColl, StockModel} = require("./investment-model.js")
 const STORE = require('./store.js')
 
 
@@ -9,7 +10,7 @@ const STORE = require('./store.js')
 
 const ACTIONS = {
 
-   fetchALlStudents: function(){
+   fetchAllStudents: function(){
       let allStudents = new AllStudentsColl()
 
       allStudents.fetch().then(function(){
@@ -57,9 +58,9 @@ const ACTIONS = {
 
          console.log(serverRes)
          STORE.setStore('currentUser', serverRes)
-         localStorage.setItem("user_id", serverRes.id);
-         console.log(localStorage.getItem("user_id"))
-
+         // localStorage.setItem("user_id", serverRes.id);
+         // console.log(localStorage.getItem("user_id"))
+//
       })
 
 
@@ -75,46 +76,21 @@ const ACTIONS = {
          console.log(serverRes)
          STORE.setStore('currentUser', serverRes)
          localStorage.setItem("user_id", serverRes.id);
-         console.log(localStorage.getItem("user_id"))
+         // console.log(localStorage.getItem("user_id"))
 
       })
+   },
+
+   handleInvestment: function(loanInfo){
+      let stockInvst = new StockModel()
+
+      stockInvst.set(loanInfo)
+
 
 
 
    },
 
-// // EXECUTE TO GRAB RANDOM ASSETS
-//    getObstacles: function(){
-//       let obst = new ObstacleCollection()
-//       //
-//       // obst.fetch().then(function(){
-//       //
-//       //    STORE.setStore('obstacles', obst.models)
-//       //
-//       // })
-//    },
-//
-//    createNewUser: function(modlVals){
-//       let newUser = new SignUpModel()
-//
-//       newUser.set(modlVals)
-//
-//       newUser.save().then(function(serverRes){
-//          STORE.setStore('currentUser', serverRes)
-//
-//       })
-//
-//    },
-//
-//    fetchCharData: function(){
-//       let charCollInst = new CharCollection()
-//
-//       return charCollInst.fetch().then(function(){
-//          STORE.setStore('characters', charCollInst)
-//       })
-//
-//
-//    },
 
    changeView: function(viewInput){
 

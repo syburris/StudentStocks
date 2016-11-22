@@ -2,7 +2,7 @@ const Backbone = require('backbone')
 
 const StockModel = Backbone.Model.extend({
 
-   url: "/portion"
+   url: "/invesment"
 
 
 })
@@ -11,7 +11,7 @@ const StockModel = Backbone.Model.extend({
 const StockColl = Backbone.Collection.extend({
 
    model: StockModel,
-   url: "/portion",
+   url: "/investment",
    initialize: ()=>{
 
    }
