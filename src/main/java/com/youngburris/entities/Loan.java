@@ -19,19 +19,19 @@ public class Loan {
     String goal;
 
     @Column
-    String balance;
+    String principalBalance;
 
     @Column
-    String payment;
+    String interestBalance;
 
     @Column
-    String pv;
+    String monthlyPayment;
 
     @Column
     String years;
 
     @Column
-    String ratePerPeriod;
+    double monthlyInterest;
 
     @Column
     String apr;
@@ -66,12 +66,10 @@ public class Loan {
     public Loan() {
     }
 
-    public Loan(String balance, String payment, String pv, String ratePerPeriod, String apr,
+    public Loan(String principalBalance, String monthlyPayment, String apr,
                 String numberOfPeriods, int gracePeriod, String years) {
-        this.balance = balance;
-        this.payment = payment;
-        this.pv = pv;
-        this.ratePerPeriod = ratePerPeriod;
+        this.principalBalance = principalBalance;
+        this.monthlyPayment = monthlyPayment;
         this.apr = apr;
         this.numberOfPeriods = numberOfPeriods;
         this.gracePeriod = gracePeriod;
@@ -94,36 +92,44 @@ public class Loan {
         this.goal = goal;
     }
 
-    public String getBalance() {
-        return balance;
+    public String getPrincipalBalance() {
+        return principalBalance;
     }
 
-    public void setBalance(String balance) {
-        this.balance = balance;
+    public void setPrincipalBalance(String principalBalance) {
+        this.principalBalance = principalBalance;
     }
 
-    public String getPayment() {
-        return payment;
+    public String getInterestBalance() {
+        return interestBalance;
     }
 
-    public void setPayment(String payment) {
-        this.payment = payment;
+    public void setInterestBalance(String interestBalance) {
+        this.interestBalance = interestBalance;
     }
 
-    public String getPv() {
-        return pv;
+    public String getMonthlyPayment() {
+        return monthlyPayment;
     }
 
-    public void setPv(String pv) {
-        this.pv = pv;
+    public void setMonthlyPayment(String monthlyPayment) {
+        this.monthlyPayment = monthlyPayment;
     }
 
-    public String getRatePerPeriod() {
-        return ratePerPeriod;
+    public String getYears() {
+        return years;
     }
 
-    public void setRatePerPeriod(String ratePerPeriod) {
-        this.ratePerPeriod = ratePerPeriod;
+    public void setYears(String years) {
+        this.years = years;
+    }
+
+    public double getMonthlyInterest() {
+        return monthlyInterest;
+    }
+
+    public void setMonthlyInterest(double monthlyInterest) {
+        this.monthlyInterest = monthlyInterest;
     }
 
     public String getApr() {
@@ -166,6 +172,22 @@ public class Loan {
         this.paymentDate = paymentDate;
     }
 
+    public Double getPaymentBalance() {
+        return paymentBalance;
+    }
+
+    public void setPaymentBalance(Double paymentBalance) {
+        this.paymentBalance = paymentBalance;
+    }
+
+    public int getMonthsPassed() {
+        return monthsPassed;
+    }
+
+    public void setMonthsPassed(int monthsPassed) {
+        this.monthsPassed = monthsPassed;
+    }
+
     public int getGracePeriod() {
         return gracePeriod;
     }
@@ -180,30 +202,6 @@ public class Loan {
 
     public void setInvestments(List<Investment> investments) {
         this.investments = investments;
-    }
-
-    public int getMonthsPassed() {
-        return monthsPassed;
-    }
-
-    public void setMonthsPassed(int monthsPassed) {
-        this.monthsPassed = monthsPassed;
-    }
-
-    public String getYears() {
-        return years;
-    }
-
-    public void setYears(String years) {
-        this.years = years;
-    }
-
-    public Double getPaymentBalance() {
-        return paymentBalance;
-    }
-
-    public void setPaymentBalance(Double paymentBalance) {
-        this.paymentBalance = paymentBalance;
     }
 
     public boolean isFunded() {
