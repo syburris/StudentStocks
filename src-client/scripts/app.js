@@ -11,6 +11,7 @@ const AppRouter = Backbone.Router.extend({
       'login/:type': "showLogin",
       'about': "showAbout",
       'signup/:type': "showSignup",
+      'dash/:user': "showDash",
       '': "showHome"
 
    },
@@ -35,6 +36,12 @@ const AppRouter = Backbone.Router.extend({
       let crntView = "login/" + type;
 
       ReactDOM.render(<AppView currentView={crntView}/>, document.querySelector("#app-container"))
+   },
+
+   showDash: function(user){
+      let crntView = "dash/" + user;
+      ReactDOM.render(<AppView currentView={crntView}/>, document.querySelector("#app-container"))
+
    },
 
    initialize: function(){

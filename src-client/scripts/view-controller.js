@@ -6,7 +6,7 @@ const ACTIONS = require("./actions.js")
 const STORE = require('./store.js')
 const {TestView} = require('./simple-components.js')
 const {StdntLoginView, InvstLoginView} = require('./login-view.js')
-
+const {StudentView} = require("./student-view.js")
 
 const AppView = React.createClass({
 
@@ -22,8 +22,6 @@ const AppView = React.createClass({
       ACTIONS.fetchSchoolData()
       ACTIONS.fetchAllStudents()
 
-
-
       STORE.onChange(function(){
          self.setState(STORE.getStoreData())
          console.log('app state changed')
@@ -36,7 +34,10 @@ const AppView = React.createClass({
       switch (this.props.currentView) {
          case "home":
             return <HomeView schoolData={this.state.schools}/>
-         break;
+            break;
+         case "dash/students":
+            return <StudentView user={this.state.currentUser}/>
+            break;
          case "signup/students":
             return <StudentFormModal/>
             break;

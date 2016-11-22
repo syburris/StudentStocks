@@ -58,6 +58,7 @@ const ACTIONS = {
 
          console.log(serverRes)
          STORE.setStore('currentUser', serverRes)
+         location.hash = "/dash/investors"
          // localStorage.setItem("user_id", serverRes.id);
          // console.log(localStorage.getItem("user_id"))
 //
@@ -75,7 +76,9 @@ const ACTIONS = {
 
          console.log(serverRes)
          STORE.setStore('currentUser', serverRes)
-         localStorage.setItem("user_id", serverRes.id);
+         localStorage.setItem("user", serverRes);
+         location.hash = "/dash/students"
+
          // console.log(localStorage.getItem("user_id"))
 
       })

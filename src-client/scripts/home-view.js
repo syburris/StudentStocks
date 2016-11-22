@@ -70,7 +70,7 @@ const SchoolItem = React.createClass({
 })
 
 
-module.exports = {HomeView}
+module.exports = {HomeView, NavView}
 
 const NavView = React.createClass({
 
@@ -269,3 +269,5 @@ const StudentSuccess = React.createClass ({
 
 
 })
+
+module.exports = {HomeView, NavView}

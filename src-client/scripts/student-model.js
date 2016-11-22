@@ -2,19 +2,30 @@ const Backbone = require('backbone')
 
 const StudentAppModel = Backbone.Model.extend({
 
-   url: "/student"
+   urlRoot: "/student",
+   checkAuth: function(){
+      this.url = "/currentstudent"
+      return this.fetch()
+   },
+
+   // initialize: function(configObj){
+   //    this.set(configObj)
+   // }
 
 
 })
+
+
+// newModel = new StudentAppModel()
+// newModel.fetch()
+// newModel.checkAuth().then(...)
 
 
 const StudentAppColl = Backbone.Collection.extend({
 
    model: StudentAppModel,
    url: "/student",
-   initialize: ()=>{
 
-   }
 
 
 })
