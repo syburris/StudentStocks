@@ -61,18 +61,47 @@ public class StudentStocksRestController {
 
 //        add seed data (investor)
         if (investors.count() == 0) {
-            Investor defaultInvestor = new Investor("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"),
-                    "Steven", "Burris", "219089-4322-32",
-                    "College of Charleston");
-            investors.save(defaultInvestor);
+            Investor investor = new Investor("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"),
+                    "Steven", "Burris", "219089-4322-32", "College of Charleston", 10000);
+            investor.setMySchool(schools.findFirstByName(investor.getSchool()));
+            Investor investor1 = new Investor("alexwebber@gmail.com", PasswordStorage.createHash("hunter2"),
+                    "Alex", "Webber", "654321-5454-23", "Harvard University", 10000);
+            investor1.setMySchool(schools.findFirstByName(investor1.getSchool()));
+            Investor investor2 = new Investor("charlottegraham@gmail.com", PasswordStorage.createHash("hunter2"),
+                    "Charlotte", "Graham", "928374-8290-93", "Brown University", 10000);
+            investor2.setMySchool(schools.findFirstByName(investor2.getSchool()));
+            Investor investor3 = new Investor("edenhazard@gmail.com", PasswordStorage.createHash("hunter2"),
+                    "Eden", "Hazard", "832938-9392-72", "University of Oxford", 10000);
+            investor3.setMySchool(schools.findFirstByName(investor3.getSchool()));
+            Investor investor4 = new Investor("garethbale@gmail.com", PasswordStorage.createHash("hunter2"),
+                    "Gareth", "Bale", "823746-4321-32", "Rhode Island School of Design", 10000);
+            investor4.setMySchool(schools.findFirstByName(investor4.getSchool()));
+            investors.save(investor);
+            investors.save(investor1);
+            investors.save(investor2);
+            investors.save(investor3);
+            investors.save(investor4);
         }
 
 //        add seed data (student)
         if (students.count() == 0) {
             Student student = new Student("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"), "Steven", "Burris",
-                    "College of Charleston", Student.Level.GRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
-                    "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12", "1000000");
+                    "College of Charleston", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
+                    "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12", "10000");
+            student.setMySchool(schools.findFirstByName(student.getSchool()));
+            Student student1 = new Student("rossboatwright@gmail.com", PasswordStorage.createHash("hunter2"),
+                    "Ross", "Boatwright", "Massachusetts Institute of Technology", Student.Level.GRADUATE,
+                    "This is filler info. I have no idea what to type here, so I'll stop.", "Wando", "4", "Finance", "Spanish",
+                    "527362-4253-32", "200000");
+            student1.setMySchool(schools.findFirstByName(student1.getSchool()));
+            Student student2 = new Student("seanseabrook@gmail.com", PasswordStorage.createHash("hunter2"), "Sean", "Burris",
+                    "Pepperdine University", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'm going to stop.",
+                    "James Island", "3.5", "Project Management", null, "928374-2378-42", "100000");
+            student2.setMySchool(schools.findFirstByName(student2.getSchool()));
             students.save(student);
+            students.save(student1);
+            students.save(student2);
+
         }
 
 
