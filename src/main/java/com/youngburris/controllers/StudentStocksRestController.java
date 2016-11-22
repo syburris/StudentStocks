@@ -197,6 +197,28 @@ public class StudentStocksRestController {
         return new ResponseEntity<Investor>(investorFromH2, HttpStatus.OK);
     }
 
+//    route to get the logged in student object
+    @RequestMapping(path = "/currentstudent", method = RequestMethod.GET)
+    public ResponseEntity<Student> getCurrentStudent(HttpSession session) {
+        String name = (String) session.getAttribute("username");
+        Student student = students.findFirstByUsername(name);
+        if (student == null) {
+            return new ResponseEntity<Student>(HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<Student>(student, HttpStatus.OK);
+    }
+
+//    route to get the logged in investor object
+    @RequestMapping(path = "/currentinvestor", method = RequestMethod.GET)
+    public ResponseEntity<Investor> getCurrentInvestor(HttpSession session) {
+        String name = (String) session.getAttribute("username");
+        Investor investor = investors.findFirstByUsername(name);
+        if (investor == null) {
+            return new ResponseEntity<Investor>(HttpStatus.FORBIDDEN);
+        }
+        return new ResponseEntity<Investor>(investor, HttpStatus.OK);
+    }
+
 //    logout route for students and investors
     @RequestMapping(path = "/logout", method = RequestMethod.POST)
     public ResponseEntity logout(HttpSession session) {
@@ -302,7 +324,7 @@ public class StudentStocksRestController {
 
 //        calculate new loan balance and save it to the loan
         double newBalance = newBalanceCalculation(loan);
-        loan.setBalance(String.valueOf(newBalance));
+        loan.setPrincipalBalance(String.valueOf(newBalance));
 
 //        Set the new loan balance in the payment, so that it can be retrieved when the payment object
 //        is returned
@@ -331,13 +353,13 @@ public class StudentStocksRestController {
 //        after the loan has been found, parse the available investment amount as a double
 //        and make sure that the amount they want to invest is not larger than the available investment amount
         Double loanGoal = Double.parseDouble(loan.getGoal());
-        Double availableBalance = loanGoal - Double.parseDouble(loan.getBalance());
+        Double availableBalance = loanGoal - Double.parseDouble(loan.getPrincipalBalance());
         if (investmentAmount > availableBalance) {
             return new ResponseEntity<Investor>(HttpStatus.CONFLICT);
         }
 //        if the portion amount is not larger than the available investment balance,
 //        allow the investor to make an investment
-        Double newLoanBalance = Double.parseDouble(loan.getBalance()) + investmentAmount;
+        Double newLoanBalance = Double.parseDouble(loan.getPrincipalBalance()) + investmentAmount;
         if ((loanGoal - newLoanBalance) == 0) {
             loan.setFunded(true);
             loan.setInitiationDate(LocalDate.now());
@@ -346,8 +368,10 @@ public class StudentStocksRestController {
             loan.setGracePeriod(today.until(gracePeriod).getMonths());
             LocalDate finishDate = today.plusYears(14);
             loan.setFinishDate(finishDate);
+            loan.setPrincipalBalance(String.valueOf(newLoanBalance));
+            loan.setMonthlyPayment(String.valueOf(monthlyPayment(loan)));
         }
-        loan.setBalance(String.valueOf(newLoanBalance));
+        loan.setPrincipalBalance(String.valueOf(newLoanBalance));
         loans.save(loan);
         Investment investment = new Investment(investmentAmount, loan);
         investments.save(investment);
@@ -395,23 +419,24 @@ public class StudentStocksRestController {
     }
 
 //    method to calculate the monthly payment
-    public static double loanPaymentCalculator(Loan loan) {
+    public static double monthlyPayment(Loan loan) {
 //        get the necessary fields
         double apr = Double.parseDouble(loan.getApr());
         double gracePeriod = loan.getGracePeriod();
         double n = Double.parseDouble(loan.getNumberOfPeriods());
-        double principalBalance = Double.parseDouble(loan.getBalance());
+        double principalBalance = Double.parseDouble(loan.getPrincipalBalance());
+
 //        get the periodic interest rate from the annual percentage rate
         double decimal = apr / 100.00;
-        double r = decimal / 12;
+        double i = decimal / 12;
+        loan.setMonthlyInterest(i);
 
 //        add interest accrued over the grace period to the principal balance
-        double nGracePeriod = gracePeriod * 12;
-        double newPrincipalBalance = ((r * principalBalance) * nGracePeriod) + principalBalance;
+        double newPrincipalBalance = ((i * principalBalance) * gracePeriod) + principalBalance;
 
 //        calculate the payment made each month
-        double monthlyPayment = (newPrincipalBalance * (r * (Math.pow((1 + r), n)))) /
-                (Math.pow((1 + r), n) - 1);
+        double monthlyPayment = (newPrincipalBalance * (i * (Math.pow((1 + i), n)))) /
+                (Math.pow((1 + i), n) - 1);
 
 //        round the payment to the nearest 100th place
         double actualPayment = Math.round(monthlyPayment * 100.00) / 100.00;
