@@ -19,6 +19,12 @@ public class Payment {
     @Column
     String newBalance;
 
+    @Column
+    String interest;
+
+    @Column
+    String principal;
+
     @ManyToOne
     Student student;
 
@@ -64,5 +70,21 @@ public class Payment {
 
     public void setNewBalance(String newBalance) {
         this.newBalance = newBalance;
+    }
+
+    public String getInterest() {
+        return interest;
+    }
+
+    public void setInterest(String interest) {
+        this.interest = interest;
+    }
+
+    public String getPrincipal() {
+        return principal;
+    }
+
+    public void setPrincipal(String principal) {
+        this.principal = principal;
     }
 }

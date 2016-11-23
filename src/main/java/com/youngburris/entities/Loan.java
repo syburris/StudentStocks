@@ -16,7 +16,13 @@ public class Loan {
     int id;
 
     @Column
-    String goal;
+    String loanGoal;
+
+    @Column
+    String loanLength;
+
+    @Column
+    String gracePeriod;
 
     @Column
     String principalBalance;
@@ -55,7 +61,7 @@ public class Loan {
     int monthsPassed;
 
     @Column
-    int gracePeriod;
+    int gracePeriodLength;
 
     @OneToMany
     List<Investment> investments;
@@ -66,13 +72,19 @@ public class Loan {
     public Loan() {
     }
 
+    public Loan(String loanGoal, String loanLength, String gracePeriod){
+        this.loanGoal = loanGoal;
+        this.loanLength = loanLength;
+        this.gracePeriod = gracePeriod;
+    }
+
     public Loan(String principalBalance, String monthlyPayment, String apr,
-                String numberOfPeriods, int gracePeriod, String years) {
+                String numberOfPeriods, int gracePeriodLength, String years) {
         this.principalBalance = principalBalance;
         this.monthlyPayment = monthlyPayment;
         this.apr = apr;
         this.numberOfPeriods = numberOfPeriods;
-        this.gracePeriod = gracePeriod;
+        this.gracePeriodLength = gracePeriodLength;
         this.years = years;
     }
 
@@ -84,12 +96,12 @@ public class Loan {
         this.id = id;
     }
 
-    public String getGoal() {
-        return goal;
+    public String getLoanGoal() {
+        return loanGoal;
     }
 
-    public void setGoal(String goal) {
-        this.goal = goal;
+    public void setLoanGoal(String loanGoal) {
+        this.loanGoal = loanGoal;
     }
 
     public String getPrincipalBalance() {
@@ -188,12 +200,12 @@ public class Loan {
         this.monthsPassed = monthsPassed;
     }
 
-    public int getGracePeriod() {
-        return gracePeriod;
+    public int getGracePeriodLength() {
+        return gracePeriodLength;
     }
 
-    public void setGracePeriod(int gracePeriod) {
-        this.gracePeriod = gracePeriod;
+    public void setGracePeriodLength(int gracePeriodLength) {
+        this.gracePeriodLength = gracePeriodLength;
     }
 
     public List<Investment> getInvestments() {
@@ -210,5 +222,21 @@ public class Loan {
 
     public void setFunded(boolean funded) {
         isFunded = funded;
+    }
+
+    public String getLoanLength() {
+        return loanLength;
+    }
+
+    public void setLoanLength(String loanLength) {
+        this.loanLength = loanLength;
+    }
+
+    public String getGracePeriod() {
+        return gracePeriod;
+    }
+
+    public void setGracePeriod(String gracePeriod) {
+        this.gracePeriod = gracePeriod;
     }
 }

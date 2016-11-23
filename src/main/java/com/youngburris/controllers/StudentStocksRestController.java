@@ -87,16 +87,16 @@ public class StudentStocksRestController {
         if (students.count() == 0) {
             Student student = new Student("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"), "Steven", "Burris",
                     "College of Charleston", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
-                    "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12", "10000");
+                    "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12");
             student.setMySchool(schools.findFirstByName(student.getSchool()));
             Student student1 = new Student("rossboatwright@gmail.com", PasswordStorage.createHash("hunter2"),
                     "Ross", "Boatwright", "Massachusetts Institute of Technology", Student.Level.GRADUATE,
                     "This is filler info. I have no idea what to type here, so I'll stop.", "Wando", "4", "Finance", "Spanish",
-                    "527362-4253-32", "200000");
+                    "527362-4253-32");
             student1.setMySchool(schools.findFirstByName(student1.getSchool()));
             Student student2 = new Student("seanseabrook@gmail.com", PasswordStorage.createHash("hunter2"), "Sean", "Burris",
                     "Pepperdine University", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'm going to stop.",
-                    "James Island", "3.5", "Project Management", null, "928374-2378-42", "100000");
+                    "James Island", "3.5", "Project Management", null, "928374-2378-42");
             student2.setMySchool(schools.findFirstByName(student2.getSchool()));
             students.save(student);
             students.save(student1);
@@ -237,7 +237,7 @@ public class StudentStocksRestController {
             studentFromDB = new Student(student.getUsername(),PasswordStorage.createHash(student.getPassword()),
                     student.getFirstName(), student.getLastName(), student.getSchool(), student.getLevel(),
                     student.getBio(), student.getHighSchool(), student.getGpa(),
-                    student.getMajor(), student.getMinor(), student.getSsn(), student.getLoanGoal());
+                    student.getMajor(), student.getMinor(), student.getSsn());
             studentFromDB.setMySchool(schools.findFirstByName(student.getSchool()));
             studentFromDB.setBalance(0);
             students.save(studentFromDB);
@@ -268,14 +268,19 @@ public class StudentStocksRestController {
         }
 
 //        save the loan to the student
-        loan.setGoal(student.getLoanGoal());
-        loan.setFunded(false);
-        loans.save(loan);
-        Loan theLoan = loans.findOne(loan.getId());
-        student.setLoan(theLoan);
-        students.save(student);
+        Loan newLoan = loans.findOne(loan.getId());
+        if (newLoan == null) {
+            newLoan = new Loan(loan.getLoanGoal(), loan.getLoanLength(), loan.getGracePeriod());
+            newLoan.setFunded(false);
+            loans.save(newLoan);
+            Loan theLoan = loans.findOne(newLoan.getId());
+            theLoan.setMonthlyPayment(String.valueOf(monthlyPayment(newLoan)));
+            student.setLoan(theLoan);
+            students.save(student);
+        }
+        Loan theLoan = students.findFirstByUsername(name).getLoan();
 
-        return new ResponseEntity<Loan>(loan, HttpStatus.OK);
+        return new ResponseEntity<Loan>(theLoan, HttpStatus.OK);
     }
 
 //    create investor user route
@@ -323,7 +328,7 @@ public class StudentStocksRestController {
         loan.setPaymentBalance(newPaymentBalance);
 
 //        calculate new loan balance and save it to the loan
-        double newBalance = newBalanceCalculation(loan);
+        double newBalance = newLoanBalance(loan);
         loan.setPrincipalBalance(String.valueOf(newBalance));
 
 //        Set the new loan balance in the payment, so that it can be retrieved when the payment object
@@ -352,7 +357,7 @@ public class StudentStocksRestController {
         Loan loan = loans.findOne(Integer.parseInt(loanId));
 //        after the loan has been found, parse the available investment amount as a double
 //        and make sure that the amount they want to invest is not larger than the available investment amount
-        Double loanGoal = Double.parseDouble(loan.getGoal());
+        Double loanGoal = Double.parseDouble(loan.getLoanGoal());
         Double availableBalance = loanGoal - Double.parseDouble(loan.getPrincipalBalance());
         if (investmentAmount > availableBalance) {
             return new ResponseEntity<Investor>(HttpStatus.CONFLICT);
@@ -365,7 +370,7 @@ public class StudentStocksRestController {
             loan.setInitiationDate(LocalDate.now());
             LocalDate today = LocalDate.now();
             LocalDate gracePeriod = today.plusYears(4);
-            loan.setGracePeriod(today.until(gracePeriod).getMonths());
+            loan.setGracePeriodLength(today.until(gracePeriod).getMonths());
             LocalDate finishDate = today.plusYears(14);
             loan.setFinishDate(finishDate);
             loan.setPrincipalBalance(String.valueOf(newLoanBalance));
@@ -422,9 +427,9 @@ public class StudentStocksRestController {
     public static double monthlyPayment(Loan loan) {
 //        get the necessary fields
         double apr = Double.parseDouble(loan.getApr());
-        double gracePeriod = loan.getGracePeriod();
+        double gracePeriod = loan.getGracePeriodLength();
         double n = Double.parseDouble(loan.getNumberOfPeriods());
-        double principalBalance = Double.parseDouble(loan.getPrincipalBalance());
+        double loanAmount = Double.parseDouble(loan.getLoanGoal());
 
 //        get the periodic interest rate from the annual percentage rate
         double decimal = apr / 100.00;
@@ -432,7 +437,7 @@ public class StudentStocksRestController {
         loan.setMonthlyInterest(i);
 
 //        add interest accrued over the grace period to the principal balance
-        double newPrincipalBalance = ((i * principalBalance) * gracePeriod) + principalBalance;
+        double newPrincipalBalance = ((i * loanAmount) * gracePeriod) + loanAmount;
 
 //        calculate the payment made each month
         double monthlyPayment = (newPrincipalBalance * (i * (Math.pow((1 + i), n)))) /
@@ -443,20 +448,18 @@ public class StudentStocksRestController {
         return actualPayment;
     }
 
-    public static double newBalanceCalculation(Loan loan) {
+//    method to find the total
+
+    public static double newLoanBalance(Loan loan) {
 //        get the necessary fields out of the loan
-        double apr = Double.parseDouble(loan.getApr());
-        double n = Double.parseDouble(loan.getNumberOfPeriods());
-        double loanAmount = Double.parseDouble(loan.getGoal());
-        double monthsPassed = loan.getMonthsPassed() + 1;
+        double principalBalance = Double.parseDouble(loan.getPrincipalBalance());
+        double i = loan.getMonthlyInterest();
+        double payment = Double.parseDouble(loan.getMonthlyPayment());
 
-//        get the periodic interest rate from the annual percentage rate
-        double decimal = apr /100.00;
-        double r = decimal / 12;
+//        find the interest amount of the payment by multiplying the monthly interest rate
+//          by the loan's principal balance
+        double interestPortion = principalBalance * i;
 
-//        calculate the new balance
-        double balance = (loanAmount * (Math.pow((1 + r), n)) - Math.pow((1 + r), monthsPassed)) /
-                (Math.pow((1 + r), n) - 1);
-        return Math.round(balance * 100.00) / 100.00;
+        return 00.00;
     }
 }
