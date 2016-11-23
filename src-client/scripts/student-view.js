@@ -41,24 +41,24 @@ const StudentView = React.createClass({
             <div className="container">
                <div className="row">
                   <h1>Welcome <span>{this.props.user.attributes  && this.props.user.attributes.firstName}</span></h1>
-                     <div className="col-xs-12 col-sm-4 left-col">
-                        <div className="row">
-                           <div className="col-xs-12 col-sm-12">
-                              <div className="thumbnail">
-                                 <h4>Payment Info >></h4>
-                                 <h3>Minimum payment: <span>$145.37</span></h3>
-                                 <p>Loan balance: <span>${this.props.user.attributes && this.props.user.attributes.loanGoal}</span></p>
-                                 <p>Payment due: <span>December 1, 2016</span></p>
-                                 <button className="btn btn-primary">Make Payment</button>
-                              </div>
-                              <div className="thumbnail">
-                                 <h4>Manage Info >></h4>
-                                 <h3><i className="fa fa-user-circle" aria-hidden="true"></i>
-                                    {this.props.user.attributes && this.props.user.attributes.firstName}<span> </span>{this.props.user.attributes &&this.props.user.attributes.lastName} </h3>
-                                 <label htmlFor="">Email</label>
-                                 <p>{this.props.user.attributes && this.props.user.attributes.username}</p>
-                                 <label htmlFor="">Education Info</label>
-                                 <p>{this.props.user.attributes && this.props.user.attributes.school}</p>
+                  <div className="col-xs-12 col-sm-4 left-col">
+                     <div className="row">
+                        <div className="col-xs-12 col-sm-12">
+                           <div className="thumbnail">
+                              <h4>Payment Info >></h4>
+                              <h3>Minimum payment: <span>$145.37</span></h3>
+                              <p>Loan balance: <span>${this.props.user.attributes && this.props.user.attributes.loanGoal}</span></p>
+                              <p>Payment due: <span>December 1, 2016</span></p>
+                              <button className="btn btn-primary">Make Payment</button>
+                           </div>
+                           <div className="thumbnail">
+                              <h4>Manage Info >></h4>
+                              <h3><i className="fa fa-user-circle" aria-hidden="true"></i>
+                                 {this.props.user.attributes && this.props.user.attributes.firstName}<span> </span>{this.props.user.attributes &&this.props.user.attributes.lastName} </h3>
+                              <label htmlFor="">Email</label>
+                              <p>{this.props.user.attributes && this.props.user.attributes.username}</p>
+                              <label htmlFor="">Education Info</label>
+                              <p>{this.props.user.attributes && this.props.user.attributes.school}</p>
                                  <p>{this.props.user.attributes && this.props.user.attributes.major}</p>
                                  <p>{this.props.user.attributes && this.props.user.attributes.minor}</p>
 
@@ -83,7 +83,10 @@ const StudentView = React.createClass({
 
 const UserNav = React.createClass({
 
+   _handleLogout: function(){
 
+      ACTIONS.logOut()
+   },
 
 
    render: function(){
@@ -93,7 +96,7 @@ const UserNav = React.createClass({
          <nav className="navbar navbar-default">
             <div className="container-fluid">
                <div className="navbar-header">
-                  <a className="navbar-brand" href="#">StudentStocks</a>
+                  <a className="navbar-brand" onClick={this._handleLogout}>StudentStocks</a>
                </div>
 
                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

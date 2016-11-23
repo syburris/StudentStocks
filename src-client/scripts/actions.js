@@ -2,6 +2,7 @@ const {InvestorAppModel, InvestorAppColl, InvestorLoginModel} = require('./inves
 const {AllStudentsColl, StudentModel, StudentAppColl,StudentLoginModel} = require("./student-model.js")
 const {SchoolColl, SchoolModel} = require("./schools-model.js")
 const {StockColl, StockModel} = require("./investment-model.js")
+const LogOutModel = require("./logout-route.js")
 const STORE = require('./store.js')
 
 
@@ -12,6 +13,15 @@ const ACTIONS = {
 
 
    logOut: function(){
+      let newLogOut = new LogOutModel()
+      newLogOut.set()
+
+      newLogOut.save().then(function(){
+         STORE.setStore("currentUser", {})
+         location.hash = ""
+
+
+      })
 
    },
 
@@ -39,7 +49,9 @@ const ACTIONS = {
 
       formInst.save().then(function(serverRes){
          console.log('this is serverresponse ', serverRes)
-         STORE.setStore('currentUser', serverRes)
+         let mod = new StudentModel()
+         mod.set(serverRes)
+         STORE.setStore('currentUser', mod)
       })
       location.hash = "/dash/students"
    },
@@ -80,6 +92,9 @@ const ACTIONS = {
       stdntLogin.set(usrInfo)
 
       stdntLogin.save().then(function(serverRes){
+         let mod = new StudentModel()
+         mod.set(serverRes)
+         STORE.setStore('currentUser', mod)
 
 
          location.hash = "/dash/students"

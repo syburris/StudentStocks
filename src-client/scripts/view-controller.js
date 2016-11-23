@@ -38,10 +38,10 @@ const AppView = React.createClass({
             return <HomeView schoolData={this.state.schools}/>
             break;
          case "dash/students":
-            return <StudentView user={this.state && this.state.currentUser}/>
+            return <StudentView user={this.state.currentUser}/>
             break;
          case "signup/students":
-            return <StudentFormModal schoolData={this.state && this.state.schools}/>
+            return <StudentFormModal schoolData={ this.state.schools}/>
             break;
          case "signup/investors":
             return <InvestorForm/>

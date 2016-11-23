@@ -95,6 +95,18 @@ const StudentFormModal = React.createClass ({
 
 
 })
+const SchoolOption = React.createClass({
+
+
+
+
+
+   render: function(){
+      return (
+         <option value=""></option>
+      )
+   }
+})
 const SimpInput = React.createClass({
 
    changeHandler: function(event) {

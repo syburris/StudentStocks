@@ -63,7 +63,6 @@ const SchoolItem = React.createClass({
       return(
          <div className="col-xs-6 col-sm-3 schoolCard">
             <img src={this.props.imgSrc} alt=""/>
-
          </div>
       )
    }
@@ -90,34 +89,23 @@ const NavView = React.createClass({
                      <span className="icon-bar"></span>
                      <span className="icon-bar"></span>
                   </button>
-                  <a className="navbar-brand" href="#/login/investors">INVESTOR LOGIN</a>
+                  <a className="navbar-brand" href="#/login/investors">StudentStocks</a>
                </div>
 
                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul className="nav navbar-nav">
-                     <li className="active"><a href="#/login/students">STUDENT LOGIN <span className="sr-only">(current)</span></a></li>
-                     <li><a href="#">Link</a></li>
-                     <li className="dropdown">
-                        <a href="#" className="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span className="caret"></span></a>
-                        <ul className="dropdown-menu" role="menu">
-                           <li><a href="#">Action</a></li>
-                           <li><a href="#">Another action</a></li>
-                           <li><a href="#">Something else here</a></li>
-                           <li className="divider"></li>
-                           <li><a href="#">Separated link</a></li>
-                           <li className="divider"></li>
-                           <li><a href="#">One more separated link</a></li>
-                        </ul>
-                     </li>
+                     <li className="active"><a href="#/login/students">Student Login <span className="sr-only">(current)</span></a></li>
+                     <li className="active"><a href="#/login/investors">Investor Login<span className="sr-only">(current)</span></a></li>
+
                   </ul>
-                  <form className="navbar-form navbar-left" role="search">
+                  {/* <form className="navbar-form navbar-left" role="search">
                      <div className="form-group">
-                        <input type="text" className="form-control" placeholder="Search"/>
+                     <input type="text" className="form-control" placeholder="Search"/>
                      </div>
                      <button type="submit" className="btn btn-default">Submit</button>
-                  </form>
+                  </form> */}
                   <ul className="nav navbar-nav navbar-right">
-                     <li><a href="#">Link</a></li>
+                     <li><a href="#">About</a></li>
                   </ul>
                </div>
             </div>
@@ -134,9 +122,6 @@ const HeaderHeros = React.createClass({
       console.log(evt)
 
       location.hash = "/signup/students"
-
-
-
 
    },
 
@@ -189,7 +174,6 @@ const HeaderHeros = React.createClass({
 const AboutStocks = React.createClass({
 
 
-
    render: function(){
 
       return (
@@ -197,12 +181,12 @@ const AboutStocks = React.createClass({
 
             <div>
                <h2>How StudentStocks<span>&#8482;</span> Works</h2>
-               <p>Here at StudentStocks we make the frustration or student loans a thing of the past</p>
+               <p>Here at StudentStocks we make the frustration of student loans a thing of the past</p>
             </div>
             <div className="col-xs-12 col-sm-4 abt-col">
                <h3>Easy Signup</h3>
                {/* <i className="fa fa-file-text-o abt-icon" aria-hidden="true"></i> */}
-               <div>
+               <div className="icon-container">
                   <img src="/images/Untitled-4.png" alt=""/>
                </div>
                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate nulla beatae ratione itaque fuga veritatis accusantium, debitis ab, voluptatem voluptatum quis suscipit similique tempora blanditiis sint in! Id, doloribus, aliquam!</p>
@@ -211,13 +195,18 @@ const AboutStocks = React.createClass({
             </div>
             <div className="col-xs-12 col-sm-4 abt-col">
                <h3>Lower Rates</h3>
-               <i className="fa fa-percent abt-icon" aria-hidden="true"></i>
+               <div className="icon-container">
+                  <img src="/images/StudentIcon.png" alt=""/>
+               </div>
                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique quam voluptatibus error hic officia quasi obcaecati velit beatae soluta, nobis, atque, nam rerum ullam deleniti maiores. Recusandae amet beatae expedita!</p>
 
             </div>
             <div className="col-xs-12 col-sm-4 abt-col">
                <h3>Become an Investor</h3>
-               <i className="fa fa-money abt-icon" aria-hidden="true"></i>
+               <div className="icon-container">
+                  <img src="/images/DollarSign_icon.png" alt=""/>
+               </div>
+
                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis ut, nihil aliquid soluta ipsum ea esse eius! Eius iste quaerat, iusto necessitatibus ex aliquam ducimus animi rem quo illo tempora.</p>
 
             </div>
@@ -235,15 +224,13 @@ const AboutStocks = React.createClass({
 const StudentSuccess = React.createClass ({
 
 
-
-
-
    render: function(){
 
 
       return (
          <div className="container">
             <div className="row success-story">
+               <h3>Success Stories</h3>
                <div className="col-sm-4">
                   <img src="https://static.pexels.com/photos/108048/pexels-photo-108048.jpeg" alt=""/>
                </div>
