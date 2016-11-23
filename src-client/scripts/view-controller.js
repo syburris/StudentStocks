@@ -33,18 +33,15 @@ const AppView = React.createClass({
    },
 
    render: function(){
-      let countMe = 1
-      console.log((countMe += 1), this.state)
       switch (this.props.currentView) {
          case "home":
             return <HomeView schoolData={this.state.schools}/>
             break;
          case "dash/students":
-            console.log(this.state.currentUser)
-            return <StudentView user={this.state.currentUser}/>
+            return <StudentView user={this.state && this.state.currentUser}/>
             break;
          case "signup/students":
-            return <StudentFormModal/>
+            return <StudentFormModal schoolData={this.state && this.state.schools}/>
             break;
          case "signup/investors":
             return <InvestorForm/>
