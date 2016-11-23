@@ -1,5 +1,5 @@
 const {InvestorAppModel, InvestorAppColl, InvestorLoginModel} = require('./investor-model.js')
-const {AllStudentsColl, StudentAppModel, StudentAppColl,StudentLoginModel} = require("./student-model.js")
+const {AllStudentsColl, StudentModel, StudentAppColl,StudentLoginModel} = require("./student-model.js")
 const {SchoolColl, SchoolModel} = require("./schools-model.js")
 const {StockColl, StockModel} = require("./investment-model.js")
 const STORE = require('./store.js')
@@ -9,6 +9,8 @@ const STORE = require('./store.js')
 
 
 const ACTIONS = {
+
+
 
    fetchAllStudents: function(){
       let allStudents = new AllStudentsColl()
@@ -39,7 +41,7 @@ const ACTIONS = {
    },
 
    submitInvestorForm: function(formInfo){
-      let formInvstForm = new InvestorAppModel
+      let formInvstForm = new InvestorAppModel()
 
       formInvstForm.set(formInfo)
 
@@ -74,13 +76,22 @@ const ACTIONS = {
 
       stdntLogin.save().then(function(serverRes){
 
-         console.log(serverRes)
-         STORE.setStore('currentUser', serverRes)
-         localStorage.setItem("user", serverRes);
+
          location.hash = "/dash/students"
 
          // console.log(localStorage.getItem("user_id"))
 
+      })
+   },
+
+   fetchCurrentStudent: function(){
+      let newModel = new StudentModel("/currentstudent")
+      console.log("thisone?", newModel)
+      newModel.checkAuth("/currentstudent").then(function(){
+
+         STORE.setStore('currentUser', newModel)
+      }).fail(function(){
+         console.log("WHOOPS!")
       })
    },
 
