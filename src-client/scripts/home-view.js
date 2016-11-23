@@ -116,12 +116,12 @@ const NavView = React.createClass({
                      </div>
                      <button type="submit" className="btn btn-default">Submit</button>
                   </form>
-                     <ul className="nav navbar-nav navbar-right">
-                        <li><a href="#">Link</a></li>
-                     </ul>
-                  </div>
+                  <ul className="nav navbar-nav navbar-right">
+                     <li><a href="#">Link</a></li>
+                  </ul>
                </div>
-            </nav>
+            </div>
+         </nav>
       )
    }
 })

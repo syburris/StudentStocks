@@ -11,6 +11,9 @@ const STORE = require('./store.js')
 const ACTIONS = {
 
 
+   logOut: function(){
+
+   },
 
    fetchAllStudents: function(){
       let allStudents = new AllStudentsColl()
@@ -30,7 +33,7 @@ const ACTIONS = {
    },
 
    submitStudentForm: function(formInfo){
-      let formInst = new StudentAppModel
+      let formInst = new StudentModel()
 
       formInst.set(formInfo)
 
@@ -38,6 +41,7 @@ const ACTIONS = {
          console.log('this is serverresponse ', serverRes)
          STORE.setStore('currentUser', serverRes)
       })
+      location.hash = "/dash/students"
    },
 
    submitInvestorForm: function(formInfo){
@@ -49,6 +53,7 @@ const ACTIONS = {
          console.log(serverRes)
          STORE.setStore('currentUser', serverRes)
       })
+      location.hash = "/dash/investors"
    },
 //
    handleInvestorLogin: function(usrInfo){

@@ -38,9 +38,9 @@ const StudentView = React.createClass({
       return(
          <div className="fluid-container student-view">
             <UserNav userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} />
-               <div className="container">
-                  <div className="row">
-                     <h1>Welcome <span>{this.props.user.attributes  && this.props.user.attributes.firstName}</span></h1>
+            <div className="container">
+               <div className="row">
+                  <h1>Welcome <span>{this.props.user.attributes  && this.props.user.attributes.firstName}</span></h1>
                      <div className="col-xs-12 col-sm-4 left-col">
                         <div className="row">
                            <div className="col-xs-12 col-sm-12">
