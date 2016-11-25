@@ -2,7 +2,6 @@ const {InvestorAppModel, InvestorAppColl, InvestorLoginModel} = require('./inves
 const {AllStudentsColl, StudentModel, StudentAppColl,StudentLoginModel} = require("./student-model.js")
 const {SchoolColl, SchoolModel} = require("./schools-model.js")
 const {StockColl, StockModel} = require("./investment-model.js")
-const LogOutModel = require("./logout-route.js")
 const STORE = require('./store.js')
 
 
@@ -13,15 +12,13 @@ const ACTIONS = {
 
 
    logOut: function(){
-      let newLogOut = new LogOutModel()
-      newLogOut.set()
+      let mod = new StudentModel()
 
-      newLogOut.save().then(function(){
-         STORE.setStore("currentUser", {})
+      mod.logOut()
+
          location.hash = ""
 
 
-      })
 
    },
 
@@ -80,7 +77,6 @@ const ACTIONS = {
          location.hash = "/dash/investors"
          // localStorage.setItem("user_id", serverRes.id);
          // console.log(localStorage.getItem("user_id"))
-//
       })
 
 
@@ -114,6 +110,16 @@ const ACTIONS = {
          console.log("WHOOPS!")
       })
    },
+   fetchCurrentInvestor: function(){
+      let newModel = new InvestorAppModel("/currentstudent")
+      console.log("thisone?", newModel)
+      newModel.checkAuth("/currentinvestor").then(function(){
+
+         STORE.setStore('currentUser', newModel)
+      }).fail(function(){
+         console.log("WHOOPS!")
+      })
+   },
 
    handleInvestment: function(loanInfo){
       let stockInvst = new StockModel()
@@ -131,6 +137,8 @@ const ACTIONS = {
       STORE.setStore('currentView', viewInput)
 
    }
+
+
 
 }
 
