@@ -4,7 +4,7 @@ const InvestorAppModel = Backbone.Model.extend({
 
    url: "/investor",
    checkAuth: function(){
-      this.url = "/currentstudent"
+      this.url = "/currentinvestor"
       return this.fetch()
    },
 

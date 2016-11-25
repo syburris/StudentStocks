@@ -28,11 +28,18 @@ const STORE = require('./store.js')
 const StudentView = React.createClass({
 
    componentWillMount: function(){
-
+      ACTIONS.fetchCurrentStudent()
 
    },
 
    render: function(){
+      if(!this.props.user.attributes){
+            console.log(this.props.user.attributes)
+         return(
+            <p>Loadingggg</p>
+         )
+      }
+
       // console.log("student props", this.props.user.attributes)
       // console.log('ehhhh', this.props.user)
       return(
@@ -59,12 +66,12 @@ const StudentView = React.createClass({
                               <p>{this.props.user.attributes && this.props.user.attributes.username}</p>
                               <label htmlFor="">Education Info</label>
                               <p>{this.props.user.attributes && this.props.user.attributes.school}</p>
-                                 <p>{this.props.user.attributes && this.props.user.attributes.major}</p>
-                                 <p>{this.props.user.attributes && this.props.user.attributes.minor}</p>
+                              <p>{this.props.user.attributes && this.props.user.attributes.major}</p>
+                              <p>{this.props.user.attributes && this.props.user.attributes.minor}</p>
 
-                              </div>
                            </div>
                         </div>
+                     </div>
                      </div>
                      <div className="col-xs-12 col-sm-8 right-col">
                         <div className="row">
@@ -154,4 +161,4 @@ const UserNav = React.createClass({
 
 
 
-module.exports = {StudentView}
+module.exports = {StudentView, UserNav}
