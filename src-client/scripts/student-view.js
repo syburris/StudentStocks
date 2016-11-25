@@ -91,6 +91,7 @@ const StudentView = React.createClass({
 const UserNav = React.createClass({
 
    _handleLogout: function(){
+      console.log('hahsdkfjahsldkfhja')
 
       ACTIONS.logOut()
    },
@@ -103,7 +104,7 @@ const UserNav = React.createClass({
          <nav className="navbar navbar-default">
             <div className="container-fluid">
                <div className="navbar-header">
-                  <a className="navbar-brand" onClick={this._handleLogout}>StudentStocks</a>
+                  <a className="navbar-brand" >StudentStocks</a>
                </div>
 
                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -115,7 +116,7 @@ const UserNav = React.createClass({
                   <ul className="nav navbar-nav navbar-right">
                      <li><p>{this.props.firstName}</p><span>{this.props.userName}</span> </li>
                      <li><i className="fa fa-user" aria-hidden="true"></i></li>
-                     <li><a href="#">Logout</a></li>
+                     <li><button onClick={this._handleLogout}>Logout</button></li>
                   </ul>
                </div>
             </div>

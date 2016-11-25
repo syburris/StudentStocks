@@ -20,6 +20,18 @@ body{
 
 	#app-container{
 		.home-view{
+
+			.in-cont{
+				background: #777;
+				.student-box{
+
+					.stud-card{
+						width: 300px;
+						height: 150px;
+
+					}
+				}
+			}
 			.hdr-hero{
 				background: url('https://static.pexels.com/photos/2116/money-gold-coins-finance.jpg')center,center, no-repeat;
 				opacity: .4;

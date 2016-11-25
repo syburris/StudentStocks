@@ -34,9 +34,7 @@ const AppView = React.createClass({
    },
 
    render: function(){
-      console.log(this.state)
       if(!this.state.allStudents[0]){
-         console.log("I'm looaddinnnnggg")
 
          return (
             <div id="load">
@@ -49,7 +47,6 @@ const AppView = React.createClass({
                <div>L</div>
             </div>         )
       }
-      console.log("single student",this.state.allStudents[0])
 
       switch (this.props.currentView) {
          case "home":
@@ -65,7 +62,7 @@ const AppView = React.createClass({
             return <StudentFormModal schoolData={ this.state.schools}/>
             break;
          case "signup/investors":
-            return <InvestorForm/>
+            return <InvestorForm schoolData={this.state.schools}/>
             break;
          case "login/investors":
             return <InvstLoginView />
