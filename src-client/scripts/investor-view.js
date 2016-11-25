@@ -28,8 +28,8 @@ const InvestorView = React.createClass({
 
          <div className="fluid-container in-cont">
             <UserNav userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} />
-            <div className="container">
-               <div className="row std-cont">
+            <div className="container student-box">
+               <div className="row">
                   {this.props.studentInfo.map((obj, i)=>{
 
                      return (
@@ -38,7 +38,7 @@ const InvestorView = React.createClass({
 
                   })}
                </div>
-               </div>
+            </div>
 
          </div>
       )
@@ -57,7 +57,7 @@ const StudentCard = React.createClass({
          <div className="col-xs-6 col-sm-3">
             <div className="thumbnail stud-card">
                <h4>{this.props.studentData.get("firstName")+ " " + this.props.studentData.get("lastName")}</h4>
-               <p>{this.props.school}</p>
+               <p>{this.props.studentData.get('school')}</p>
 
                <button className="btn btn-primary">Invest</button>
             </div>

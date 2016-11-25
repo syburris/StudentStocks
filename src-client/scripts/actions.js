@@ -12,11 +12,16 @@ const ACTIONS = {
 
 
    logOut: function(){
+      console.log("exexutttinn")
       let mod = new StudentModel()
 
       mod.logOut()
 
+      mod.save().then(function(){
          location.hash = ""
+
+      })
+
 
 
 
