@@ -9,24 +9,7 @@ const ACTIONS = require('./actions.js')
 const StudentFormModal = React.createClass ({
 
 
-   _handleClick: function(evt){
-      console.log("??????")
-      evt.preventDefault()
-      console.log('this is the state you want to send to your backend>', this.state)
-      let newForm = this.state;
-         newForm["level"] = this.refs.level.value
-         newForm["bio"] = this.refs.bio.value
-         newForm["school"] = this.refs.school.value
 
-      console.log(newForm)
-      ACTIONS.submitStudentForm(newForm)
-      console.log(window.location.hash)
-
-      window.location.hash = "/dash/students"
-
-
-
-   },
 
    handleChange: function(data, name) {
       let newState = {};
@@ -67,7 +50,7 @@ const StudentFormModal = React.createClass ({
 
                {/* bio */}
                <label htmlFor="bio">Tell us a little about yourself...</label>
-               <textarea className="form-control" rows="3" id="textArea" ref="bio"></textarea>
+               <textarea className="form-control" rows="1" id="textArea" ref="bio"></textarea>
                {/* highSchool */}
                <SimpInput title="High School" name="highSchool" handleChange={this.handleChange} />
                {/* level */}
@@ -115,34 +98,7 @@ const SchoolOption = React.createClass({
       )
    }
 })
-const SimpInput = React.createClass({
 
-   changeHandler: function(event) {
-      const {
-         value: value,
-         name: name,
-      } = event.currentTarget;
-      console.log(value);
-
-      this.props.handleChange(value, name);
-   },
-
-   render: function(){
-      let textType
-      if(this.props.textType != undefined){
-         textType = this.props.textType
-      }else{textType = "text"}
-
-      return(
-         <div className="input-group simp-input">
-            <label htmlFor={this.props.title} className="input-label">{this.props.title}</label>
-            <input type={textType} className="form-control" name={this.props.name} placeholder={this.props.title} onChange={this.changeHandler}/>
-         </div>
-
-
-      )
-   }
-})
 
 
 module.exports = {StudentFormModal, SimpInput, SchoolOption}
