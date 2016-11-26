@@ -19,19 +19,53 @@ body{
 
 
 	#app-container{
-		.home-view{
+		.in-cont{
+			color: black;
+			background: #777;
+			.student-box{
+				width:100%;
+				height:100%;
+				overflow-x:scroll;
+				overflow-y:scroll;
 
-			.in-cont{
-				background: #777;
-				.student-box{
+				.stud-card{
+					width: 300px;
+					height: 150px;
 
-					.stud-card{
-						width: 300px;
-						height: 150px;
-
-					}
 				}
 			}
+		}
+
+
+
+
+
+		.home-view{
+			.login-modal {
+				background-color: #dbd9d9;
+				position: fixed;
+	  			top: 50%;
+	  			left: 50%;
+	  			width: 400px;
+	 			height: 200px;
+	  			margin-left: -200px;
+	  			margin-top: -150px;
+	  			padding: 50px;
+	  			border-radius: 5px;
+	  			z-index: 10;
+	  			box-shadow: 0 0 0 99999px rgba(0, 0, 0, 0.7);
+	}
+
+	.close-modal {
+	  color:  #000;
+	  text-decoration: none;
+	  float: right;
+	  position: absolute;
+	  top: 10px;
+	  right: 20px
+	}
+
+
 			.hdr-hero{
 				background: url('https://static.pexels.com/photos/2116/money-gold-coins-finance.jpg')center,center, no-repeat;
 				opacity: .4;

@@ -64,21 +64,20 @@ const ACTIONS = {
       formInvstForm.set(formInfo)
 
       formInvstForm.save().then(function(serverRes){
-         console.log(serverRes)
-         STORE.setStore('currentUser', serverRes)
+         formInvstForm.set(serverRes)
+         STORE.setStore('currentUser', formInvstForm)
       })
       location.hash = "/dash/investors"
    },
 //
    handleInvestorLogin: function(usrInfo){
-      let InvstLogin = new InvestorLoginModel()
+      let invstLogin = new InvestorLoginModel()
 
-      InvstLogin.set(usrInfo)
+      invstLogin.set(usrInfo)
 
-      InvstLogin.save().then(function(serverRes){
-
-         console.log(serverRes)
-         STORE.setStore('currentUser', serverRes)
+      invstLogin.save().then(function(serverRes){
+         invstLogin.set(serverRes)
+         STORE.setStore('currentUser', invstLogin)
          location.hash = "/dash/investors"
          // localStorage.setItem("user_id", serverRes.id);
          // console.log(localStorage.getItem("user_id"))
@@ -106,7 +105,7 @@ const ACTIONS = {
    },
 
    fetchCurrentStudent: function(){
-      let newModel = new StudentModel("/currentstudent")
+      let newModel = new StudentModel()
       console.log("thisone?", newModel)
       newModel.checkAuth("/currentstudent").then(function(){
 
@@ -116,9 +115,9 @@ const ACTIONS = {
       })
    },
    fetchCurrentInvestor: function(){
-      let newModel = new InvestorAppModel("/currentstudent")
+      let newModel = new InvestorAppModel()
       console.log("thisone?", newModel)
-      newModel.checkAuth("/currentinvestor").then(function(){
+      newModel.checkAuth().then(function(){
 
          STORE.setStore('currentUser', newModel)
       }).fail(function(){

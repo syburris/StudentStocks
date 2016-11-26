@@ -18,6 +18,7 @@ const InvestorForm = React.createClass({
       evt.preventDefault()
 
       let newForm = this.state;
+      newForm["school"] = this.refs.school.value
 
       ACTIONS.submitInvestorForm(newForm)
 
