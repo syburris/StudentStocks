@@ -50,14 +50,14 @@ const ACTIONS = {
 
       formInst.set(formInfo)
 
-      formInst.save().then(function(serverRes){
-         console.log('this is serverresponse ', serverRes)
-         let mod = new StudentModel()
-         mod.set(serverRes)
-         STORE.setStore('currentUser', mod)
-         STORE.setStore("userType", "")
+      formInst.save().then(function(){
+         // console.log('this is serverresponse ', serverRes)
+         // let mod = new StudentModel()
+         // mod.set(serverRes)
+         // STORE.setStore('currentUser', mod)
+         // STORE.setStore("userType", "")
       })
-      location.hash = "/dash/students"
+
    },
 
    submitInvestorForm: function(formInfo){

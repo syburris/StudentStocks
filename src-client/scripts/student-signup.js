@@ -101,4 +101,4 @@ const SchoolOption = React.createClass({
 
 
 
-module.exports = {StudentFormModal, SimpInput, SchoolOption}
+module.exports = {StudentFormModal, SchoolOption}

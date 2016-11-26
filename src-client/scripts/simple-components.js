@@ -53,41 +53,55 @@ const FormModal = React.createClass({
 
    getInitialState: function(){
 
-      return {pageView: 0}
-   },
-   _changePage: function(evt){
-      console.log(this.state)
-      if(evt.target.textContent === "next"){
-         this.setState({pageView: 1})
-      }else{
-         this.setState({pageView: 0})
+      return {
+         pageView: 0,
+         studentForm: {}
       }
+   },
+   _handlePageTwo: function(evt){
+      let newForm = this.state.studentForm;
+      newForm["school"] = this.refs.school.value
+      newForm["level"] = this.refs.level.value
+      console.log(newForm)
+      ACTIONS.submitStudentForm(newForm)
+
+         this.setState({pageView: 2, studentForm: newForm})
 
    },
-   _handleClick: function(evt){
+
+   _handleFormSubmit: function(evt){
+      evt.preventDefault()
+
+   },
+   // _nextChanges: function(evt){
+   //    console.log(evt.target)
+   //    let updateForm = this.state.studentForm
+   //    // updateform[]
+   //
+   //
+   //
+   //
+   // },
+   _handlePageOne: function(evt){
       console.log("??????")
       evt.preventDefault()
       console.log('this is the state you want to send to your backend>', this.state)
-      let newForm = this.state;
-         newForm["level"] = this.refs.level.value
+      let newForm = this.state.studentForm;
          newForm["bio"] = this.refs.bio.value
-         newForm["school"] = this.refs.school.value
 
-      console.log(newForm)
-      ACTIONS.submitStudentForm(newForm)
-      console.log(window.location.hash)
 
-      window.location.hash = "/dash/students"
+
+      this.setState({pageView: 1, studentForm: newForm})
+
+
 
    },
    handleChange: function(data, name) {
-      let newState = {};
+      let newState = this.state.studentForm
 
       newState[name] = data;
 
-      this.setState(newState, () => {
-      });
-      console.log(this.state)
+      this.setState({studentForm: newState})
    },
 
    _exitLogin: function(){
@@ -105,21 +119,25 @@ const FormModal = React.createClass({
                   <div className="form-cont">
                      <form action="" className="form-horizontal">
                         {/* username */}
-                        <SimpInput title="Email" name="username" handleChange={this.handleChange} />
+                        <SimpInput key={0} title="Email" name="username" handleChange={this.handleChange} />
                         {/* password */}
-                        <SimpInput textType="password" title="Password" name="password" handleChange={this.handleChange} />
+                        <SimpInput key={1} textType="password" title="Password" name="password" handleChange={this.handleChange} />
                         {/* firstName */}
-                        <SimpInput title="First Name" name="firstName" handleChange={this.handleChange} />
+                        <SimpInput key={2} title="First Name" name="firstName" handleChange={this.handleChange} />
                         {/* lastName */}
-                        <SimpInput title="Last Name" name="lastName" handleChange={this.handleChange} />
+                        <SimpInput key={3} title="Last Name" name="lastName" handleChange={this.handleChange} />
                      </form>
-
+                     {/* bio */}
+                     <label htmlFor="bio">Tell us a little about yourself...</label>
+                     <textarea className="form-control" rows="1" id="textArea" ref="bio"></textarea>
+                     {/* ssn */}
+                     <SimpInput title="SSN" name="ssn" handleChange={this.handleChange} />
                      <div className="row">
                         <div className="col-xs-6">
                            {/* <button className="btn btn-primary" type="back" onClick={this._changePage}>back</button> */}
                         </div>
                         <div className="col-xs-6">
-                           <button className="btn btn-primary" onClick={this._changePage}>next</button>
+                           <button className="btn btn-primary" onClick={this._handlePageOne}>next</button>
                         </div>
                      </div>
                   </div>
@@ -133,21 +151,72 @@ const FormModal = React.createClass({
                <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
 
                <div>
-                  <h1>Im workkinnn</h1>
+                  <h1>Education Info</h1>
+                  <div className="form-cont">
+                     <form action="" className="form-horizontal">
+                        {/* highSchool */}
+                        <SimpInput key={4} title="High School" name="highSchool" handleChange={this.handleChange} />
+                        {/* gpa */}
+                        <SimpInput key={5} title="G.P.A" name="gpa" handleChange={this.handleChange} />
+                        {/* school */}
+                        <label htmlFor="">School Attending</label>
+                        <select className="form-control" id="select" ref="school" >
+                           {this.props.schoolData.map((obj,i)=>{
+                              return <SchoolOption schoolName={obj.get('name')} key={i}/>
+                           })}
+                        </select>
+                        {/* level */}
+                        <label htmlFor="level">Graduate or Undergrad?</label>
+                        <select className="form-control" id="select" ref="level">
+                           <option>UNDERGRADUATE</option>
+                           <option>GRADUATE</option>
+                        </select>
+                        {/* major */}
+                        <SimpInput key={6} title="Major" name="major" handleChange={this.handleChange} />
+                        {/* minor */}
+                        <SimpInput key={7} title="Minor" name="minor" handleChange={this.handleChange} />
+                     </form>
+
+                  </div>
+
                   <div className="row">
                      <div className="col-xs-6">
-                        <button className="btn btn-primary" type="back" onClick={this._changePage}>back</button>
                      </div>
                      <div className="col-xs-6">
-                        <button className="btn btn-primary" type="next" onClick={this._changePage}>next</button>
+                        <button className="btn btn-primary" type="next" onClick={this._handlePageTwo}>next</button>
                      </div>
                   </div>
                </div>
             </div>
          )
+         }else{
+            return(
+            <div className="gen-modal signup-modal">
+               <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
+
+               <div>
+                  <h1>Education Info</h1>
+                  <div className="form-cont">
+                     <form action="" className="form-horizontal">
+                     </form>
+
+                  </div>
+
+                  <div className="row">
+                     <div className="col-xs-6">
+                     </div>
+                     <div className="col-xs-6">
+                        <button className="btn btn-primary" type="next" onClick={this._handlePageTwo}>next</button>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         )
+
+         }
+
                   }
-                  }
-                  })
+})
 
 const StudModal = React.createClass({
 
@@ -183,7 +252,6 @@ const SimpInput = React.createClass({
          value: value,
          name: name,
       } = event.currentTarget;
-      console.log(value);
 
       this.props.handleChange(value, name);
    },
@@ -197,10 +265,24 @@ const SimpInput = React.createClass({
       return(
          <div className="input-group simp-input">
             <label htmlFor={this.props.title} className="input-label">{this.props.title}</label>
-            <input type={textType} className="form-control" name={this.props.name} placeholder={this.props.title} onChange={this.changeHandler}/>
+            <input type={textType} className="form-control" name={this.props.name} placeholder={this.props.title} onChange={this.changeHandler} />
          </div>
 
 
+      )
+   }
+})
+const SchoolOption = React.createClass({
+
+
+
+
+
+   render: function(){
+      return (
+         <option value={this.props.schoolName}>
+            {this.props.schoolName}
+         </option>
       )
    }
 })
