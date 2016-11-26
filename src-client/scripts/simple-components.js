@@ -12,7 +12,7 @@ const LoginModal = React.createClass({
          username: this.refs.userField.value,
          password: this.refs.passField.value
       }
-      if(this.props.userType === "investor"){
+      if(this.props.userType === "Investor"){
 
          ACTIONS.handleInvestorLogin(loginInfo)
       }else{
@@ -29,7 +29,7 @@ const LoginModal = React.createClass({
    render: function(){
 
       return(
-         <div className="login-modal">
+         <div className="gen-modal login-modal">
             <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
             <div>
                <form action="">
@@ -48,4 +48,35 @@ const LoginModal = React.createClass({
 
 
 
-module.exports = LoginModal
+const StudModal = React.createClass({
+
+   _exitLogin: function(){
+      STORE.setStore('selectedStudent', {})
+   },
+
+
+
+
+   render: function(){
+      console.log(this.props)
+
+      return(
+         <div className="gen-modal stud-modal">
+            <a className="close-modal" href="#/dash/investors" onClick={this._exitLogin}>X</a>
+            <div>
+               <form action="">
+                  <p>Username</p>
+                  <input className="input-group" type="text" className="username" ref="userField"/>
+                  <p>Password</p>
+                  <input className="input-group" type="password" className="password" ref="passField"/>
+                  <button onClick={this._handleSubmit} className="btn btn-primary">Login</button>
+               </form>
+            </div>
+         </div>
+
+
+      )
+   }
+})
+
+module.exports = {LoginModal, StudModal}

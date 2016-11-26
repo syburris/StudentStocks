@@ -1,7 +1,7 @@
 const React = require('react')
 const AppBarExampleIcon = require('./student-signup.js')
 const ACTIONS = require("./actions.js")
-const Modal = require('./simple-components.js')
+const {LoginModal} = require('./simple-components.js')
 const STORE = require('./store.js')
 
 
@@ -22,11 +22,11 @@ const HomeView = React.createClass({
 
    render: function(){
       console.log('data', this.props)
-      let modalView = function(){
+      let LoginModalView = function(){
 
          if(this.props.userType.length > 2){
             console.log("im tryin to changggaa")
-               return <Modal userType={this.props.userType}/>
+               return <LoginModal userType={this.props.userType}/>
 
          }
       }.bind(this)
@@ -35,7 +35,7 @@ const HomeView = React.createClass({
 
       return(
          <div className="fluid-container home-view">
-            {modalView()}
+            {LoginModalView()}
             <NavView/>
             <div className="jumbotron hdr-hero">
 
@@ -150,10 +150,10 @@ const HeaderHeros = React.createClass({
 
    },
 
-   _handleModalView: function(evt){
+   _handleLoginModalView: function(evt){
       console.log(evt)
 
-      STORE.setStore('showModal', true)
+      STORE.setStore('showLoginModal', true)
    },
 
 
@@ -171,7 +171,7 @@ const HeaderHeros = React.createClass({
                <button className="btn btn-primary" onClick={this._handleStudentForm} ref="student">Apply Now</button>
                <p>or</p>
                {/* page down to student about/testimonials */}
-               <button className="btn btn-primary" onClick={this._handleModalView}>Find out more</button>
+               <button className="btn btn-primary" onClick={this._handleLoginModalView}>Find out more</button>
                <h4>XX Active Student Loans</h4>
 
             </div>

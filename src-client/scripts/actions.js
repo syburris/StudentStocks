@@ -27,6 +27,7 @@ const ACTIONS = {
 
    },
 
+
    fetchAllStudents: function(){
       let allStudents = new AllStudentsColl()
 
