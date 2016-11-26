@@ -51,19 +51,40 @@ const LoginModal = React.createClass({
 
 const FormModal = React.createClass({
 
+   getInitialState: function(){
+
+      return {pageView: 0}
+   },
+   _changePage: function(evt){
+      console.log(this.state)
+      if(evt.target.textContent === "next"){
+         this.setState({pageView: 1})
+      }else{
+         this.setState({pageView: 0})
+      }
+
+   },
+
    _exitLogin: function(){
       STORE.setStore("userType", "")
    },
 
 
    render: function(){
-      if(this.props.userType === "StudentSignup"){
+      if(this.props.userType === "StudentSignup" && this.state.pageView === 0){
          return(
             <div className="gen-modal login-modal tex-center">
                <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
                <div>
                   <h1>Helloooooooooooo</h1>
-
+                  <div className="row">
+                     <div className="col-xs-6">
+                        <button className="btn btn-primary" type="back" onClick={this._changePage}>back</button>
+                     </div>
+                     <div className="col-xs-6">
+                        <button className="btn btn-primary" type="next" onClick={this._changePage}>next</button>
+                     </div>
+                  </div>
                </div>
             </div>
 
@@ -72,9 +93,17 @@ const FormModal = React.createClass({
          return(
             <div className="gen-modal login-modal">
                <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
-               
+
                <div>
                   <h1>Im workkinnn</h1>
+                  <div className="row">
+                     <div className="col-xs-6">
+                        <button className="btn btn-primary" type="back" onClick={this._changePage}>back</button>
+                     </div>
+                     <div className="col-xs-6">
+                        <button className="btn btn-primary" type="next" onClick={this._changePage}>next</button>
+                     </div>
+                  </div>
                </div>
             </div>
          )
