@@ -33,7 +33,7 @@ const HomeView = React.createClass({
 
       let formModalView = function(){
          if(this.props.userType === "StudentSignup" || this.props.userType === "InvestorSignup"){
-            return <FormModal userType={this.props.userType} />
+            return <FormModal userType={this.props.userType} schoolData={this.props.schoolData} />
          }
 
       }.bind(this)
