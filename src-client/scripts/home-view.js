@@ -1,7 +1,7 @@
 const React = require('react')
 const AppBarExampleIcon = require('./student-signup.js')
 const ACTIONS = require("./actions.js")
-const {LoginModal} = require('./simple-components.js')
+const {LoginModal, FormModal} = require('./simple-components.js')
 const STORE = require('./store.js')
 
 
@@ -22,20 +22,28 @@ const HomeView = React.createClass({
 
    render: function(){
       console.log('data', this.props)
-      let LoginModalView = function(){
+      let loginModalView = function(){
 
-         if(this.props.userType.length > 2){
+         if(this.props.userType === "Student" || this.props.userType === "Investor"){
             console.log("im tryin to changggaa")
                return <LoginModal userType={this.props.userType}/>
 
          }
       }.bind(this)
 
+      let formModalView = function(){
+         if(this.props.userType === "StudentSignup" || this.props.userType === "InvestorSignup"){
+            return <FormModal userType={this.props.userType} />
+         }
+
+      }.bind(this)
+
 
 
       return(
          <div className="fluid-container home-view">
-            {LoginModalView()}
+            {loginModalView()}
+            {formModalView()}
             <NavView/>
             <div className="jumbotron hdr-hero">
 
@@ -139,14 +147,13 @@ const HeaderHeros = React.createClass({
       evt.preventDefault()
       console.log(evt)
 
-      location.hash = "/signup/students"
-
+      STORE.setStore("userType", "StudentSignup")
    },
 
    _handleInvestorForm: function(evt){
       evt.preventDefault()
 
-      location.hash = "/signup/investors"
+      STORE.setStore("userType", "InvestorSignup")
 
    },
 

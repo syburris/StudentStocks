@@ -30,8 +30,11 @@ const LoginModal = React.createClass({
 
       return(
          <div className="gen-modal login-modal">
+
             <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
             <div>
+               <h3>{this.props.userType} login</h3>
+
                <form action="">
                   <p>Username</p>
                   <input className="input-group" type="text" className="username" ref="userField"/>
@@ -46,7 +49,38 @@ const LoginModal = React.createClass({
    }
 })
 
+const FormModal = React.createClass({
 
+   _exitLogin: function(){
+      STORE.setStore("userType", "")
+   },
+
+
+   render: function(){
+      if(this.props.userType === "StudentSignup"){
+         return(
+            <div className="gen-modal login-modal tex-center">
+               <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
+               <div>
+                  <h1>Helloooooooooooo</h1>
+
+               </div>
+            </div>
+
+         )
+      }else{
+         return(
+            <div className="gen-modal login-modal">
+               <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
+               
+               <div>
+                  <h1>Im workkinnn</h1>
+               </div>
+            </div>
+         )
+      }
+   }
+})
 
 const StudModal = React.createClass({
 
@@ -64,13 +98,9 @@ const StudModal = React.createClass({
          <div className="gen-modal stud-modal">
             <a className="close-modal" href="#/dash/investors" onClick={this._exitLogin}>X</a>
             <div>
-               <form action="">
-                  <p>Username</p>
-                  <input className="input-group" type="text" className="username" ref="userField"/>
-                  <p>Password</p>
-                  <input className="input-group" type="password" className="password" ref="passField"/>
-                  <button onClick={this._handleSubmit} className="btn btn-primary">Login</button>
-               </form>
+               <h4>{this.props.modData.firstName} {this.props.modData.lastName}</h4>
+               <p>{this.props.modData.school}</p>
+
             </div>
          </div>
 
@@ -79,4 +109,4 @@ const StudModal = React.createClass({
    }
 })
 
-module.exports = {LoginModal, StudModal}
+module.exports = {LoginModal, StudModal, FormModal}
