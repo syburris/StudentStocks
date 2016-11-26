@@ -293,12 +293,12 @@ public class StudentStocksRestController {
         else {
             return new ResponseEntity<Investor>(HttpStatus.IM_USED);
         }
-
+        Investor investor1 = investors.findOne(investorFromDB.getId());
 //        set attributes and send 200
-        session.setAttribute("username", investor.getUsername());
+        session.setAttribute("username", investor1.getUsername());
         session.setAttribute("isInvestor", true);
         session.setAttribute("time", LocalDate.now());
-        return new ResponseEntity<Investor>(investor, HttpStatus.OK);
+        return new ResponseEntity<Investor>(investor1, HttpStatus.OK);
     }
 
 //    route for posting payments on loan
