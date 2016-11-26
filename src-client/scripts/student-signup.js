@@ -16,6 +16,7 @@ const StudentFormModal = React.createClass ({
       let newForm = this.state;
          newForm["level"] = this.refs.level.value
          newForm["bio"] = this.refs.bio.value
+         newForm["school"] = this.refs.school.value
 
       console.log(newForm)
       ACTIONS.submitStudentForm(newForm)
@@ -33,7 +34,6 @@ const StudentFormModal = React.createClass ({
       newState[name] = data;
 
       this.setState(newState, () => {
-         console.log('current state', this.state);
       });
    },
 
@@ -58,14 +58,20 @@ const StudentFormModal = React.createClass ({
                {/* lastName */}
                <SimpInput title="Last Name" name="lastName" handleChange={this.handleChange} />
                {/* school */}
-               <SimpInput title="School Attending" name="school" handleChange={this.handleChange} />
+               <label htmlFor="">School Attending</label>
+               <select className="form-control" id="select" ref="school">
+                  {this.props.schoolData.map((obj,i)=>{
+                     return <SchoolOption schoolName={obj.get('name')} key={i}/>
+                  })}
+               </select>
+
                {/* bio */}
                <label htmlFor="bio">Tell us a little about yourself...</label>
                <textarea className="form-control" rows="3" id="textArea" ref="bio"></textarea>
                {/* highSchool */}
                <SimpInput title="High School" name="highSchool" handleChange={this.handleChange} />
                {/* level */}
-               Graduate or Undergrad?
+               <label htmlFor="level">Graduate or Undergrad?</label>
                <select className="form-control" id="select" ref="level">
                   <option>UNDERGRADUATE</option>
                   <option>GRADUATE</option>
@@ -103,7 +109,9 @@ const SchoolOption = React.createClass({
 
    render: function(){
       return (
-         <option value=""></option>
+         <option value={this.props.schoolName}>
+            {this.props.schoolName}
+         </option>
       )
    }
 })
@@ -137,4 +145,4 @@ const SimpInput = React.createClass({
 })
 
 
-module.exports = {StudentFormModal, SimpInput}
+module.exports = {StudentFormModal, SimpInput, SchoolOption}

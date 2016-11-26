@@ -1,11 +1,13 @@
 const React = require('react')
 const AppBarExampleIcon = require('./student-signup.js')
 const ACTIONS = require("./actions.js")
-
-
+const {LoginModal, FormModal} = require('./simple-components.js')
+const STORE = require('./store.js')
 
 
 const HomeView = React.createClass({
+
+
 
    componentWillMount: function(){
       // ACTIONS.fetchSchoolData()
@@ -19,11 +21,29 @@ const HomeView = React.createClass({
    },
 
    render: function(){
-      console.log('school data', this.props.schoolData)
+      console.log('data', this.props)
+      let loginModalView = function(){
+
+         if(this.props.userType === "Student" || this.props.userType === "Investor"){
+            console.log("im tryin to changggaa")
+               return <LoginModal userType={this.props.userType}/>
+
+         }
+      }.bind(this)
+
+      let formModalView = function(){
+         if(this.props.userType === "StudentSignup" || this.props.userType === "InvestorSignup"){
+            return <FormModal userType={this.props.userType} />
+         }
+
+      }.bind(this)
+
 
 
       return(
          <div className="fluid-container home-view">
+            {loginModalView()}
+            {formModalView()}
             <NavView/>
             <div className="jumbotron hdr-hero">
 
@@ -69,10 +89,16 @@ const SchoolItem = React.createClass({
 })
 
 
-module.exports = {HomeView, NavView}
 
 const NavView = React.createClass({
 
+   _studLogin: function(){
+      STORE.setStore('userType', "Student")
+   },
+
+   _invstLogin: function(){
+      STORE.setStore('userType', "Investor")
+   },
 
 
 
@@ -89,13 +115,13 @@ const NavView = React.createClass({
                      <span className="icon-bar"></span>
                      <span className="icon-bar"></span>
                   </button>
-                  <a className="navbar-brand" href="#/login/investors">StudentStocks</a>
+                  <a className="navbar-brand" href="">StudentStocks</a>
                </div>
 
                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul className="nav navbar-nav">
-                     <li className="active"><a href="#/login/students">Student Login <span className="sr-only">(current)</span></a></li>
-                     <li className="active"><a href="#/login/investors">Investor Login<span className="sr-only">(current)</span></a></li>
+                     <li className="active" ><a href="#" onClick={this._studLogin}>Student Login</a></li>
+                     <li className="active" ><a href="#" onClick={this._invstLogin}>Investor Login</a></li>
 
                   </ul>
                   {/* <form className="navbar-form navbar-left" role="search">
@@ -121,15 +147,20 @@ const HeaderHeros = React.createClass({
       evt.preventDefault()
       console.log(evt)
 
-      location.hash = "/signup/students"
-
+      STORE.setStore("userType", "StudentSignup")
    },
 
    _handleInvestorForm: function(evt){
       evt.preventDefault()
 
-      location.hash = "/signup/investors"
+      STORE.setStore("userType", "InvestorSignup")
 
+   },
+
+   _handleLoginModalView: function(evt){
+      console.log(evt)
+
+      STORE.setStore('showLoginModal', true)
    },
 
 
@@ -147,7 +178,7 @@ const HeaderHeros = React.createClass({
                <button className="btn btn-primary" onClick={this._handleStudentForm} ref="student">Apply Now</button>
                <p>or</p>
                {/* page down to student about/testimonials */}
-               <button className="btn btn-primary">Find out more</button>
+               <button className="btn btn-primary" onClick={this._handleLoginModalView}>Find out more</button>
                <h4>XX Active Student Loans</h4>
 
             </div>

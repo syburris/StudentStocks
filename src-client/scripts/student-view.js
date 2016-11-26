@@ -28,11 +28,18 @@ const STORE = require('./store.js')
 const StudentView = React.createClass({
 
    componentWillMount: function(){
-
+      ACTIONS.fetchCurrentStudent()
 
    },
 
    render: function(){
+      if(!this.props.user.attributes){
+            console.log(this.props.user.attributes)
+         return(
+            <p>Loadingggg</p>
+         )
+      }
+
       // console.log("student props", this.props.user.attributes)
       // console.log('ehhhh', this.props.user)
       return(
@@ -59,12 +66,12 @@ const StudentView = React.createClass({
                               <p>{this.props.user.attributes && this.props.user.attributes.username}</p>
                               <label htmlFor="">Education Info</label>
                               <p>{this.props.user.attributes && this.props.user.attributes.school}</p>
-                                 <p>{this.props.user.attributes && this.props.user.attributes.major}</p>
-                                 <p>{this.props.user.attributes && this.props.user.attributes.minor}</p>
+                              <p>{this.props.user.attributes && this.props.user.attributes.major}</p>
+                              <p>{this.props.user.attributes && this.props.user.attributes.minor}</p>
 
-                              </div>
                            </div>
                         </div>
+                     </div>
                      </div>
                      <div className="col-xs-12 col-sm-8 right-col">
                         <div className="row">
@@ -84,6 +91,7 @@ const StudentView = React.createClass({
 const UserNav = React.createClass({
 
    _handleLogout: function(){
+      console.log('hahsdkfjahsldkfhja')
 
       ACTIONS.logOut()
    },
@@ -96,7 +104,7 @@ const UserNav = React.createClass({
          <nav className="navbar navbar-default">
             <div className="container-fluid">
                <div className="navbar-header">
-                  <a className="navbar-brand" onClick={this._handleLogout}>StudentStocks</a>
+                  <a className="navbar-brand" >StudentStocks</a>
                </div>
 
                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -108,7 +116,7 @@ const UserNav = React.createClass({
                   <ul className="nav navbar-nav navbar-right">
                      <li><p>{this.props.firstName}</p><span>{this.props.userName}</span> </li>
                      <li><i className="fa fa-user" aria-hidden="true"></i></li>
-                     <li><a href="#">Logout</a></li>
+                     <li><button onClick={this._handleLogout}>Logout</button></li>
                   </ul>
                </div>
             </div>
@@ -154,4 +162,4 @@ const UserNav = React.createClass({
 
 
 
-module.exports = {StudentView}
+module.exports = {StudentView, UserNav}

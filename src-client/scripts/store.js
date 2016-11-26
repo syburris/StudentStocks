@@ -7,8 +7,9 @@ const STORE = {
       "schools": [],
       allStudents: [],
       currentUser: {},
+      selectedStudent: {},
       studentsSearched: [],
-      currentView: "",
+      userType: "",
 
 
    },

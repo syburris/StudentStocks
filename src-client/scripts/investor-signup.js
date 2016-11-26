@@ -1,6 +1,6 @@
 const React = require('react')
 const ACTIONS = require('./actions.js')
-const {StudentFormModal, SimpInput} = require("./student-signup.js")
+const {StudentFormModal, SimpInput, SchoolOption} = require("./student-signup.js")
 
 
 
@@ -18,6 +18,7 @@ const InvestorForm = React.createClass({
       evt.preventDefault()
 
       let newForm = this.state;
+      newForm["school"] = this.refs.school.value
 
       ACTIONS.submitInvestorForm(newForm)
 
@@ -52,8 +53,12 @@ const InvestorForm = React.createClass({
                {/* ssn */}
                <SimpInput title="SSN" name="ssn" handleChange={this.handleChange} />
                {/* school */}
-               <SimpInput title="School Attended" name="school" handleChange={this.handleChange} />
-
+               <label htmlFor="">School Attended</label>
+               <select className="form-control" id="select" ref="school">
+                  {this.props.schoolData.map((obj,i)=>{
+                     return <SchoolOption schoolName={obj.get('name')} key={i}/>
+                  })}
+               </select>
                <button className="btn button-primary" onClick={this._handleClick}>Submit Form</button>
 
             </form>

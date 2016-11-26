@@ -2,7 +2,6 @@ const {InvestorAppModel, InvestorAppColl, InvestorLoginModel} = require('./inves
 const {AllStudentsColl, StudentModel, StudentAppColl,StudentLoginModel} = require("./student-model.js")
 const {SchoolColl, SchoolModel} = require("./schools-model.js")
 const {StockColl, StockModel} = require("./investment-model.js")
-const LogOutModel = require("./logout-route.js")
 const STORE = require('./store.js')
 
 
@@ -13,17 +12,21 @@ const ACTIONS = {
 
 
    logOut: function(){
-      let newLogOut = new LogOutModel()
-      newLogOut.set()
+      console.log("exexutttinn")
+      let mod = new StudentModel()
 
-      newLogOut.save().then(function(){
-         STORE.setStore("currentUser", {})
+      mod.logOut()
+
+      mod.save().then(function(){
          location.hash = ""
-
 
       })
 
+
+
+
    },
+
 
    fetchAllStudents: function(){
       let allStudents = new AllStudentsColl()
@@ -52,6 +55,7 @@ const ACTIONS = {
          let mod = new StudentModel()
          mod.set(serverRes)
          STORE.setStore('currentUser', mod)
+         STORE.setStore("userType", "")
       })
       location.hash = "/dash/students"
    },
@@ -62,25 +66,27 @@ const ACTIONS = {
       formInvstForm.set(formInfo)
 
       formInvstForm.save().then(function(serverRes){
-         console.log(serverRes)
-         STORE.setStore('currentUser', serverRes)
+         formInvstForm.set(serverRes)
+         STORE.setStore('currentUser', formInvstForm)
+         STORE.setStore("userType", "")
+
       })
       location.hash = "/dash/investors"
    },
 //
    handleInvestorLogin: function(usrInfo){
-      let InvstLogin = new InvestorLoginModel()
+      let invstLogin = new InvestorLoginModel()
 
-      InvstLogin.set(usrInfo)
+      invstLogin.set(usrInfo)
 
-      InvstLogin.save().then(function(serverRes){
+      invstLogin.save().then(function(serverRes){
+         invstLogin.set(serverRes)
+         STORE.setStore('currentUser', invstLogin)
+         STORE.setStore("userType", "")
 
-         console.log(serverRes)
-         STORE.setStore('currentUser', serverRes)
          location.hash = "/dash/investors"
          // localStorage.setItem("user_id", serverRes.id);
          // console.log(localStorage.getItem("user_id"))
-//
       })
 
 
@@ -95,6 +101,8 @@ const ACTIONS = {
          let mod = new StudentModel()
          mod.set(serverRes)
          STORE.setStore('currentUser', mod)
+         STORE.setStore("userType", "")
+
 
 
          location.hash = "/dash/students"
@@ -105,9 +113,19 @@ const ACTIONS = {
    },
 
    fetchCurrentStudent: function(){
-      let newModel = new StudentModel("/currentstudent")
+      let newModel = new StudentModel()
       console.log("thisone?", newModel)
       newModel.checkAuth("/currentstudent").then(function(){
+
+         STORE.setStore('currentUser', newModel)
+      }).fail(function(){
+         console.log("WHOOPS!")
+      })
+   },
+   fetchCurrentInvestor: function(){
+      let newModel = new InvestorAppModel()
+      console.log("thisone?", newModel)
+      newModel.checkAuth().then(function(){
 
          STORE.setStore('currentUser', newModel)
       }).fail(function(){
@@ -131,6 +149,8 @@ const ACTIONS = {
       STORE.setStore('currentView', viewInput)
 
    }
+
+
 
 }
 

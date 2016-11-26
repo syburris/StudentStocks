@@ -7,11 +7,13 @@ const STORE = require('./store.js')
 const {TestView} = require('./simple-components.js')
 const {StdntLoginView, InvstLoginView} = require('./login-view.js')
 const {StudentView} = require("./student-view.js")
-
+const InvestorView = require('./investor-view.js')
 const AppView = React.createClass({
 
    getInitialState: function(){
 
+      ACTIONS.fetchSchoolData()
+      ACTIONS.fetchAllStudents()
 
       return STORE.getStoreData()
    },
@@ -19,10 +21,9 @@ const AppView = React.createClass({
 
    componentWillMount: function(){
       let self = this
-
+      console.log(this.state)
       ACTIONS.fetchSchoolData()
       ACTIONS.fetchAllStudents()
-      ACTIONS.fetchCurrentStudent()
 
 
       STORE.onChange(function(){
@@ -33,21 +34,38 @@ const AppView = React.createClass({
    },
 
    render: function(){
+      if(!this.state.allStudents[0]){
+
+         return (
+            <div id="load">
+               <div>G</div>
+               <div>N</div>
+               <div>I</div>
+               <div>D</div>
+               <div>A</div>
+               <div>O</div>
+               <div>L</div>
+            </div>         )
+      }
+
       switch (this.props.currentView) {
          case "home":
-            return <HomeView schoolData={this.state.schools}/>
+            return <HomeView schoolData={this.state.schools} showModal={this.state.showModal} userType={this.state.userType}/>
             break;
          case "dash/students":
             return <StudentView user={this.state.currentUser}/>
+            break;
+         case "dash/investors":
+            return <InvestorView user={this.state.currentUser} studentInfo={this.state.allStudents} selectedStudent={this.state.selectedStudent}/>
             break;
          case "signup/students":
             return <StudentFormModal schoolData={ this.state.schools}/>
             break;
          case "signup/investors":
-            return <InvestorForm/>
+            return <InvestorForm schoolData={this.state.schools}/>
             break;
          case "login/investors":
-            return <InvstLoginView/>
+            return <InvstLoginView />
             break;
          case "login/students":
             return <StdntLoginView/>

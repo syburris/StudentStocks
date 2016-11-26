@@ -7,6 +7,11 @@ const StudentModel = Backbone.Model.extend({
       this.url = newUrl
       return this.fetch()
    },
+   logOut: function(){
+      console.log("gettin hitttt")
+      this.url = "/logout"
+      return this.set()
+   },
 
 
 
