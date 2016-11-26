@@ -1,7 +1,7 @@
 const React = require('react')
 const AppBarExampleIcon = require('./student-signup.js')
 const ACTIONS = require("./actions.js")
-const Modal = require('./simple-components.js')
+const {LoginModal, FormModal} = require('./simple-components.js')
 const STORE = require('./store.js')
 
 
@@ -22,20 +22,28 @@ const HomeView = React.createClass({
 
    render: function(){
       console.log('data', this.props)
-      let modalView = function(){
+      let loginModalView = function(){
 
-         if(this.props.userType.length > 2){
+         if(this.props.userType === "Student" || this.props.userType === "Investor"){
             console.log("im tryin to changggaa")
-               return <Modal userType={this.props.userType}/>
+               return <LoginModal userType={this.props.userType}/>
 
          }
+      }.bind(this)
+
+      let formModalView = function(){
+         if(this.props.userType === "StudentSignup" || this.props.userType === "InvestorSignup"){
+            return <FormModal userType={this.props.userType} />
+         }
+
       }.bind(this)
 
 
 
       return(
          <div className="fluid-container home-view">
-            {modalView()}
+            {loginModalView()}
+            {formModalView()}
             <NavView/>
             <div className="jumbotron hdr-hero">
 
@@ -139,21 +147,20 @@ const HeaderHeros = React.createClass({
       evt.preventDefault()
       console.log(evt)
 
-      location.hash = "/signup/students"
-
+      STORE.setStore("userType", "StudentSignup")
    },
 
    _handleInvestorForm: function(evt){
       evt.preventDefault()
 
-      location.hash = "/signup/investors"
+      STORE.setStore("userType", "InvestorSignup")
 
    },
 
-   _handleModalView: function(evt){
+   _handleLoginModalView: function(evt){
       console.log(evt)
 
-      STORE.setStore('showModal', true)
+      STORE.setStore('showLoginModal', true)
    },
 
 
@@ -171,7 +178,7 @@ const HeaderHeros = React.createClass({
                <button className="btn btn-primary" onClick={this._handleStudentForm} ref="student">Apply Now</button>
                <p>or</p>
                {/* page down to student about/testimonials */}
-               <button className="btn btn-primary" onClick={this._handleModalView}>Find out more</button>
+               <button className="btn btn-primary" onClick={this._handleLoginModalView}>Find out more</button>
                <h4>XX Active Student Loans</h4>
 
             </div>

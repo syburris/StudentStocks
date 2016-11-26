@@ -12,7 +12,7 @@ const LoginModal = React.createClass({
          username: this.refs.userField.value,
          password: this.refs.passField.value
       }
-      if(this.props.userType === "investor"){
+      if(this.props.userType === "Investor"){
 
          ACTIONS.handleInvestorLogin(loginInfo)
       }else{
@@ -29,9 +29,12 @@ const LoginModal = React.createClass({
    render: function(){
 
       return(
-         <div className="login-modal">
+         <div className="gen-modal login-modal">
+
             <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
             <div>
+               <h3>{this.props.userType} login</h3>
+
                <form action="">
                   <p>Username</p>
                   <input className="input-group" type="text" className="username" ref="userField"/>
@@ -46,6 +49,64 @@ const LoginModal = React.createClass({
    }
 })
 
+const FormModal = React.createClass({
+
+   _exitLogin: function(){
+      STORE.setStore("userType", "")
+   },
 
 
-module.exports = LoginModal
+   render: function(){
+      if(this.props.userType === "StudentSignup"){
+         return(
+            <div className="gen-modal login-modal tex-center">
+               <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
+               <div>
+                  <h1>Helloooooooooooo</h1>
+
+               </div>
+            </div>
+
+         )
+      }else{
+         return(
+            <div className="gen-modal login-modal">
+               <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
+               
+               <div>
+                  <h1>Im workkinnn</h1>
+               </div>
+            </div>
+         )
+      }
+   }
+})
+
+const StudModal = React.createClass({
+
+   _exitLogin: function(){
+      STORE.setStore('selectedStudent', {})
+   },
+
+
+
+
+   render: function(){
+      console.log(this.props)
+
+      return(
+         <div className="gen-modal stud-modal">
+            <a className="close-modal" href="#/dash/investors" onClick={this._exitLogin}>X</a>
+            <div>
+               <h4>{this.props.modData.firstName} {this.props.modData.lastName}</h4>
+               <p>{this.props.modData.school}</p>
+
+            </div>
+         </div>
+
+
+      )
+   }
+})
+
+module.exports = {LoginModal, StudModal, FormModal}

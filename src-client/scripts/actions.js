@@ -27,6 +27,7 @@ const ACTIONS = {
 
    },
 
+
    fetchAllStudents: function(){
       let allStudents = new AllStudentsColl()
 
@@ -54,6 +55,7 @@ const ACTIONS = {
          let mod = new StudentModel()
          mod.set(serverRes)
          STORE.setStore('currentUser', mod)
+         STORE.setStore("userType", "")
       })
       location.hash = "/dash/students"
    },
@@ -66,6 +68,8 @@ const ACTIONS = {
       formInvstForm.save().then(function(serverRes){
          formInvstForm.set(serverRes)
          STORE.setStore('currentUser', formInvstForm)
+         STORE.setStore("userType", "")
+
       })
       location.hash = "/dash/investors"
    },
@@ -78,6 +82,8 @@ const ACTIONS = {
       invstLogin.save().then(function(serverRes){
          invstLogin.set(serverRes)
          STORE.setStore('currentUser', invstLogin)
+         STORE.setStore("userType", "")
+
          location.hash = "/dash/investors"
          // localStorage.setItem("user_id", serverRes.id);
          // console.log(localStorage.getItem("user_id"))
@@ -95,6 +101,8 @@ const ACTIONS = {
          let mod = new StudentModel()
          mod.set(serverRes)
          STORE.setStore('currentUser', mod)
+         STORE.setStore("userType", "")
+
 
 
          location.hash = "/dash/students"

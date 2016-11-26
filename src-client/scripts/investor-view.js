@@ -1,5 +1,7 @@
 const React = require('react')
 const ACTIONS = require('./actions.js')
+const {StudModal} = require('./simple-components.js')
+const STORE = require("./store.js")
 
 const InvestorView = React.createClass({
 
@@ -21,6 +23,14 @@ const InvestorView = React.createClass({
             <p>loadinng</p>
          )
       }
+      let modalView = function(){
+         console.log(this.props)
+         if(this.props.selectedStudent.attributes != undefined){
+            return(
+               <StudModal modData={this.props.selectedStudent.attributes}/>
+            )
+         }
+      }.bind(this)
          console.log("running", this.props)
 
 
@@ -28,6 +38,7 @@ const InvestorView = React.createClass({
 
          <div className="fluid-container in-cont">
             <UserNav userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} />
+            {modalView()}
             <div className="container student-box">
                <div className="row">
                   {this.props.studentInfo.map((obj, i)=>{
@@ -49,17 +60,22 @@ const InvestorView = React.createClass({
 
 const StudentCard = React.createClass({
 
+   _handleInvest: function(){
+      console.log(this.props.studentData)
+      STORE.setStore("selectedStudent", this.props.studentData)
+   },
+
 
 
    render: function(){
 
       return(
-         <div className="col-xs-6 col-sm-3">
-            <div className="thumbnail stud-card">
+         <div className="col-xs-6 col-sm-3  stud-card">
+            <div className="thumbnail">
                <h4>{this.props.studentData.get("firstName")+ " " + this.props.studentData.get("lastName")}</h4>
                <p>{this.props.studentData.get('school')}</p>
 
-               <button className="btn btn-primary">Invest</button>
+               <button className="btn btn-primary" onClick={this._handleInvest}>Invest</button>
             </div>
          </div>
       )
