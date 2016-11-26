@@ -79,7 +79,7 @@ const FormModal = React.createClass({
                   <h1>Helloooooooooooo</h1>
                   <div className="row">
                      <div className="col-xs-6">
-                        <button className="btn btn-primary" type="back" onClick={this._changePage}>back</button>
+                        {/* <button className="btn btn-primary" type="back" onClick={this._changePage}>back</button> */}
                      </div>
                      <div className="col-xs-6">
                         <button className="btn btn-primary" type="next" onClick={this._changePage}>next</button>
