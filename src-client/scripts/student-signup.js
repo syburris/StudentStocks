@@ -109,7 +109,7 @@ const SchoolOption = React.createClass({
 
    render: function(){
       return (
-         <option value="">
+         <option value={this.props.schoolName}>
             {this.props.schoolName}
          </option>
       )

@@ -1,11 +1,13 @@
 const React = require('react')
 const AppBarExampleIcon = require('./student-signup.js')
 const ACTIONS = require("./actions.js")
-
-
+const Modal = require('./simple-components.js')
+const STORE = require('./store.js')
 
 
 const HomeView = React.createClass({
+
+
 
    componentWillMount: function(){
       // ACTIONS.fetchSchoolData()
@@ -19,11 +21,21 @@ const HomeView = React.createClass({
    },
 
    render: function(){
-      console.log('school data', this.props.schoolData)
+      console.log('data', this.props)
+      let modalView = function(){
+
+         if(this.props.userType.length > 2){
+            console.log("im tryin to changggaa")
+               return <Modal userType={this.props.userType}/>
+
+         }
+      }.bind(this)
+
 
 
       return(
          <div className="fluid-container home-view">
+            {modalView()}
             <NavView/>
             <div className="jumbotron hdr-hero">
 
@@ -69,10 +81,16 @@ const SchoolItem = React.createClass({
 })
 
 
-module.exports = {HomeView, NavView}
 
 const NavView = React.createClass({
 
+   _studLogin: function(){
+      STORE.setStore('userType', "Student")
+   },
+
+   _invstLogin: function(){
+      STORE.setStore('userType', "Investor")
+   },
 
 
 
@@ -89,13 +107,13 @@ const NavView = React.createClass({
                      <span className="icon-bar"></span>
                      <span className="icon-bar"></span>
                   </button>
-                  <a className="navbar-brand" href="#/login/investors">StudentStocks</a>
+                  <a className="navbar-brand" href="">StudentStocks</a>
                </div>
 
                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul className="nav navbar-nav">
-                     <li className="active"><a href="#/login/students">Student Login <span className="sr-only">(current)</span></a></li>
-                     <li className="active"><a href="#/login/investors">Investor Login<span className="sr-only">(current)</span></a></li>
+                     <li className="active" ><a href="#" onClick={this._studLogin}>Student Login</a></li>
+                     <li className="active" ><a href="#" onClick={this._invstLogin}>Investor Login</a></li>
 
                   </ul>
                   {/* <form className="navbar-form navbar-left" role="search">
@@ -132,6 +150,12 @@ const HeaderHeros = React.createClass({
 
    },
 
+   _handleModalView: function(evt){
+      console.log(evt)
+
+      STORE.setStore('showModal', true)
+   },
+
 
 
 
@@ -147,7 +171,7 @@ const HeaderHeros = React.createClass({
                <button className="btn btn-primary" onClick={this._handleStudentForm} ref="student">Apply Now</button>
                <p>or</p>
                {/* page down to student about/testimonials */}
-               <button className="btn btn-primary">Find out more</button>
+               <button className="btn btn-primary" onClick={this._handleModalView}>Find out more</button>
                <h4>XX Active Student Loans</h4>
 
             </div>
