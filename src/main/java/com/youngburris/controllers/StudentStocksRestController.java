@@ -256,7 +256,7 @@ public class StudentStocksRestController {
 
 //    Route to create loan
     @RequestMapping(path = "/postloan", method = RequestMethod.POST)
-    public ResponseEntity<Loan> createLoan (HttpSession session, @RequestBody Loan loan) {
+    public ResponseEntity<Student> createLoan (HttpSession session, @RequestBody Loan loan) {
 //        get the student's username
         String name = (String) session.getAttribute("username");
 //        find the student from username
@@ -264,23 +264,16 @@ public class StudentStocksRestController {
 
 //        if student isn't logged in, throw an error
         if (student == null) {
-            return new ResponseEntity<Loan>(HttpStatus.FORBIDDEN);
+            return new ResponseEntity<Student>(HttpStatus.FORBIDDEN);
         }
 
 //        save the loan to the student
-        Loan newLoan = loans.findOne(loan.getId());
-        if (newLoan == null) {
-            newLoan = new Loan(loan.getLoanGoal(), loan.getLoanLength(), loan.getGracePeriod());
-            newLoan.setFunded(false);
-            loans.save(newLoan);
-            Loan theLoan = loans.findOne(newLoan.getId());
-            theLoan.setMonthlyPayment(String.valueOf(monthlyPayment(newLoan)));
-            student.setLoan(theLoan);
-            students.save(student);
-        }
-        Loan theLoan = students.findFirstByUsername(name).getLoan();
-
-        return new ResponseEntity<Loan>(theLoan, HttpStatus.OK);
+        loans.save(loan);
+        Loan theLoan = loans.findOne(loan.getId());
+        student.setLoan(theLoan);
+        students.save(student);
+        Student student1 = students.findFirstByUsername(name);
+        return new ResponseEntity<Student>(student1, HttpStatus.OK);
     }
 
 //    create investor user route
