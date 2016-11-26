@@ -267,7 +267,65 @@ public class StudentStocksRestController {
             return new ResponseEntity<Student>(HttpStatus.FORBIDDEN);
         }
 
-//        save the loan to the student
+//        set the apr based on the loan's goal
+        double loanGoal = Double.parseDouble(loan.getLoanGoal());
+        if(0 < loanGoal && loanGoal <= 5000) {
+            loan.setApr("2");
+        }
+        else if (5001 <= loanGoal && loanGoal <= 10000) {
+            loan.setApr("2.1");
+        }
+        else if (10001 <= loanGoal && loanGoal <= 15000) {
+            loan.setApr("2.2");
+        }
+        else if (15001 <= loanGoal && loanGoal <= 20000) {
+            loan.setApr("2.3");
+        }
+        else if (20001 <= loanGoal && loanGoal <= 25000) {
+            loan.setApr("2.4");
+        }
+        else if (25001 <= loanGoal && loanGoal <= 30000) {
+            loan.setApr("2.5");
+        }
+        else if (30001 <= loanGoal && loanGoal <= 35000) {
+            loan.setApr("2.6");
+        }
+        else if (35001 <= loanGoal && loanGoal <= 40000) {
+            loan.setApr("2.7");
+        }
+        else if (40001 <= loanGoal && loanGoal <= 45000) {
+            loan.setApr("2.8");
+        }
+        else if (45001 <= loanGoal && loanGoal <= 50000) {
+            loan.setApr("2.9");
+        }
+        else if (50001 <= loanGoal && loanGoal <= 55000) {
+            loan.setApr("3");
+        }
+        else if (55001 <= loanGoal && loanGoal <= 60000) {
+            loan.setApr("3.1");
+        }
+        else if (60001 <= loanGoal && loanGoal <= 70000) {
+            loan.setApr("3.2");
+        }
+        else if (70001 <= loanGoal && loanGoal <= 80000) {
+            loan.setApr("3.3");
+        }
+        else if (80001 <= loanGoal && loanGoal <= 90000) {
+            loan.setApr("3.4");
+        }
+        else if (90001 <= loanGoal && loanGoal <= 100000) {
+            loan.setApr("3.5");
+        }
+        else {
+            loan.setApr("3.6");
+        }
+        loan.setGracePeriodLength(Integer.parseInt(loan.getGracePeriod()) * 12);
+        loan.setNumberOfPeriods(String.valueOf(Integer.parseInt(loan.getLoanLength()) * 12));
+
+//        calculate the monthly payment
+        String payment = String.valueOf(monthlyPayment(loan));
+        loan.setMonthlyPayment(payment);
         loans.save(loan);
         Loan theLoan = loans.findOne(loan.getId());
         student.setLoan(theLoan);
