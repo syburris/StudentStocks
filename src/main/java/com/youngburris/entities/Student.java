@@ -58,8 +58,6 @@ public class Student {
     @Column(nullable = false)
     String ssn;
 
-    @Column
-    String loanGoal;
 
     @Column
     double balance;
@@ -83,7 +81,7 @@ public class Student {
 
     public Student(String username, String password, String firstName, String lastName, String school,
                    Level level, String bio, String highSchool, String gpa, String major,
-                   String minor, String ssn, String loanGoal) {
+                   String minor, String ssn) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;
@@ -96,7 +94,7 @@ public class Student {
         this.major = major;
         this.minor = minor;
         this.ssn = ssn;
-        this.loanGoal = loanGoal;
+
     }
 
     public int getId() {
@@ -202,14 +200,6 @@ public class Student {
 
     public void setSsn(String ssn) {
         this.ssn = ssn;
-    }
-
-    public String getLoanGoal() {
-        return loanGoal;
-    }
-
-    public void setLoanGoal(String loanGoal) {
-        this.loanGoal = loanGoal;
     }
 
     public double getBalance() {
