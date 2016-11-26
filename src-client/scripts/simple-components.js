@@ -64,6 +64,31 @@ const FormModal = React.createClass({
       }
 
    },
+   _handleClick: function(evt){
+      console.log("??????")
+      evt.preventDefault()
+      console.log('this is the state you want to send to your backend>', this.state)
+      let newForm = this.state;
+         newForm["level"] = this.refs.level.value
+         newForm["bio"] = this.refs.bio.value
+         newForm["school"] = this.refs.school.value
+
+      console.log(newForm)
+      ACTIONS.submitStudentForm(newForm)
+      console.log(window.location.hash)
+
+      window.location.hash = "/dash/students"
+
+   },
+   handleChange: function(data, name) {
+      let newState = {};
+
+      newState[name] = data;
+
+      this.setState(newState, () => {
+      });
+      console.log(this.state)
+   },
 
    _exitLogin: function(){
       STORE.setStore("userType", "")
@@ -73,25 +98,38 @@ const FormModal = React.createClass({
    render: function(){
       if(this.props.userType === "StudentSignup" && this.state.pageView === 0){
          return(
-            <div className="gen-modal login-modal tex-center">
+            <div className="gen-modal signup-modal text-center">
                <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
                <div>
-                  <h1>Helloooooooooooo</h1>
-                  <div className="row">
-                     <div className="col-xs-6">
-                        {/* <button className="btn btn-primary" type="back" onClick={this._changePage}>back</button> */}
-                     </div>
-                     <div className="col-xs-6">
-                        <button className="btn btn-primary" type="next" onClick={this._changePage}>next</button>
+                  <h1>Personal Info</h1>
+                  <div className="form-cont">
+                     <form action="" className="form-horizontal">
+                        {/* username */}
+                        <SimpInput title="Email" name="username" handleChange={this.handleChange} />
+                        {/* password */}
+                        <SimpInput textType="password" title="Password" name="password" handleChange={this.handleChange} />
+                        {/* firstName */}
+                        <SimpInput title="First Name" name="firstName" handleChange={this.handleChange} />
+                        {/* lastName */}
+                        <SimpInput title="Last Name" name="lastName" handleChange={this.handleChange} />
+                     </form>
+
+                     <div className="row">
+                        <div className="col-xs-6">
+                           {/* <button className="btn btn-primary" type="back" onClick={this._changePage}>back</button> */}
+                        </div>
+                        <div className="col-xs-6">
+                           <button className="btn btn-primary" onClick={this._changePage}>next</button>
+                        </div>
                      </div>
                   </div>
                </div>
             </div>
 
-         )
-      }else{
+               )
+      }else if(this.props.userType === "StudentSignup" && this.state.pageView === 1){
          return(
-            <div className="gen-modal login-modal">
+            <div className="gen-modal signup-modal">
                <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
 
                <div>
@@ -107,9 +145,9 @@ const FormModal = React.createClass({
                </div>
             </div>
          )
-      }
-   }
-})
+                  }
+                  }
+                  })
 
 const StudModal = React.createClass({
 
@@ -138,4 +176,35 @@ const StudModal = React.createClass({
    }
 })
 
-module.exports = {LoginModal, StudModal, FormModal}
+const SimpInput = React.createClass({
+
+   changeHandler: function(event) {
+      const {
+         value: value,
+         name: name,
+      } = event.currentTarget;
+      console.log(value);
+
+      this.props.handleChange(value, name);
+   },
+
+   render: function(){
+      let textType
+      if(this.props.textType != undefined){
+         textType = this.props.textType
+      }else{textType = "text"}
+
+      return(
+         <div className="input-group simp-input">
+            <label htmlFor={this.props.title} className="input-label">{this.props.title}</label>
+            <input type={textType} className="form-control" name={this.props.name} placeholder={this.props.title} onChange={this.changeHandler}/>
+         </div>
+
+
+      )
+   }
+})
+
+
+
+                  module.exports = {LoginModal, StudModal, FormModal}
