@@ -322,6 +322,7 @@ public class StudentStocksRestController {
         }
         loan.setGracePeriodLength(Double.parseDouble(loan.getGracePeriod()) * 12);
         loan.setNumberOfPeriods(String.valueOf(Double.parseDouble(loan.getLoanLength()) * 12));
+        loan.setPrincipalBalance(String.valueOf(0.00));
 
 //        calculate the monthly payment
         String payment = String.valueOf(monthlyPayment(loan));
