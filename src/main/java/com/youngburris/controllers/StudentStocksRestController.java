@@ -378,6 +378,43 @@ public class StudentStocksRestController {
         double newPaymentBalance = paymentBalance + thePayment;
         loan.setPaymentBalance(newPaymentBalance);
 
+//        repay the investors' principal
+        ArrayList<Investment> investmentArrayList = (ArrayList<Investment>) loan.getInvestments();
+        double principalPayment = principalPortion(loan);
+        for (Investment investment : investmentArrayList) {
+            double percent = Double.parseDouble(loan.getLoanGoal()) / investment.getAmount();
+            double amountOwed = principalPayment * percent;
+            double amountPaid = Math.round(amountOwed * 100.00) / 100.00;
+            investment.setPrincipalRepaid(amountPaid);
+            investments.save(investment);
+        }
+
+//        pay the investors' interest
+        double interestPayment = interestPortion(loan);
+        for (Investment investment : investmentArrayList) {
+            double percent = Double.parseDouble(loan.getLoanGoal()) / investment.getAmount();
+            double amountOwed = percent * interestPayment;
+            double amountPaid = Math.round(amountOwed * 100.00) / 100.00;
+            investment.setInterestPaid(amountPaid);
+            investments.save(investment);
+        }
+
+//        update the investors's balance to reflect the payment
+        ArrayList<Investor> investorArrayList = (ArrayList<Investor>) investors.findAll();
+        for (Investor investor : investorArrayList) {
+            ArrayList<Investment> investmentArrayList1 = (ArrayList<Investment>) investor.getInvestments();
+            for (Investment investment : investmentArrayList1) {
+                double interestPaid = investment.getInterestPaid();
+                double principalPaid = investment.getPrincipalRepaid();
+                double balance = investor.getBalance();
+                double newBalance = principalPaid + interestPaid + balance;
+                investor.setPrincipalPaid(principalPaid);
+                investor.setInterestPaid(interestPaid);
+                investor.setBalance(newBalance);
+                investors.save(investor);
+            }
+        }
+
 //        calculate new loan balance and save it to the loan
         double newBalance = newLoanBalance(loan);
         loan.setPrincipalBalance(String.valueOf(newBalance));
@@ -389,8 +426,11 @@ public class StudentStocksRestController {
 //        save the payment
         payments.save(payment);
 
+//        repay investors
+        Payment theActualPayment = payments.findOne(payment.getId());
+
 //        return the payment object and a 200
-        return new ResponseEntity<Payment>(payment, HttpStatus.OK);
+        return new ResponseEntity<Payment>(theActualPayment, HttpStatus.OK);
     }
 
     @RequestMapping(path = "/investment", method = RequestMethod.POST)
@@ -499,7 +539,7 @@ public class StudentStocksRestController {
         return actualPayment;
     }
 
-//    method to find the total
+//    method to calculate new loan balance
 
     public static double newLoanBalance(Loan loan) {
 //        get the necessary fields out of the loan
@@ -510,7 +550,32 @@ public class StudentStocksRestController {
 //        find the interest amount of the payment by multiplying the monthly interest rate
 //          by the loan's principal balance
         double interestPortion = principalBalance * i;
+        double principalPortion = payment - interestPortion;
+        double newBalance = principalBalance - principalPortion;
+        return newBalance;
+    }
 
-        return 00.00;
+    public static double interestPortion(Loan loan) {
+//        get the necessary fields out of the loan
+        double principalBalance = Double.parseDouble(loan.getPrincipalBalance());
+        double i = loan.getMonthlyInterest();
+        double payment = Double.parseDouble(loan.getMonthlyPayment());
+
+//        find the interest portion of the loan
+        double interestPortion = principalBalance * i;
+        return interestPortion;
+    }
+
+    public static double principalPortion(Loan loan) {
+        //        get the necessary fields out of the loan
+        double principalBalance = Double.parseDouble(loan.getPrincipalBalance());
+        double i = loan.getMonthlyInterest();
+        double payment = Double.parseDouble(loan.getMonthlyPayment());
+
+//        find the interest amount of the payment by multiplying the monthly interest rate
+//          by the loan's principal balance
+        double interestPortion = principalBalance * i;
+        double principalPortion = payment - interestPortion;
+        return principalPortion;
     }
 }
