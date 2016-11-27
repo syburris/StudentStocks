@@ -61,7 +61,7 @@ public class Loan {
     int monthsPassed;
 
     @Column
-    int gracePeriodLength;
+    double gracePeriodLength;
 
     @OneToMany
     List<Investment> investments;
@@ -200,11 +200,11 @@ public class Loan {
         this.monthsPassed = monthsPassed;
     }
 
-    public int getGracePeriodLength() {
+    public double getGracePeriodLength() {
         return gracePeriodLength;
     }
 
-    public void setGracePeriodLength(int gracePeriodLength) {
+    public void setGracePeriodLength(double gracePeriodLength) {
         this.gracePeriodLength = gracePeriodLength;
     }
 
