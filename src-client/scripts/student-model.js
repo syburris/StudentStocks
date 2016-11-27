@@ -53,5 +53,9 @@ const StudentLoginModel = Backbone.Model.extend({
 
 
 })
+const StudentPayment = Backbone.Model.extend({
 
-module.exports = {AllStudentsColl, StudentModel, StudentAppColl,StudentLoginModel}
+   url: "/payment"
+})
+
+module.exports = {AllStudentsColl, StudentModel, StudentAppColl,StudentLoginModel, StudentPayment}
