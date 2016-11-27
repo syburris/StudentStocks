@@ -39,6 +39,12 @@ public class Investor {
     @Column
     double balance;
 
+    @Column
+    double principalPaid;
+
+    @Column
+    double interestPaid;
+
     @OneToMany
     List<Investment> investments;
 
@@ -147,5 +153,21 @@ public class Investor {
 
     public void setMySchool(School mySchool) {
         this.mySchool = mySchool;
+    }
+
+    public double getPrincipalPaid() {
+        return principalPaid;
+    }
+
+    public void setPrincipalPaid(double principalPaid) {
+        this.principalPaid = principalPaid;
+    }
+
+    public double getInterestPaid() {
+        return interestPaid;
+    }
+
+    public void setInterestPaid(double interestPaid) {
+        this.interestPaid = interestPaid;
     }
 }

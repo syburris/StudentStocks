@@ -16,6 +16,12 @@ public class Investment {
     @Column
     double amount;
 
+    @Column
+    double principalRepaid;
+
+    @Column
+    double interestPaid;
+
     @ManyToOne
     Loan loan;
 
@@ -56,4 +62,19 @@ public class Investment {
         this.loan = loan;
     }
 
+    public double getPrincipalRepaid() {
+        return principalRepaid;
+    }
+
+    public void setPrincipalRepaid(double principalRepaid) {
+        this.principalRepaid = principalRepaid;
+    }
+
+    public double getInterestPaid() {
+        return interestPaid;
+    }
+
+    public void setInterestPaid(double interestPaid) {
+        this.interestPaid = interestPaid;
+    }
 }
