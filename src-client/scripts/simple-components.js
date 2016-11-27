@@ -337,6 +337,9 @@ const StudModal = React.createClass({
 
    render: function(){
       console.log(this.props)
+      let style = {
+         width: "25%",
+      }
 
       return(
          <div className="gen-modal stud-modal">
@@ -344,7 +347,9 @@ const StudModal = React.createClass({
             <div>
                <h4>{this.props.modData.firstName} {this.props.modData.lastName}</h4>
                <p>{this.props.modData.school}</p>
-
+               <div className="progress progress-striped active">
+                  <div className="progress-bar progess-bar-info" style={style}></div>
+               </div>
             </div>
          </div>
 
