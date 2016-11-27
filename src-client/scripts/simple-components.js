@@ -268,6 +268,64 @@ const StudFormModal = React.createClass({
                   }
 })
 
+const InvstFormModal = React.createClass({
+   _handleClick: function(evt){
+      evt.preventDefault()
+
+      let newForm = this.state;
+      newForm["school"] = this.refs.school.value
+
+      ACTIONS.submitInvestorForm(newForm)
+
+
+   },
+   handleChange: function(data, name) {
+      let newState = {};
+
+      newState[name] = data;
+
+      this.setState(newState, () => {
+         console.log('current state', this.state);
+      });
+   },
+   _exitLogin: function(){
+      STORE.setStore("userType", "")
+
+   },
+
+   render: function(){
+      return(
+         <div className="gen-modal signup-modal">
+            <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
+            <div className="form-cont">
+               <form action="" className="form-horizontal">
+                  {/* username */}
+                  <SimpInput title="Email" name="username" handleChange={this.handleChange} />
+                  {/* password */}
+                  <SimpInput textType="password" title="Password" name="password" handleChange={this.handleChange} />
+                  {/* firstName */}
+                  <SimpInput title="First Name" name="firstName" handleChange={this.handleChange} />
+                  {/* lastName */}
+                  <SimpInput title="Last Name" name="lastName" handleChange={this.handleChange} />
+                  {/* ssn */}
+                  <SimpInput title="SSN" name="ssn" handleChange={this.handleChange} />
+                  {/* school */}
+                  <label htmlFor="">School Attended</label>
+                  <select className="form-control" id="select" ref="school">
+                     {this.props.schoolData.map((obj,i)=>{
+                        return <SchoolOption schoolName={obj.get('name')} key={i}/>
+                     })}
+                  </select>
+                  <button className="btn button-primary" onClick={this._handleClick}>Submit Form</button>
+
+               </form>
+            </div>
+         </div>
+
+      )
+   }
+})
+
 const StudModal = React.createClass({
 
    _exitLogin: function(){
@@ -340,4 +398,4 @@ const SchoolOption = React.createClass({
 
 
 
-                  module.exports = {LoginModal, StudModal, StudFormModal}
+                  module.exports = {LoginModal, StudModal, StudFormModal, InvstFormModal}
