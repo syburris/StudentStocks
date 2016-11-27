@@ -1,7 +1,7 @@
 const React = require('react')
 const AppBarExampleIcon = require('./student-signup.js')
 const ACTIONS = require("./actions.js")
-const {LoginModal, FormModal} = require('./simple-components.js')
+const {LoginModal, StudFormModal} = require('./simple-components.js')
 const STORE = require('./store.js')
 
 
@@ -31,9 +31,9 @@ const HomeView = React.createClass({
          }
       }.bind(this)
 
-      let formModalView = function(){
+      let StudFormModalView = function(){
          if(this.props.userType === "StudentSignup" || this.props.userType === "InvestorSignup"){
-            return <FormModal userType={this.props.userType} schoolData={this.props.schoolData} />
+            return <StudFormModal userType={this.props.userType} schoolData={this.props.schoolData} />
          }
 
       }.bind(this)
@@ -43,7 +43,7 @@ const HomeView = React.createClass({
       return(
          <div className="fluid-container home-view">
             {loginModalView()}
-            {formModalView()}
+            {StudFormModalView()}
             <NavView/>
             <div className="jumbotron hdr-hero">
 
