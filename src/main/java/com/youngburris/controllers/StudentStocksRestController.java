@@ -320,8 +320,8 @@ public class StudentStocksRestController {
         else {
             loan.setApr("3.6");
         }
-        loan.setGracePeriodLength(Integer.parseInt(loan.getGracePeriod()) * 12);
-        loan.setNumberOfPeriods(String.valueOf(Integer.parseInt(loan.getLoanLength()) * 12));
+        loan.setGracePeriodLength(Double.parseDouble(loan.getGracePeriod()) * 12);
+        loan.setNumberOfPeriods(String.valueOf(Double.parseDouble(loan.getLoanLength()) * 12));
 
 //        calculate the monthly payment
         String payment = String.valueOf(monthlyPayment(loan));
