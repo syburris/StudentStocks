@@ -2,6 +2,7 @@ const {InvestorAppModel, InvestorAppColl, InvestorLoginModel} = require('./inves
 const {AllStudentsColl, StudentModel, StudentAppColl,StudentLoginModel} = require("./student-model.js")
 const {SchoolColl, SchoolModel} = require("./schools-model.js")
 const {StockColl, StockModel} = require("./investment-model.js")
+const {LoanModel, LoanCollection} = require('./loan-model.js')
 const STORE = require('./store.js')
 
 
@@ -34,6 +35,20 @@ const ACTIONS = {
       allStudents.fetch().then(function(){
          STORE.setStore('allStudents', allStudents.models)
       })
+   },
+   submitLoanForm: function(formInfo){
+      let loanForm = new LoanModel()
+
+      loanForm.set(formInfo)
+      loanForm.save().then(function(serverRes){
+         console.log(serverRes)
+         let mod = new StudentModel()
+         mod.set(serverRes)
+         STORE.setStore("currentUser", mod)
+      })
+      location.hash = "/dash/students"
+
+
    },
 
 

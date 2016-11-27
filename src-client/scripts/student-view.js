@@ -34,7 +34,6 @@ const StudentView = React.createClass({
 
    render: function(){
       if(!this.props.user.attributes){
-            console.log(this.props.user.attributes)
          return(
             <p>Loadingggg</p>
          )

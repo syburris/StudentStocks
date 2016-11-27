@@ -2,6 +2,7 @@ const React = require('react')
 const ACTIONS = require("./actions.js")
 const STORE = require('./store.js')
 
+
 const LoginModal = React.createClass({
 
    _handleSubmit: function(evt){
@@ -49,9 +50,10 @@ const LoginModal = React.createClass({
    }
 })
 
-const FormModal = React.createClass({
+const StudFormModal = React.createClass({
 
    getInitialState: function(){
+
 
       return {
          pageView: 0,
@@ -65,12 +67,19 @@ const FormModal = React.createClass({
       console.log(newForm)
       ACTIONS.submitStudentForm(newForm)
 
-         this.setState({pageView: 2, studentForm: newForm})
+         this.setState({pageView: 2, studentForm: {}})
 
    },
 
    _handleFormSubmit: function(evt){
       evt.preventDefault()
+      let newForm = this.state.studentForm
+      console.log(this.refs)
+      newForm["gracePeriod"] = this.refs.gracePeriod.value
+      newForm["loanLength"] = this.refs.loanLength.value
+
+
+      ACTIONS.submitLoanForm(newForm)
 
    },
    // _nextChanges: function(evt){
@@ -98,6 +107,7 @@ const FormModal = React.createClass({
    },
    handleChange: function(data, name) {
       let newState = this.state.studentForm
+      console.log(this.refs)
 
       newState[name] = data;
 
@@ -110,6 +120,24 @@ const FormModal = React.createClass({
 
 
    render: function(){
+      let createOptions = function(strt, lgth, intr){
+         let newArr = []
+         for(var i = strt; i <= lgth; i+= intr){
+            var numStr = i.toString()
+            var year
+            if(i === 1){
+               var year = " Year"
+
+            }else{year = " Years"}
+
+            newArr.push({value: numStr, text: numStr + year })
+         }
+         console.log(newArr)
+         return newArr
+      }
+
+
+
       if(this.props.userType === "StudentSignup" && this.state.pageView === 0){
          return(
             <div className="gen-modal signup-modal text-center">
@@ -195,9 +223,31 @@ const FormModal = React.createClass({
                <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
 
                <div>
-                  <h1>Education Info</h1>
+                  <h1>Loan Info</h1>
                   <div className="form-cont">
                      <form action="" className="form-horizontal">
+                        {/* loanGoal; */}
+                        <SimpInput key={8} title="Amount Requested" name="loanGoal" handleChange={this.handleChange} />
+                        {/* loanLength; */}
+                        <label htmlFor="" className="input-label">Loan Length</label>
+                        <select name="" id="select" className="form-control" ref="loanLength">
+                           {createOptions(2, 15, .5).map(function(obj, i){
+                              return(
+                                 <option key={i} value={obj.value}>{obj.text}</option>
+                              )
+                           })}
+                        </select>
+                        {/* gracePeriod; */}
+                        <label htmlFor="" className="input-label">Grace Period</label>
+                        <select className="form-control" id="select" ref="gracePeriod" >
+                           {createOptions(.5, 4, .5).map(function(obj, i){
+                              return(
+                                 <option key={i} value={obj.value}>{obj.text}</option>
+                              )
+                           })}
+                        </select>
+                        <span className="note-tag">Note: Interest will accrud during grace period</span>
+
                      </form>
 
                   </div>
@@ -206,7 +256,7 @@ const FormModal = React.createClass({
                      <div className="col-xs-6">
                      </div>
                      <div className="col-xs-6">
-                        <button className="btn btn-primary" type="next" onClick={this._handlePageTwo}>next</button>
+                        <button className="btn btn-primary" type="next" onClick={this._handleFormSubmit}>Submit Info</button>
                      </div>
                   </div>
                </div>
@@ -244,6 +294,7 @@ const StudModal = React.createClass({
       )
    }
 })
+
 
 const SimpInput = React.createClass({
 
@@ -289,4 +340,4 @@ const SchoolOption = React.createClass({
 
 
 
-                  module.exports = {LoginModal, StudModal, FormModal}
+                  module.exports = {LoginModal, StudModal, StudFormModal}
