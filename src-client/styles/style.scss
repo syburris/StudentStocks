@@ -1,6 +1,10 @@
 @import "../../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss";
 @import "../../node_modules/font-awesome/scss/font-awesome.scss";
 // @import "../../node_modules/@blueprintjs/core/dist/blueprint.scss";
+$primaryBlue: #61AEE0;
+$primaryOrg: #F4B41B;
+$iconColor: #F9D321;
+$transBlue: rgba(97,174,224, .6);
 * {
 	box-sizing: border-box;
 }
@@ -64,11 +68,44 @@ body{
 			}
 		}
 
-
-
-
-
 		.home-view{
+			.top-offset{
+				background:rgba(0, 0, 0, 0);
+				height: 100px;
+			}
+			.home-nav{
+
+
+				background: $transBlue;
+				color: #fff;
+				.menu-col{
+
+					padding-top: 30px;
+					.nav-menu{
+
+						padding: 50px 0 0 0;
+						li{
+							padding-right: 5px;
+							a{
+								color: #fff;
+
+								:hover{
+									color: #fff;
+								}
+								:visited{
+									color: #fff;
+								}
+								text-decoration: none;
+
+							}
+							font-size: 2rem;
+							display: inline-block;
+						}
+					}
+				}
+
+
+			}
 			.login-modal{
 				width: 400px;
 				height: 200px;

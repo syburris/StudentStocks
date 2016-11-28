@@ -366,7 +366,7 @@ const StudModal = React.createClass({
                   <div className="progress-bar progess-bar-info" style={style}></div>
                </div>
                <div className="">
-                  <form action="" className="form-control">
+                  <form action="" className="form-horizontal">
                      <SimpInput title="Amount to invest" name="amount" handleChange={this.handleChange} />
                      <button className="btn btn-primary" onClick={this._handleInvestment}>Make Investment</button>
 
