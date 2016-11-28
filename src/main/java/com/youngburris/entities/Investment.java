@@ -25,8 +25,6 @@ public class Investment {
     @Column
     String theLoanId;
 
-    @ManyToOne
-    Loan loan;
 
     public Investment() {
     }
@@ -40,10 +38,6 @@ public class Investment {
         this.theLoanId = loanId;
     }
 
-    public Investment(String amount, Loan loan) {
-        this.amount = amount;
-        this.loan = loan;
-    }
 
     public int getId() {
         return id;
@@ -61,13 +55,6 @@ public class Investment {
         this.amount = amount;
     }
 
-    public Loan getLoan() {
-        return loan;
-    }
-
-    public void setLoan(Loan loan) {
-        this.loan = loan;
-    }
 
     public double getPrincipalRepaid() {
         return principalRepaid;
