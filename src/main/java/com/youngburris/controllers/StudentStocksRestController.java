@@ -88,8 +88,12 @@ public class StudentStocksRestController {
             Student student = new Student("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"), "Steven", "Burris",
                     "College of Charleston", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
                     "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12");
+            students.save(student);
+            Student student1 = students.findOne(student.getId());
+            student1.setMySchool(schools.findFirstByName(student1.getSchool()));
+            students.save(student1);
             student.setMySchool(schools.findFirstByName(student.getSchool()));
-            Student student1 = new Student("rossboatwright@gmail.com", PasswordStorage.createHash("hunter2"),
+            Student student11 = new Student("rossboatwright@gmail.com", PasswordStorage.createHash("hunter2"),
                     "Ross", "Boatwright", "Massachusetts Institute of Technology", Student.Level.GRADUATE,
                     "This is filler info. I have no idea what to type here, so I'll stop.", "Wando", "4", "Finance", "Spanish",
                     "527362-4253-32");
@@ -98,8 +102,6 @@ public class StudentStocksRestController {
                     "Pepperdine University", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'm going to stop.",
                     "James Island", "3.5", "Project Management", null, "928374-2378-42");
             student2.setMySchool(schools.findFirstByName(student2.getSchool()));
-            students.save(student);
-            students.save(student1);
             students.save(student2);
 
         }
@@ -323,6 +325,7 @@ public class StudentStocksRestController {
         loan.setGracePeriodLength(Double.parseDouble(loan.getGracePeriod()) * 12);
         loan.setNumberOfPeriods(String.valueOf(Double.parseDouble(loan.getLoanLength()) * 12));
         loan.setPrincipalBalance(String.valueOf(0.00));
+        loan.setPaymentBalance(0.00);
 
 //        calculate the monthly payment
         String payment = String.valueOf(monthlyPayment(loan));
@@ -380,10 +383,11 @@ public class StudentStocksRestController {
         loan.setPaymentBalance(newPaymentBalance);
 
 //        repay the investors' principal
-        ArrayList<Investment> investmentArrayList = (ArrayList<Investment>) loan.getInvestments();
+        List<Investment> investmentArrayList = loan.getInvestments();
         double principalPayment = principalPortion(loan);
+        payment.setPrincipal(String.valueOf(principalPayment));
         for (Investment investment : investmentArrayList) {
-            double percent = Double.parseDouble(loan.getLoanGoal()) / Double.parseDouble(investment.getAmount());
+            double percent = Double.parseDouble(investment.getAmount()) / Double.parseDouble(loan.getLoanGoal());
             double amountOwed = principalPayment * percent;
             double amountPaid = Math.round(amountOwed * 100.00) / 100.00;
             investment.setPrincipalRepaid(amountPaid);
@@ -392,8 +396,9 @@ public class StudentStocksRestController {
 
 //        pay the investors' interest
         double interestPayment = interestPortion(loan);
+        payment.setInterest(String.valueOf(interestPayment));
         for (Investment investment : investmentArrayList) {
-            double percent = Double.parseDouble(loan.getLoanGoal()) / Double.parseDouble(investment.getAmount());
+            double percent = Double.parseDouble(investment.getAmount()) / Double.parseDouble(loan.getLoanGoal());
             double amountOwed = percent * interestPayment;
             double amountPaid = Math.round(amountOwed * 100.00) / 100.00;
             investment.setInterestPaid(amountPaid);
@@ -403,7 +408,7 @@ public class StudentStocksRestController {
 //        update the investors's balance to reflect the payment
         ArrayList<Investor> investorArrayList = (ArrayList<Investor>) investors.findAll();
         for (Investor investor : investorArrayList) {
-            ArrayList<Investment> investmentArrayList1 = (ArrayList<Investment>) investor.getInvestments();
+            List<Investment> investmentArrayList1 = investor.getInvestments();
             for (Investment investment : investmentArrayList1) {
                 double interestPaid = investment.getInterestPaid();
                 double principalPaid = investment.getPrincipalRepaid();
@@ -425,6 +430,7 @@ public class StudentStocksRestController {
         payment.setNewBalance(String.valueOf(newBalance));
 
 //        save the payment
+        payment.setStudent(student);
         payments.save(payment);
 
 //        repay investors
@@ -477,6 +483,9 @@ public class StudentStocksRestController {
 
         List<Investment> myInvestments = investor.getInvestments();
         myInvestments.add(theInvestment);
+        double balance = investor.getBalance();
+        double newBalance = balance - investmentAmount;
+        investor.setBalance(newBalance);
         investor.setInvestments(myInvestments);
         investors.save(investor);
 
