@@ -160,7 +160,7 @@ const DropDownMenu = React.createClass({
 
    render: function(){
       return(
-         <ul className="dropdown-menu drop-search">
+         <ul className="dropdown-menu drop-search text-center">
             <li className="drop-title">Search By:</li>
             <li><a href="">School</a></li>
             <li><a href="">GPA</a></li>
