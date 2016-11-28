@@ -51,8 +51,8 @@ const HomeView = React.createClass({
             {loginModalView()}
             {studFormModalView()}
             {invstFormModalView()}
-            <div className="top-offset">
-            </div>
+            <div className="top-offset"></div>
+
             <NavView/>
 
             <HeaderHeros/>
@@ -115,12 +115,16 @@ const NavView = React.createClass({
       return(
          <nav className="home-nav container-fluid">
 
+
             <div className="row">
-               <div className="col-xs-12 col-sm-6">
+               <div className="title-cont col-xs-12 col-sm-4 text-center">
+                  <div className="logo-cont">
+                     <img src="images/main-logo.png" alt=""/>
+                  </div>
                   <h1>StudentStocks</h1>
                   <h3>Invest in the brightest futures</h3>
                </div>
-               <div className="menu-col col-sm-6">
+               <div className=" menu-col col-sm-8">
                   {/* <div className="row"> */}
                   <div className="col-sm-12 r-top">
 
