@@ -44,6 +44,14 @@ body{
 
 	#app-container{
 		.in-cont{
+			.invst-nav{
+				.drop-search{
+					position: absolute;
+					top: 46.5px;
+					left: 38px;
+					display: block;
+				}
+			}
 			.stud-modal{
 				background-color: #dbd9d9;
 				width: 300px;

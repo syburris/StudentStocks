@@ -116,7 +116,7 @@ const UserNav = React.createClass({
 
 
       return(
-         <nav className="navbar navbar-default">
+         <nav className="invst-nav navbar-default">
             <div className="container-fluid">
                <div className="navbar-header">
                   <a className="navbar-brand" onClick={this._handleLogout}>StudentStocks</a>
@@ -126,9 +126,8 @@ const UserNav = React.createClass({
                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul className="nav navbar-nav">
 
-                     <li className="active"><a href="#/dash/investors"><i className="fa fa-search" aria-hidden="true" onClick={this._handleSearchButton}></i><span className="sr-only">(current)</span></a></li>
+                     <li className="active" onClick={this._handleSearchButton}><a href="#/dash/investors"><i className="fa fa-search" aria-hidden="true"></i><span className="sr-only">(current)</span></a></li>
 
-                     <li><a href="#">Link</a></li>
 
                   </ul>
                   <ul className="nav navbar-nav navbar-right">
