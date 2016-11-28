@@ -81,8 +81,21 @@ const StudentView = React.createClass({
                   </div>
                   <div className="col-xs-12 col-sm-8 right-col">
                      <div className="row">
-                        <div className="thumbnail col-xs-12 col-sm-12">
+                        <div className="thumbnail col-xs-12 col-sm-12 loan-info">
                            <h2>Current Loan Info</h2>
+                           <div className="row">
+                              <div className="col-xs-8">
+                                 <p>Remaining Grace Period:</p>
+                                 <h3>{this.props.user.attributes.loan.gracePeriod} Years</h3>
+                                 <p>Current Loan Length</p>
+                                 <h3>{this.props.user.attributes.loan.loanLength} Years</h3>
+                                 <p>current # of Investors:</p>
+                                 <h3>{this.props.user.attributes.loan.investments.length} </h3>
+                              </div>
+                              <div className="col-xs-4">
+
+                              </div>
+                           </div>
 
                         </div>
                      </div>
