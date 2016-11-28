@@ -232,19 +232,19 @@ public class StudentStocksRestController {
 //        add seed data (investor)
         if (investors.count() == 0) {
             Investor investor = new Investor("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"),
-                    "Steven", "Burris", "219089-4322-32", "College of Charleston", 10000);
+                    "Steven", "Burris", "219089-4322-32", "College of Charleston", 100000);
             investor.setMySchool(schools.findFirstByName(investor.getSchool()));
             Investor investor1 = new Investor("alexwebber@gmail.com", PasswordStorage.createHash("hunter2"),
-                    "Alex", "Webber", "654321-5454-23", "Harvard University", 10000);
+                    "Alex", "Webber", "654321-5454-23", "Harvard University", 80000);
             investor1.setMySchool(schools.findFirstByName(investor1.getSchool()));
             Investor investor2 = new Investor("charlottegraham@gmail.com", PasswordStorage.createHash("hunter2"),
-                    "Charlotte", "Graham", "928374-8290-93", "Brown University", 10000);
+                    "Charlotte", "Graham", "928374-8290-93", "Brown University", 90000);
             investor2.setMySchool(schools.findFirstByName(investor2.getSchool()));
             Investor investor3 = new Investor("edenhazard@gmail.com", PasswordStorage.createHash("hunter2"),
-                    "Eden", "Hazard", "832938-9392-72", "University of Oxford", 10000);
+                    "Eden", "Hazard", "832938-9392-72", "University of Oxford", 40000);
             investor3.setMySchool(schools.findFirstByName(investor3.getSchool()));
             Investor investor4 = new Investor("garethbale@gmail.com", PasswordStorage.createHash("hunter2"),
-                    "Gareth", "Bale", "823746-4321-32", "Rhode Island School of Design", 10000);
+                    "Gareth", "Bale", "823746-4321-32", "Rhode Island School of Design", 60000);
             investor4.setMySchool(schools.findFirstByName(investor4.getSchool()));
             investors.save(investor);
             investors.save(investor1);
