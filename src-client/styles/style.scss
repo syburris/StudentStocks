@@ -4,7 +4,7 @@
 $primaryBlue: #61AEE0;
 $primaryOrg: #F4B41B;
 $iconColor: #F9D321;
-$transBlue: rgba(97,174,224, .6);
+$transBlue: rgba(97,174,224, .85);
 * {
 	box-sizing: border-box;
 }
@@ -75,23 +75,34 @@ body{
 				background:rgba(0, 0, 0, 0);
 				height: 100px;
 			}
+
 			.home-nav{
-				height: 15%;
+				height: 240px;
+
 
 
 				background: $transBlue;
 				color: #fff;
+				.logo-cont{
+					position: absolute;
+					top: -80px;
+					left: 70px;
+					width: 180px;
+
+				}
+				.title-cont{
+					position: relative;
+					padding-top: 90px;
+				}
 				.menu-col{
 
 					padding-top: 30px;
 					.nav-menu{
-
-						padding: 50px 0 0 0;
+						padding: 137px 0 0 90px;
 						li{
-							padding-right: 5px;
+							padding-right: 15px;
 							a{
 								color: #fff;
-
 								:hover{
 									color: #fff;
 								}
@@ -99,7 +110,6 @@ body{
 									color: #fff;
 								}
 								text-decoration: none;
-
 							}
 							font-size: 2rem;
 							display: inline-block;
