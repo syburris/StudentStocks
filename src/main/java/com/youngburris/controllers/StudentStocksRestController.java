@@ -469,9 +469,12 @@ public class StudentStocksRestController {
             loan.setMonthlyPayment(String.valueOf(monthlyPayment(loan)));
         }
         loan.setPrincipalBalance(String.valueOf(newLoanBalance));
-        loans.save(loan);
-        Investment theInvestment = new Investment(String.valueOf(investmentAmount), loan);
+        List<Investment> loanInvestments = loan.getInvestments();
+        Investment theInvestment = new Investment(String.valueOf(investmentAmount), investment.getLoanId());
         investments.save(theInvestment);
+        loanInvestments.add(theInvestment);
+        loans.save(loan);
+
         List<Investment> myInvestments = investor.getInvestments();
         myInvestments.add(theInvestment);
         investor.setInvestments(myInvestments);
