@@ -1,7 +1,5 @@
 const React = require('react')
 const {HomeView} = require('./home-view.js')
-const {StudentFormModal, SimpInput} = require('./student-signup.js')
-const InvestorForm = require('./investor-signup.js')
 const ACTIONS = require("./actions.js")
 const STORE = require('./store.js')
 const {TestView} = require('./simple-components.js')

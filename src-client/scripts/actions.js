@@ -153,8 +153,10 @@ const ACTIONS = {
 
       stockInvst.set(loanInfo)
 
+      stockInvst.save().then(function(){
 
-
+         location.hash = "dash/investors"
+      })
 
    },
 
