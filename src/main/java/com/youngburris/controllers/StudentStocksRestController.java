@@ -59,55 +59,7 @@ public class StudentStocksRestController {
             dir.mkdir();
         }
 
-//        add seed data (investor)
-        if (investors.count() == 0) {
-            Investor investor = new Investor("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"),
-                    "Steven", "Burris", "219089-4322-32", "College of Charleston", 10000);
-            investor.setMySchool(schools.findFirstByName(investor.getSchool()));
-            Investor investor1 = new Investor("alexwebber@gmail.com", PasswordStorage.createHash("hunter2"),
-                    "Alex", "Webber", "654321-5454-23", "Harvard University", 10000);
-            investor1.setMySchool(schools.findFirstByName(investor1.getSchool()));
-            Investor investor2 = new Investor("charlottegraham@gmail.com", PasswordStorage.createHash("hunter2"),
-                    "Charlotte", "Graham", "928374-8290-93", "Brown University", 10000);
-            investor2.setMySchool(schools.findFirstByName(investor2.getSchool()));
-            Investor investor3 = new Investor("edenhazard@gmail.com", PasswordStorage.createHash("hunter2"),
-                    "Eden", "Hazard", "832938-9392-72", "University of Oxford", 10000);
-            investor3.setMySchool(schools.findFirstByName(investor3.getSchool()));
-            Investor investor4 = new Investor("garethbale@gmail.com", PasswordStorage.createHash("hunter2"),
-                    "Gareth", "Bale", "823746-4321-32", "Rhode Island School of Design", 10000);
-            investor4.setMySchool(schools.findFirstByName(investor4.getSchool()));
-            investors.save(investor);
-            investors.save(investor1);
-            investors.save(investor2);
-            investors.save(investor3);
-            investors.save(investor4);
-        }
-
-//        add seed data (student)
-        if (students.count() == 0) {
-            Student student = new Student("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"), "Steven", "Burris",
-                    "College of Charleston", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
-                    "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12");
-            students.save(student);
-            Student student1 = students.findOne(student.getId());
-            student1.setMySchool(schools.findFirstByName(student1.getSchool()));
-            students.save(student1);
-            student.setMySchool(schools.findFirstByName(student.getSchool()));
-            Student student11 = new Student("rossboatwright@gmail.com", PasswordStorage.createHash("hunter2"),
-                    "Ross", "Boatwright", "Massachusetts Institute of Technology", Student.Level.GRADUATE,
-                    "This is filler info. I have no idea what to type here, so I'll stop.", "Wando", "4", "Finance", "Spanish",
-                    "527362-4253-32");
-            student1.setMySchool(schools.findFirstByName(student1.getSchool()));
-            Student student2 = new Student("seanseabrook@gmail.com", PasswordStorage.createHash("hunter2"), "Sean", "Burris",
-                    "Pepperdine University", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'm going to stop.",
-                    "James Island", "3.5", "Project Management", null, "928374-2378-42");
-            student2.setMySchool(schools.findFirstByName(student2.getSchool()));
-            students.save(student2);
-
-        }
-
-
-//        add seed data (schools)
+        //        add seed data (schools)
         if (schools.count() == 0) {
             School school = new School("College of Charleston", "66 George Street", "Charleston", "SC", "29424", "USA",
                     "843.805.5507", "images/cofc.jpg", "http://www.cofc.edu/");
@@ -140,6 +92,123 @@ public class StudentStocksRestController {
             schools.save(school8);
             schools.save(school9);
         }
+
+        //        add seed data (student)
+        if (students.count() == 0) {
+            Student student = new Student("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"), "Steven", "Burris",
+                    "College of Charleston", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
+                    "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12");
+            student.setMySchool(schools.findFirstByName(student.getSchool()));
+            Student student1 = new Student("rossboatwright@gmail.com", PasswordStorage.createHash("hunter2"),
+                    "Ross", "Boatwright", "Massachusetts Institute of Technology", Student.Level.GRADUATE,
+                    "This is filler info. I have no idea what to type here, so I'll stop.", "Wando", "4", "Finance", "Spanish",
+                    "527362-4253-32");
+            student1.setMySchool(schools.findFirstByName(student1.getSchool()));
+            Student student2 = new Student("seanseabrook@gmail.com", PasswordStorage.createHash("hunter2"), "Sean", "Burris",
+                    "Pepperdine University", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'm going to stop.",
+                    "James Island", "3.5", "Project Management", null, "928374-2378-42");
+            student2.setMySchool(schools.findFirstByName(student2.getSchool()));
+            Student student3 = new Student("mikebrown@gmail.com", PasswordStorage.createHash("hunter2"), "Mike", "Brown",
+                    "Dartmouth College", Student.Level.UNDERGRADUATE,
+                    "My name is Michael Brown. I'm 18 years old and a senior at Wando, and I have been accepted to Dartmouth in the Fall.  I am going to be studying biology with the hopes of continuing to get my MD.",
+                    "Wando", "3.7", "Biology", "Chemistry", "648935-4235-42");
+            student3.setMySchool(schools.findFirstByName(student3.getSchool()));
+            Student student4 = new Student("zachthomas@gmail.com", PasswordStorage.createHash("hunter2"), "Zach", "Thomas",
+                    "Brown University", Student.Level.UNDERGRADUATE, "My name is Zach Thomas. I just graduated from Woodberry Forest School and I'm currently taking a gap year to do some traveling." +
+                    "I have been accepted to Brown for the fall of 2017, and I will be studying Finance.", "Woodberry Forest School", "3.8",
+                    "Finance", "Marketing", "478392-1038-38");
+            student4.setMySchool(schools.findFirstByName(student4.getSchool()));
+            Student student5 = new Student("barrydaniels@gmail.com", PasswordStorage.createHash("hunter2"), "Barry", "Daniels",
+                    "University of Oxford", Student.Level.GRADUATE, "My name is Barry Daniels. I'm a recent graduate of Newberry and The Iron Yard, and" +
+                    "I've been accepted to Oxford for the graduate literature program.", "Christ School", "3.4",
+                    "British Literature", "Comparative Literature", "378242-7293-28");
+            student5.setMySchool(schools.findFirstByName(student5.getSchool()));
+            Student student6 = new Student("victorguy@gmail.com", PasswordStorage.createHash("hunter2"), "Victor", "Guy",
+                    "College of Charleston", Student.Level.UNDERGRADUATE, "My name is Victor, I went to West Ashley High School and graduated early." +
+                    "I've been accepted to the College of Charleston to study Computer Information Systems in the fall of 2017.", "West Ashley High School",
+                    "3.33", "Computer Information Systems", "Decision Sciences", "289432-4283-90");
+            student6.setMySchool(schools.findFirstByName(student6.getSchool()));
+            Student student7 = new Student("thomasdonaldson@gmail.com", PasswordStorage.createHash("hunter2"), "Thomas", "Donaldson",
+                    "University of Virginia", Student.Level.GRADUATE, "My name is Thomas and I recently graduated from Clemson University with a B.S." +
+                    " in Engineering.  I've been accepted to UVA's graduate school to persue my masters in Engineering.", "Porter-Gaud School",
+                    "3.12", "Engineering", "Mandarin", "639483-3489-23");
+            student7.setMySchool(schools.findFirstByName(student7.getSchool()));
+            Student student8 = new Student("travishunter@gmail.com", PasswordStorage.createHash("hunter2"), "Travis", "Hunter",
+                    "University of South Carolina", Student.Level.UNDERGRADUATE, "My name is Travis. I'm a senior at Wando High School, " +
+                    "and I'll be attending USC in the Fall. I plan on majoring in Chemistry and would like to study chemical engineering.",
+                    "Wando High School", "3.31", "Chemistry", "Engineering", "327992-2378-73");
+            student8.setMySchool(schools.findFirstByName(student8.getSchool()));
+            Student student9 = new Student("josegonzales@gmail.com", PasswordStorage.createHash("hunter2"), "Jose", "Gonzales",
+                    "University of South Carolina", Student.Level.UNDERGRADUATE, "My name is Jose, and I'm a senior at West Ashley High School. " +
+                    "I'll be attending USC in the Fall, and I'll be studying Accounting.", "West Ashley High School", "3.72",
+                    "Accounting", "Finance", "128378-2387-37");
+            student9.setMySchool(schools.findFirstByName(student9.getSchool()));
+            Student student10 = new Student("conradjones@gmail.com", PasswordStorage.createHash("hunter2"), "Conrad", "Jones",
+                    "Harvard University", Student.Level.GRADUATE, "My name is Conrad Jones, and I recently graduated from Brown. " +
+                    "I'll be attending Harvard Law in the Fall.", "Woodberry Forest School", "3.98", "Tax Law", "Accounting",
+                    "234979-2234-82");
+            student10.setMySchool(schools.findFirstByName(student10.getSchool()));
+            Student student11 = new Student("danielschwartz@gmail.com", PasswordStorage.createHash("hunter2"), "Daniel", "Schwartz",
+                    "Pepperdine University", Student.Level.UNDERGRADUATE, "My name is Daniel, and I'm a senior at Charleston Collegiate. " +
+                    "I'll be attending Pepperdine in the Fall to study theatre.", "Charleston Collegiate School", "3.11",
+                    "Theatre", "Music Theory", "149872-2387-74");
+            student11.setMySchool(schools.findFirstByName(student11.getSchool()));
+            Student student12 = new Student("georgesmythe@gmail.com", PasswordStorage.createHash("hunter2"), "George", "Smythe",
+                    "Rhode Island School of Design", Student.Level.UNDERGRADUATE, "My name is George and I'm a senior at Porter-Gaud School. " +
+                    "I'll be attending RISD in the Fall, and I'll be studying graphic design.", "Porter-Gaud School", "3.44",
+                    "Graphic Design", "Computer Science", "928352-2794-23");
+            student12.setMySchool(schools.findFirstByName(student12.getSchool()));
+            Student student13 = new Student("williamthompson@gmail.com", PasswordStorage.createHash("hunter2"), "William", "Thompson",
+                    "University of South Carolina", Student.Level.UNDERGRADUATE, "My name is William Thompson, and I'm a senior at " +
+                    "Bishop England High School. I'm attending USC in the fall, and I'll be studying Business Administration.",
+                    "Bishop England High School", "3.65", "Business Administration", "French", "293847-4297-02");
+            student13.setMySchool(schools.findFirstByName(student13.getSchool()));
+            Student student14 = new Student("richardsalmons@gmail.com", PasswordStorage.createHash("hunter2"), "Richard", "Salmons",
+                    "Pepperdine University", Student.Level.UNDERGRADUATE, "My name is Richard Salmons, and I'm a senior at Wando High School. " +
+                    "I'll be attending Pepperdine in the Fall, and I plan on majoring in Communications.", "Wando High School", "3.12",
+                    "Communications", "Spanish", "419723-3178-31");
+            student14.setMySchool(schools.findFirstByName(student14.getSchool()));
+            students.save(student);
+            students.save(student1);
+            students.save(student2);
+            students.save(student3);
+            students.save(student4);
+            students.save(student5);
+            students.save(student6);
+            students.save(student7);
+            students.save(student8);
+            students.save(student9);
+            students.save(student10);
+            students.save(student11);
+            students.save(student12);
+            students.save(student13);
+        }
+
+//        add seed data (investor)
+        if (investors.count() == 0) {
+            Investor investor = new Investor("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"),
+                    "Steven", "Burris", "219089-4322-32", "College of Charleston", 10000);
+            investor.setMySchool(schools.findFirstByName(investor.getSchool()));
+            Investor investor1 = new Investor("alexwebber@gmail.com", PasswordStorage.createHash("hunter2"),
+                    "Alex", "Webber", "654321-5454-23", "Harvard University", 10000);
+            investor1.setMySchool(schools.findFirstByName(investor1.getSchool()));
+            Investor investor2 = new Investor("charlottegraham@gmail.com", PasswordStorage.createHash("hunter2"),
+                    "Charlotte", "Graham", "928374-8290-93", "Brown University", 10000);
+            investor2.setMySchool(schools.findFirstByName(investor2.getSchool()));
+            Investor investor3 = new Investor("edenhazard@gmail.com", PasswordStorage.createHash("hunter2"),
+                    "Eden", "Hazard", "832938-9392-72", "University of Oxford", 10000);
+            investor3.setMySchool(schools.findFirstByName(investor3.getSchool()));
+            Investor investor4 = new Investor("garethbale@gmail.com", PasswordStorage.createHash("hunter2"),
+                    "Gareth", "Bale", "823746-4321-32", "Rhode Island School of Design", 10000);
+            investor4.setMySchool(schools.findFirstByName(investor4.getSchool()));
+            investors.save(investor);
+            investors.save(investor1);
+            investors.save(investor2);
+            investors.save(investor3);
+            investors.save(investor4);
+        }
+
+
     }
 
     @PreDestroy
