@@ -37,7 +37,7 @@ const InvestorView = React.createClass({
       return(
 
          <div className="fluid-container in-cont">
-            <UserNav userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} />
+            <UserNav userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} showDrop={this.props.showDrop} searchView={this.props.searchView} />
             {modalView()}
             <div className="container student-box">
                <div className="row">
@@ -87,9 +87,26 @@ const UserNav = React.createClass({
 
       ACTIONS.logOut()
    },
+   _handleSearchButton: function(){
+      STORE.setStore("showDrop", true)
+   },
 
 
    render: function(){
+
+      let showDropDown = function(){
+         console.log("runnniinnnn?",this.props.showDrop)
+         if(this.props.showDrop === true){
+            console.log("hello?")
+            return <DropDownMenu/>
+         }
+
+      }.bind(this)
+      let showSearchBar = function(){
+         if(this.props.searchView === true){
+            return <StudSearch/>
+         }
+      }.bind(this)
 
 
       return(
@@ -98,10 +115,13 @@ const UserNav = React.createClass({
                <div className="navbar-header">
                   <a className="navbar-brand" onClick={this._handleLogout}>StudentStocks</a>
                </div>
+               {showDropDown()}
 
                <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                   <ul className="nav navbar-nav">
-                     <li className="active"><a href="#/login/students">STUDENT LOGIN <span className="sr-only">(current)</span></a></li>
+
+                     <li className="active"><a href="#/dash/investors"><i className="fa fa-search" aria-hidden="true" onClick={this._handleSearchButton}></i><span className="sr-only">(current)</span></a></li>
+
                      <li><a href="#">Link</a></li>
 
                   </ul>
@@ -113,6 +133,35 @@ const UserNav = React.createClass({
                </div>
             </div>
          </nav>
+
+      )
+   }
+})
+
+const StudSearch = React.createClass({
+
+
+
+   render: function(){
+      return(
+         <li>
+            <input type="text"/>
+         </li>
+      )
+   }
+})
+
+const DropDownMenu = React.createClass({
+
+   render: function(){
+      return(
+         <ul className="drop-search">
+            <li className="drop-title">Search By:</li>
+            <li>School</li>
+            <li>GPA</li>
+            <li>Major</li>
+            <li>Show All</li>
+         </ul>
 
       )
    }
