@@ -69,11 +69,14 @@ body{
 		}
 
 		.home-view{
+			background: url(../images/home-main.jpg) no-repeat center center fixed;
+			background-size: cover;
 			.top-offset{
 				background:rgba(0, 0, 0, 0);
 				height: 100px;
 			}
 			.home-nav{
+				height: 15%;
 
 
 				background: $transBlue;
