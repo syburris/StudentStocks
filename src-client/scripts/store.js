@@ -10,6 +10,8 @@ const STORE = {
       selectedStudent: {},
       studentsSearched: [],
       userType: "",
+      showDrop: false,
+      showSearch: false,
 
 
    },
