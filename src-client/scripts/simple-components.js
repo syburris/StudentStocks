@@ -327,16 +327,31 @@ const InvstFormModal = React.createClass({
 })
 
 const StudModal = React.createClass({
+   handleChange: function(data, name) {
+      let newState = {};
+
+      newState[name] = data;
+
+      this.setState(newState, () => {
+         console.log('current state', this.state);
+      });
+   },
 
    _exitLogin: function(){
       STORE.setStore('selectedStudent', {})
+   },
+   _handleInvestment: function(evt){
+      evt.preventDefault()
+      let invstForm = this.state
+      invstForm["loanId"] = this.props.loanData.id.toString()
+      console.log(invstForm)
+      ACTIONS.handleInvestment(invstForm)
    },
 
 
 
 
    render: function(){
-      console.log(this.props)
       let style = {
          width: "25%",
       }
@@ -349,6 +364,13 @@ const StudModal = React.createClass({
                <p>{this.props.modData.school}</p>
                <div className="progress progress-striped active">
                   <div className="progress-bar progess-bar-info" style={style}></div>
+               </div>
+               <div className="">
+                  <form action="" className="form-control">
+                     <SimpInput title="Amount to invest" name="amount" handleChange={this.handleChange} />
+                     <button className="btn btn-primary" onClick={this._handleInvestment}>Make Investment</button>
+
+                  </form>
                </div>
             </div>
          </div>

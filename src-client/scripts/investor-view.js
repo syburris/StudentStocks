@@ -27,7 +27,7 @@ const InvestorView = React.createClass({
          console.log(this.props)
          if(this.props.selectedStudent.attributes != undefined){
             return(
-               <StudModal modData={this.props.selectedStudent.attributes}/>
+               <StudModal modData={this.props.selectedStudent.attributes} loanData={this.props.selectedStudent.attributes.loan}/>
             )
          }
       }.bind(this)

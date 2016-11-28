@@ -1,5 +1,4 @@
 const React = require('react')
-const AppBarExampleIcon = require('./student-signup.js')
 const ACTIONS = require("./actions.js")
 const {LoginModal, StudFormModal, InvstFormModal} = require('./simple-components.js')
 const STORE = require('./store.js')
