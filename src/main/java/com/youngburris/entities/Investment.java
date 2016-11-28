@@ -14,7 +14,7 @@ public class Investment {
     int id;
 
     @Column
-    double amount;
+    String amount;
 
     @Column
     double principalRepaid;
@@ -22,20 +22,27 @@ public class Investment {
     @Column
     double interestPaid;
 
+    @Column
+    String theLoanId;
+
     @ManyToOne
     Loan loan;
 
     public Investment() {
     }
 
-    public Investment(double amount) {
+    public Investment(String amount) {
         this.amount = amount;
     }
 
-    public Investment(double amount, Loan loan) {
+    public Investment(String amount, String loanId) {
+        this.amount = amount;
+        this.theLoanId = loanId;
+    }
+
+    public Investment(String amount, Loan loan) {
         this.amount = amount;
         this.loan = loan;
-
     }
 
     public int getId() {
@@ -46,11 +53,11 @@ public class Investment {
         this.id = id;
     }
 
-    public double getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(double amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 
@@ -76,5 +83,13 @@ public class Investment {
 
     public void setInterestPaid(double interestPaid) {
         this.interestPaid = interestPaid;
+    }
+
+    public String getLoanId() {
+        return theLoanId;
+    }
+
+    public void setLoanId(String loanId) {
+        this.theLoanId = loanId;
     }
 }
