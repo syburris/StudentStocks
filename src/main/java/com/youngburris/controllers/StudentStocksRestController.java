@@ -383,7 +383,7 @@ public class StudentStocksRestController {
         ArrayList<Investment> investmentArrayList = (ArrayList<Investment>) loan.getInvestments();
         double principalPayment = principalPortion(loan);
         for (Investment investment : investmentArrayList) {
-            double percent = Double.parseDouble(loan.getLoanGoal()) / investment.getAmount();
+            double percent = Double.parseDouble(loan.getLoanGoal()) / Double.parseDouble(investment.getAmount());
             double amountOwed = principalPayment * percent;
             double amountPaid = Math.round(amountOwed * 100.00) / 100.00;
             investment.setPrincipalRepaid(amountPaid);
@@ -393,7 +393,7 @@ public class StudentStocksRestController {
 //        pay the investors' interest
         double interestPayment = interestPortion(loan);
         for (Investment investment : investmentArrayList) {
-            double percent = Double.parseDouble(loan.getLoanGoal()) / investment.getAmount();
+            double percent = Double.parseDouble(loan.getLoanGoal()) / Double.parseDouble(investment.getAmount());
             double amountOwed = percent * interestPayment;
             double amountPaid = Math.round(amountOwed * 100.00) / 100.00;
             investment.setInterestPaid(amountPaid);
@@ -435,7 +435,7 @@ public class StudentStocksRestController {
     }
 
     @RequestMapping(path = "/investment", method = RequestMethod.POST)
-    public ResponseEntity<Investor> postInvestment(HttpSession session, String amount, String loanId) {
+    public ResponseEntity<Investor> postInvestment(HttpSession session, @RequestBody Investment investment) {
 //        get the username from session attribute
         String name = (String) session.getAttribute("username");
 //        make sure the investor is logged in
@@ -445,18 +445,18 @@ public class StudentStocksRestController {
         }
 //        if the investor is logged in, let them invest in a loan
 //        first parse the investment amount as a double and find the loan they're investing in
-        Double investmentAmount = Double.parseDouble(amount);
-        Loan loan = loans.findOne(Integer.parseInt(loanId));
+        double investmentAmount = Double.parseDouble(investment.getAmount());
+        Loan loan = loans.findOne(Integer.parseInt(investment.getLoanId()));
 //        after the loan has been found, parse the available investment amount as a double
 //        and make sure that the amount they want to invest is not larger than the available investment amount
-        Double loanGoal = Double.parseDouble(loan.getLoanGoal());
-        Double availableBalance = loanGoal - Double.parseDouble(loan.getPrincipalBalance());
+        double loanGoal = Double.parseDouble(loan.getLoanGoal());
+        double availableBalance = loanGoal - Double.parseDouble(loan.getPrincipalBalance());
         if (investmentAmount > availableBalance) {
             return new ResponseEntity<Investor>(HttpStatus.CONFLICT);
         }
 //        if the portion amount is not larger than the available investment balance,
 //        allow the investor to make an investment
-        Double newLoanBalance = Double.parseDouble(loan.getPrincipalBalance()) + investmentAmount;
+        double newLoanBalance = Double.parseDouble(loan.getPrincipalBalance()) + investmentAmount;
         if ((loanGoal - newLoanBalance) == 0) {
             loan.setFunded(true);
             loan.setInitiationDate(LocalDate.now());
@@ -470,10 +470,10 @@ public class StudentStocksRestController {
         }
         loan.setPrincipalBalance(String.valueOf(newLoanBalance));
         loans.save(loan);
-        Investment investment = new Investment(investmentAmount, loan);
-        investments.save(investment);
+        Investment theInvestment = new Investment(String.valueOf(investmentAmount), loan);
+        investments.save(theInvestment);
         List<Investment> myInvestments = investor.getInvestments();
-        myInvestments.add(investment);
+        myInvestments.add(theInvestment);
         investor.setInvestments(myInvestments);
         investors.save(investor);
 
