@@ -88,7 +88,13 @@ const UserNav = React.createClass({
       ACTIONS.logOut()
    },
    _handleSearchButton: function(){
-      STORE.setStore("showDrop", true)
+      var val = this.props.showDrop
+      if(val === true){
+         val = false
+      }else{
+         val = true
+      }
+      STORE.setStore("showDrop", val)
    },
 
 
@@ -155,12 +161,12 @@ const DropDownMenu = React.createClass({
 
    render: function(){
       return(
-         <ul className="drop-search">
+         <ul className="dropdown-menu drop-search">
             <li className="drop-title">Search By:</li>
-            <li>School</li>
-            <li>GPA</li>
-            <li>Major</li>
-            <li>Show All</li>
+            <li><a href="">School</a></li>
+            <li><a href="">GPA</a></li>
+            <li><a href="">Major</a></li>
+            <li><a href="">Show All</a></li>
          </ul>
 
       )
