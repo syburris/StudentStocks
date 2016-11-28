@@ -99,75 +99,120 @@ public class StudentStocksRestController {
                     "College of Charleston", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
                     "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12");
             student.setMySchool(schools.findFirstByName(student.getSchool()));
+            Loan loan = new Loan("20000", "5", "1");
+            postLoan(student, loan);
+
             Student student1 = new Student("rossboatwright@gmail.com", PasswordStorage.createHash("hunter2"),
                     "Ross", "Boatwright", "Massachusetts Institute of Technology", Student.Level.GRADUATE,
                     "This is filler info. I have no idea what to type here, so I'll stop.", "Wando", "4", "Finance", "Spanish",
                     "527362-4253-32");
             student1.setMySchool(schools.findFirstByName(student1.getSchool()));
+            Loan loan1 = new Loan("30000", "10", "4");
+            postLoan(student1, loan1);
+
             Student student2 = new Student("seanseabrook@gmail.com", PasswordStorage.createHash("hunter2"), "Sean", "Burris",
                     "Pepperdine University", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'm going to stop.",
                     "James Island", "3.5", "Project Management", null, "928374-2378-42");
             student2.setMySchool(schools.findFirstByName(student2.getSchool()));
+            Loan loan2 = new Loan("50000", "8", "2");
+            postLoan(student2, loan2);
+
             Student student3 = new Student("mikebrown@gmail.com", PasswordStorage.createHash("hunter2"), "Mike", "Brown",
                     "Dartmouth College", Student.Level.UNDERGRADUATE,
                     "My name is Michael Brown. I'm 18 years old and a senior at Wando, and I have been accepted to Dartmouth in the Fall.  I am going to be studying biology with the hopes of continuing to get my MD.",
                     "Wando", "3.7", "Biology", "Chemistry", "648935-4235-42");
             student3.setMySchool(schools.findFirstByName(student3.getSchool()));
+            Loan loan3 = new Loan("40000", "10", "4");
+            postLoan(student3, loan3);
+
             Student student4 = new Student("zachthomas@gmail.com", PasswordStorage.createHash("hunter2"), "Zach", "Thomas",
                     "Brown University", Student.Level.UNDERGRADUATE, "My name is Zach Thomas. I just graduated from Woodberry Forest School and I'm currently taking a gap year to do some traveling." +
                     "I have been accepted to Brown for the fall of 2017, and I will be studying Finance.", "Woodberry Forest School", "3.8",
                     "Finance", "Marketing", "478392-1038-38");
             student4.setMySchool(schools.findFirstByName(student4.getSchool()));
+            Loan loan4 = new Loan("20000", "4", "2");
+            postLoan(student4, loan4);
+
             Student student5 = new Student("barrydaniels@gmail.com", PasswordStorage.createHash("hunter2"), "Barry", "Daniels",
                     "University of Oxford", Student.Level.GRADUATE, "My name is Barry Daniels. I'm a recent graduate of Newberry and The Iron Yard, and" +
                     "I've been accepted to Oxford for the graduate literature program.", "Christ School", "3.4",
                     "British Literature", "Comparative Literature", "378242-7293-28");
             student5.setMySchool(schools.findFirstByName(student5.getSchool()));
+            Loan loan5 = new Loan("30000", "5", "2");
+            postLoan(student5, loan5);
+
             Student student6 = new Student("victorguy@gmail.com", PasswordStorage.createHash("hunter2"), "Victor", "Guy",
                     "College of Charleston", Student.Level.UNDERGRADUATE, "My name is Victor, I went to West Ashley High School and graduated early." +
                     "I've been accepted to the College of Charleston to study Computer Information Systems in the fall of 2017.", "West Ashley High School",
                     "3.33", "Computer Information Systems", "Decision Sciences", "289432-4283-90");
             student6.setMySchool(schools.findFirstByName(student6.getSchool()));
+            Loan loan6 = new Loan("45000", "6", "4");
+            postLoan(student6, loan6);
+
             Student student7 = new Student("thomasdonaldson@gmail.com", PasswordStorage.createHash("hunter2"), "Thomas", "Donaldson",
                     "University of Virginia", Student.Level.GRADUATE, "My name is Thomas and I recently graduated from Clemson University with a B.S." +
                     " in Engineering.  I've been accepted to UVA's graduate school to persue my masters in Engineering.", "Porter-Gaud School",
                     "3.12", "Engineering", "Mandarin", "639483-3489-23");
             student7.setMySchool(schools.findFirstByName(student7.getSchool()));
+            Loan loan7 = new Loan("32000", "10", "4");
+            postLoan(student7, loan7);
+
             Student student8 = new Student("travishunter@gmail.com", PasswordStorage.createHash("hunter2"), "Travis", "Hunter",
                     "University of South Carolina", Student.Level.UNDERGRADUATE, "My name is Travis. I'm a senior at Wando High School, " +
                     "and I'll be attending USC in the Fall. I plan on majoring in Chemistry and would like to study chemical engineering.",
                     "Wando High School", "3.31", "Chemistry", "Engineering", "327992-2378-73");
             student8.setMySchool(schools.findFirstByName(student8.getSchool()));
+            Loan loan8 = new Loan("27000", "5", "1");
+            postLoan(student8, loan8);
+
             Student student9 = new Student("josegonzales@gmail.com", PasswordStorage.createHash("hunter2"), "Jose", "Gonzales",
                     "University of South Carolina", Student.Level.UNDERGRADUATE, "My name is Jose, and I'm a senior at West Ashley High School. " +
                     "I'll be attending USC in the Fall, and I'll be studying Accounting.", "West Ashley High School", "3.72",
                     "Accounting", "Finance", "128378-2387-37");
             student9.setMySchool(schools.findFirstByName(student9.getSchool()));
+            Loan loan9 = new Loan("39000", "8", "3");
+            postLoan(student9, loan9);
+
             Student student10 = new Student("conradjones@gmail.com", PasswordStorage.createHash("hunter2"), "Conrad", "Jones",
                     "Harvard University", Student.Level.GRADUATE, "My name is Conrad Jones, and I recently graduated from Brown. " +
                     "I'll be attending Harvard Law in the Fall.", "Woodberry Forest School", "3.98", "Tax Law", "Accounting",
                     "234979-2234-82");
             student10.setMySchool(schools.findFirstByName(student10.getSchool()));
+            Loan loan10 = new Loan("80000", "10", "4");
+            postLoan(student10, loan10);
+
             Student student11 = new Student("danielschwartz@gmail.com", PasswordStorage.createHash("hunter2"), "Daniel", "Schwartz",
                     "Pepperdine University", Student.Level.UNDERGRADUATE, "My name is Daniel, and I'm a senior at Charleston Collegiate. " +
                     "I'll be attending Pepperdine in the Fall to study theatre.", "Charleston Collegiate School", "3.11",
                     "Theatre", "Music Theory", "149872-2387-74");
             student11.setMySchool(schools.findFirstByName(student11.getSchool()));
+            Loan loan11 = new Loan("73000", "9", "3");
+            postLoan(student11, loan11);
+
             Student student12 = new Student("georgesmythe@gmail.com", PasswordStorage.createHash("hunter2"), "George", "Smythe",
                     "Rhode Island School of Design", Student.Level.UNDERGRADUATE, "My name is George and I'm a senior at Porter-Gaud School. " +
                     "I'll be attending RISD in the Fall, and I'll be studying graphic design.", "Porter-Gaud School", "3.44",
                     "Graphic Design", "Computer Science", "928352-2794-23");
             student12.setMySchool(schools.findFirstByName(student12.getSchool()));
+            Loan loan12 = new Loan("38000", "6", "2");
+            postLoan(student12, loan12);
+
             Student student13 = new Student("williamthompson@gmail.com", PasswordStorage.createHash("hunter2"), "William", "Thompson",
                     "University of South Carolina", Student.Level.UNDERGRADUATE, "My name is William Thompson, and I'm a senior at " +
                     "Bishop England High School. I'm attending USC in the fall, and I'll be studying Business Administration.",
                     "Bishop England High School", "3.65", "Business Administration", "French", "293847-4297-02");
             student13.setMySchool(schools.findFirstByName(student13.getSchool()));
+            Loan loan13 = new Loan("14500", "5", "2");
+            postLoan(student13, loan13);
+
             Student student14 = new Student("richardsalmons@gmail.com", PasswordStorage.createHash("hunter2"), "Richard", "Salmons",
                     "Pepperdine University", Student.Level.UNDERGRADUATE, "My name is Richard Salmons, and I'm a senior at Wando High School. " +
                     "I'll be attending Pepperdine in the Fall, and I plan on majoring in Communications.", "Wando High School", "3.12",
                     "Communications", "Spanish", "419723-3178-31");
             student14.setMySchool(schools.findFirstByName(student14.getSchool()));
+            Loan loan14 = new Loan("28000", "8", "4");
+            postLoan(student14, loan14);
+
             students.save(student);
             students.save(student1);
             students.save(student2);
@@ -338,73 +383,9 @@ public class StudentStocksRestController {
             return new ResponseEntity<Student>(HttpStatus.FORBIDDEN);
         }
 
-//        set the apr based on the loan's goal
-        double loanGoal = Double.parseDouble(loan.getLoanGoal());
-        if(0 < loanGoal && loanGoal <= 5000) {
-            loan.setApr("2");
-        }
-        else if (5001 <= loanGoal && loanGoal <= 10000) {
-            loan.setApr("2.1");
-        }
-        else if (10001 <= loanGoal && loanGoal <= 15000) {
-            loan.setApr("2.2");
-        }
-        else if (15001 <= loanGoal && loanGoal <= 20000) {
-            loan.setApr("2.3");
-        }
-        else if (20001 <= loanGoal && loanGoal <= 25000) {
-            loan.setApr("2.4");
-        }
-        else if (25001 <= loanGoal && loanGoal <= 30000) {
-            loan.setApr("2.5");
-        }
-        else if (30001 <= loanGoal && loanGoal <= 35000) {
-            loan.setApr("2.6");
-        }
-        else if (35001 <= loanGoal && loanGoal <= 40000) {
-            loan.setApr("2.7");
-        }
-        else if (40001 <= loanGoal && loanGoal <= 45000) {
-            loan.setApr("2.8");
-        }
-        else if (45001 <= loanGoal && loanGoal <= 50000) {
-            loan.setApr("2.9");
-        }
-        else if (50001 <= loanGoal && loanGoal <= 55000) {
-            loan.setApr("3");
-        }
-        else if (55001 <= loanGoal && loanGoal <= 60000) {
-            loan.setApr("3.1");
-        }
-        else if (60001 <= loanGoal && loanGoal <= 70000) {
-            loan.setApr("3.2");
-        }
-        else if (70001 <= loanGoal && loanGoal <= 80000) {
-            loan.setApr("3.3");
-        }
-        else if (80001 <= loanGoal && loanGoal <= 90000) {
-            loan.setApr("3.4");
-        }
-        else if (90001 <= loanGoal && loanGoal <= 100000) {
-            loan.setApr("3.5");
-        }
-        else {
-            loan.setApr("3.6");
-        }
-        loan.setGracePeriodLength(Double.parseDouble(loan.getGracePeriod()) * 12);
-        loan.setNumberOfPeriods(String.valueOf(Double.parseDouble(loan.getLoanLength()) * 12));
-        loan.setPrincipalBalance(String.valueOf(0.00));
-        loan.setPaymentBalance(0.00);
+        postLoan(student, loan);
 
-//        calculate the monthly payment
-        String payment = String.valueOf(monthlyPayment(loan));
-        loan.setMonthlyPayment(payment);
-        loans.save(loan);
-        Loan theLoan = loans.findOne(loan.getId());
-        student.setLoan(theLoan);
-        students.save(student);
-        Student student1 = students.findFirstByUsername(name);
-        return new ResponseEntity<Student>(student1, HttpStatus.OK);
+        return new ResponseEntity<Student>(student, HttpStatus.OK);
     }
 
 //    create investor user route
@@ -659,5 +640,74 @@ public class StudentStocksRestController {
         double interestPortion = principalBalance * i;
         double principalPortion = payment - interestPortion;
         return principalPortion;
+    }
+
+    public void postLoan(Student student, Loan loan) {
+        //        set the apr based on the loan's goal
+        double loanGoal = Double.parseDouble(loan.getLoanGoal());
+        if(0 < loanGoal && loanGoal <= 5000) {
+            loan.setApr("2");
+        }
+        else if (5001 <= loanGoal && loanGoal <= 10000) {
+            loan.setApr("2.1");
+        }
+        else if (10001 <= loanGoal && loanGoal <= 15000) {
+            loan.setApr("2.2");
+        }
+        else if (15001 <= loanGoal && loanGoal <= 20000) {
+            loan.setApr("2.3");
+        }
+        else if (20001 <= loanGoal && loanGoal <= 25000) {
+            loan.setApr("2.4");
+        }
+        else if (25001 <= loanGoal && loanGoal <= 30000) {
+            loan.setApr("2.5");
+        }
+        else if (30001 <= loanGoal && loanGoal <= 35000) {
+            loan.setApr("2.6");
+        }
+        else if (35001 <= loanGoal && loanGoal <= 40000) {
+            loan.setApr("2.7");
+        }
+        else if (40001 <= loanGoal && loanGoal <= 45000) {
+            loan.setApr("2.8");
+        }
+        else if (45001 <= loanGoal && loanGoal <= 50000) {
+            loan.setApr("2.9");
+        }
+        else if (50001 <= loanGoal && loanGoal <= 55000) {
+            loan.setApr("3");
+        }
+        else if (55001 <= loanGoal && loanGoal <= 60000) {
+            loan.setApr("3.1");
+        }
+        else if (60001 <= loanGoal && loanGoal <= 70000) {
+            loan.setApr("3.2");
+        }
+        else if (70001 <= loanGoal && loanGoal <= 80000) {
+            loan.setApr("3.3");
+        }
+        else if (80001 <= loanGoal && loanGoal <= 90000) {
+            loan.setApr("3.4");
+        }
+        else if (90001 <= loanGoal && loanGoal <= 100000) {
+            loan.setApr("3.5");
+        }
+        else {
+            loan.setApr("3.6");
+        }
+        loan.setGracePeriodLength(Double.parseDouble(loan.getGracePeriod()) * 12);
+        loan.setNumberOfPeriods(String.valueOf(Double.parseDouble(loan.getLoanLength()) * 12));
+        loan.setPrincipalBalance(String.valueOf(0.00));
+        loan.setPaymentBalance(0.00);
+
+//        calculate the monthly payment
+        String payment = String.valueOf(monthlyPayment(loan));
+        loan.setMonthlyPayment(payment);
+        loans.save(loan);
+        Loan theLoan = loans.findOne(loan.getId());
+        student.setLoan(theLoan);
+        students.save(student);
+
     }
 }
