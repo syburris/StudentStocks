@@ -51,10 +51,10 @@ const HomeView = React.createClass({
             {loginModalView()}
             {studFormModalView()}
             {invstFormModalView()}
-            <NavView/>
-            <div className="jumbotron hdr-hero">
-
+            <div className="top-offset">
             </div>
+            <NavView/>
+
             <HeaderHeros/>
             <AboutStocks/>
             <StudentSuccess/>
@@ -113,35 +113,33 @@ const NavView = React.createClass({
 
    render: function(){
       return(
-         <nav className="navbar navbar-default">
-            <div className="container-fluid">
-               <div className="navbar-header">
-                  <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                     <span className="sr-only">Toggle navigation</span>
-                     <span className="icon-bar"></span>
-                     <span className="icon-bar"></span>
-                     <span className="icon-bar"></span>
-                  </button>
-                  <a className="navbar-brand" href="">StudentStocks</a>
+         <nav className="home-nav container-fluid">
+
+            <div className="row">
+               <div className="col-xs-12 col-sm-6">
+                  <h1>StudentStocks</h1>
+                  <h3>Invest in the brightest futures</h3>
                </div>
+               <div className="menu-col col-sm-6">
+                  {/* <div className="row"> */}
+                  <div className="col-sm-12 r-top">
 
-               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul className="nav navbar-nav">
-                     <li className="active" ><a href="#" onClick={this._studLogin}>Student Login</a></li>
-                     <li className="active" ><a href="#" onClick={this._invstLogin}>Investor Login</a></li>
+                  </div>
+                  <div className="col-sm-12">
+                     <ul className="nav-menu">
+                        <li><a href="#" onClick={this._studLogin}>Student Login</a></li>
+                        <li> | </li>
+                        <li><a href="#" onClick={this._invstLogin}>Investor Login</a></li>
+                        <li> | </li>
+                        <li><a href="#">About Us</a></li>
+                     </ul>
+                  </div>
 
-                  </ul>
-                  {/* <form className="navbar-form navbar-left" role="search">
-                     <div className="form-group">
-                     <input type="text" className="form-control" placeholder="Search"/>
-                     </div>
-                     <button type="submit" className="btn btn-default">Submit</button>
-                  </form> */}
-                  <ul className="nav navbar-nav navbar-right">
-                     <li><a href="#">About</a></li>
-                  </ul>
+                  {/* </div> */}
+
                </div>
             </div>
+
          </nav>
       )
    }
