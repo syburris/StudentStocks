@@ -423,6 +423,8 @@ const SchoolOption = React.createClass({
    }
 })
 
+// const PaymentModal:
+
 
 
                   module.exports = {LoginModal, StudModal, StudFormModal, InvstFormModal}

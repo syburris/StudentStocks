@@ -25,11 +25,18 @@ const STORE = require('./store.js')
 // "stevenburris@gmail.com"
 
 
+
+
 const StudentView = React.createClass({
 
    componentWillMount: function(){
       ACTIONS.fetchCurrentStudent()
 
+   },
+
+   _handlePayment: function(){
+      let newPayment={payment: "236.0"}
+      ACTIONS.submitPayment(newPayment)
    },
 
    render: function(){
@@ -55,7 +62,7 @@ const StudentView = React.createClass({
                               <h3>Minimum payment: <span>$145.37</span></h3>
                               <p>Loan balance: <span>${this.props.user.attributes && this.props.user.attributes.loanGoal}</span></p>
                               <p>Payment due: <span>December 1, 2016</span></p>
-                              <button className="btn btn-primary">Make Payment</button>
+                              <button className="btn btn-primary" onClick={this._handlePayment}>Make Payment</button>
                            </div>
                            <div className="thumbnail">
                               <h4>Manage Info >></h4>
@@ -71,15 +78,15 @@ const StudentView = React.createClass({
                            </div>
                         </div>
                      </div>
-                     </div>
-                     <div className="col-xs-12 col-sm-8 right-col">
-                        <div className="row">
-                           <div className="thumbnail col-xs-12 col-sm-12">
-                              <h2>Current Loan Info</h2>
+                  </div>
+                  <div className="col-xs-12 col-sm-8 right-col">
+                     <div className="row">
+                        <div className="thumbnail col-xs-12 col-sm-12">
+                           <h2>Current Loan Info</h2>
 
-                           </div>
                         </div>
                      </div>
+                  </div>
                </div>
             </div>
          </div>

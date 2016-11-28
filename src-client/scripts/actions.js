@@ -1,5 +1,5 @@
 const {InvestorAppModel, InvestorAppColl, InvestorLoginModel} = require('./investor-model.js')
-const {AllStudentsColl, StudentModel, StudentAppColl,StudentLoginModel} = require("./student-model.js")
+const {AllStudentsColl, StudentModel, StudentAppColl,StudentLoginModel, StudentPayment} = require("./student-model.js")
 const {SchoolColl, SchoolModel} = require("./schools-model.js")
 const {StockColl, StockModel} = require("./investment-model.js")
 const {LoanModel, LoanCollection} = require('./loan-model.js')
@@ -158,6 +158,13 @@ const ACTIONS = {
          location.hash = "dash/investors"
       })
 
+   },
+   submitPayment: function(payInfo){
+      let pay = new StudentPayment()
+      pay.set(payInfo)
+      pay.save().then(function(){
+         console.log("donneeeeee")
+      })
    },
 
 
