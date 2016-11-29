@@ -1,5 +1,5 @@
 const {InvestorAppModel, InvestorAppColl, InvestorLoginModel} = require('./investor-model.js')
-const {AllStudentsColl, StudentModel, StudentAppColl,StudentLoginModel, StudentPayment} = require("./student-model.js")
+const {AllStudentsColl, SingleStudentModel, StudentModel, StudentAppColl,StudentLoginModel, StudentPayment} = require("./student-model.js")
 const {SchoolColl, SchoolModel} = require("./schools-model.js")
 const {StockColl, StockModel} = require("./investment-model.js")
 const {LoanModel, LoanCollection} = require('./loan-model.js')
@@ -29,10 +29,11 @@ const ACTIONS = {
    },
 
 
-   fetchAllStudents: function(){
-      let allStudents = new AllStudentsColl()
+   fetchAllStudents: function(field){
+      let allStudents = new SingleStudentModel()
 
-      allStudents.fetch().then(function(){
+      allStudents.set(field)
+      allStudents.save().then(function(){
          STORE.setStore('allStudents', allStudents.models)
       })
    },

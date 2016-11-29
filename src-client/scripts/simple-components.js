@@ -352,8 +352,11 @@ const StudModal = React.createClass({
 
 
    render: function(){
+      let amountInvested = parseInt(this.props.modData.loan.principalBalance)
+      let loanAmount = parseInt(this.props.modData.loan.loanGoal)
+      let perVal = ((amountInvested / loanAmount)* 100) + "%"
       let style = {
-         width: "25%",
+         width: perVal,
       }
 
       return(
@@ -362,47 +365,51 @@ const StudModal = React.createClass({
             <div>
                <h4>{this.props.modData.firstName} {this.props.modData.lastName}</h4>
                <p>{this.props.modData.school}</p>
-               <div className="progress progress-striped active">
+               {/* <div className="progress progress-striped active">
                   <div className="progress-bar progess-bar-info" style={style}></div>
-               </div>
+               </div> */}
                <div className="">
                   <form action="" className="form-horizontal">
                      <SimpInput title="Amount to invest" name="amount" handleChange={this.handleChange} />
                      <button className="btn btn-primary" onClick={this._handleInvestment}>Make Investment</button>
 
                   </form>
+                  <div className="progress vertical">
+                     <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style={style}>
+                     </div>
+                  </div>
                </div>
             </div>
          </div>
 
 
-      )
-   }
-})
+               )
+               }
+               })
 
 
-const SimpInput = React.createClass({
+               const SimpInput = React.createClass({
 
-   changeHandler: function(event) {
-      const {
-         value: value,
-         name: name,
-      } = event.currentTarget;
+                  changeHandler: function(event) {
+                     const {
+                        value: value,
+                        name: name,
+                     } = event.currentTarget;
 
-      this.props.handleChange(value, name);
-   },
+                     this.props.handleChange(value, name);
+                  },
 
-   render: function(){
-      let textType
-      if(this.props.textType != undefined){
-         textType = this.props.textType
-      }else{textType = "text"}
+                  render: function(){
+                     let textType
+                     if(this.props.textType != undefined){
+                        textType = this.props.textType
+                     }else{textType = "text"}
 
-      return(
-         <div className="input-group simp-input">
-            <label htmlFor={this.props.title} className="input-label">{this.props.title}</label>
-            <input type={textType} className="form-control" name={this.props.name} placeholder={this.props.title} onChange={this.changeHandler} />
-         </div>
+                     return(
+                        <div className="input-group simp-input">
+                           <label htmlFor={this.props.title} className="input-label">{this.props.title}</label>
+                           <input type={textType} className="form-control" name={this.props.name} placeholder={this.props.title} onChange={this.changeHandler} />
+                        </div>
 
 
       )
@@ -419,6 +426,17 @@ const SchoolOption = React.createClass({
          <option value={this.props.schoolName}>
             {this.props.schoolName}
          </option>
+      )
+   }
+})
+const ProgressBar = React.createClass({
+
+   render: function(){
+      return(
+         <div className="progress vertical">
+            <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 20%;">
+            </div>
+         </div>
       )
    }
 })

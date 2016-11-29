@@ -11,7 +11,7 @@ const AppView = React.createClass({
    getInitialState: function(){
 
       ACTIONS.fetchSchoolData()
-      ACTIONS.fetchAllStudents()
+      ACTIONS.fetchAllStudents({})
 
       return STORE.getStoreData()
    },
