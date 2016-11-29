@@ -2,29 +2,6 @@ const React = require("react")
 const ACTIONS = require('./actions.js')
 const {NavView} = require("./home-view.js")
 const STORE = require('./store.js')
-// CURRENT USER RESPONSE ****
-// balance:0
-// bio:"This is filler info. I have no idea what to type here, so I'll stop."
-// firstName: "Steven"
-// gpa: "4"
-// highSchool: "Porter-Gaud"
-// id: 1
-// lastName: "Burris"
-// level: "GRADUATE"
-// loanGoal:
-// "1000000"
-// major:
-// "Accounting"
-// minor:
-// "French"
-// mySchool:
-// null
-// school:
-// "College of Charleston"
-// username:
-// "stevenburris@gmail.com"
-
-
 
 
 const StudentView = React.createClass({

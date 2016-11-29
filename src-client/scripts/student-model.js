@@ -58,4 +58,4 @@ const StudentPayment = Backbone.Model.extend({
    url: "/payment"
 })
 
-module.exports = {AllStudentsColl, StudentModel, StudentAppColl,StudentLoginModel, StudentPayment}
+module.exports = {AllStudentsColl, SingleStudentModel, StudentModel, StudentAppColl, StudentLoginModel, StudentPayment}

@@ -8,11 +8,10 @@ const STORE = {
       allStudents: [],
       currentUser: {},
       selectedStudent: {},
-      studentsSearched: [],
+      studentsSearched: {},
       userType: "",
       showDrop: false,
       showSearch: false,
-
 
    },
 

@@ -5,7 +5,7 @@ $primaryBlue: #61AEE0;
 $primaryOrg: #F4B41B;
 $iconColor: #F9D321;
 $transBlue: rgba(97,174,224, .85);
-
+$darkblue: #00447B;
 * {
 	box-sizing: border-box;
 }
@@ -36,71 +36,101 @@ body{
 		  float: right;
 		  position: absolute;
 		  top: 10px;
-		  right: 20px
+		  right: 20px;
 		}
 }
-$barColor: tomato;
-$overlayColor: #fffde8;
-$backColor: #2f3439;
-
-
-
-
-
-
-/* -------------------------------------
- * Bar container
- * ------------------------------------- */
-.progress-radial{
-  float: left;
-  margin-right: 30px;
-  position: relative;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  border: 2px solid $backColor; // remove gradient color
-  background-color: $barColor; // default 100%
-  }
-
-/* -------------------------------------
- * Optional centered circle w/text
- * ------------------------------------- */
-.progress-radial .overlay{
-  position: absolute;
-  width: 60px;
-  height: 60px;
-  background-color: $overlayColor;
-  border-radius: 50%;
-  margin-left: 20px;
-  margin-top: 20px;
-  text-align: center;
-  line-height: 60px;
-  font-size: 16px;
-  }
-
-/* -------------------------------------
- * Mixin for progress-% class
- * ------------------------------------- */
-
-// $step: 5; // step of % for created classes
-// 
-// $loops: round(100 / $step);
-// $increment: 360 / $loops;
-// $half: round($loops / 2);
-// @for $i from 0 through $loops{
-//
-// .progress-#{$i*$step}
+// $barColor: tomato;
+// $overlayColor: #fffde8;
+// $backColor: #2f3439;
 //
 //
-//     @if $i < $half{
-//       $nextdeg: 90deg + ( $increment * $i );
-//       background-image: linear-gradient(90deg, $backColor 50%, transparent 50%, transparent), linear-gradient($nextdeg, $barColor 50%, $backColor 50%, $backColor);
-// 	}
-//     @else
-//       $nextdeg: -90deg + ( $increment * ( $i - $half ) );
-//       background-image: linear-gradient($nextdeg, $barColor 50%, transparent 50%, transparent), linear-gradient(270deg, $barColor 50%, $backColor 50%, $backColor);
-// };
+//
 
+.cofc{
+	color: #fff;
+	background: #670000;
+	i{
+		color: #CAB387;
+	}
+}
+.usc{
+	color: #fff;
+	background: #74020C;
+	i{
+		color: #000;
+	}
+}
+.harvard{
+	background: #A51C30;
+	color: #fff;
+	i{
+		color: #000;
+	}
+}
+
+.uva{
+	background: #002F6C;
+	color: #fff;
+	i{
+		color: #F27031;
+	}
+}
+.oxford{
+	background: #002147;
+	color: #fff;
+	i{
+		color: #fff;
+	}
+}
+.pepper{
+	background: #00205C;
+	color: #fff;
+	i{
+		color: #EE7624
+	}
+}
+.mit{
+	background: #993333;
+	color: #fff;
+	i{
+		color: #666666;
+	}
+}
+.dart{
+	background: #00693E;
+	color: #fff;
+	i{
+		color: #000;
+	}
+}
+.ri{
+	background: #99072D;
+	color: #fff;
+	i{
+		color: #000;
+	}
+}
+.brown{
+	background: #C00404;
+	color: #fff;
+	i{
+		color: #3A1E1A;
+	}
+}
+.vertical {
+	position: relative;
+	top: 100px;
+	right: 30px;
+  display: inline-block;
+  width: 200%;
+  height: 40px;
+  box-shadow: inset 0px 4px 6px #ccc;
+  transform: rotate(-90deg);
+}
+
+.progress-bar {
+  box-shadow: inset 0px 4px 6px rgba(100,100,100,0.6);
+}
 
 	#app-container{
 		.in-cont{
@@ -120,7 +150,7 @@ $backColor: #2f3439;
 
 			}
 			color: black;
-			background: #777;
+			background: $darkblue;
 			.student-box{
 				// max-height: 400px;
 				// max-width: 600p
@@ -130,8 +160,26 @@ $backColor: #2f3439;
 				// overflow-y:scroll;
 
 				.stud-card{
-					width: 300px;
-					height: 150px;
+					position: relative;
+					width: 365px;
+					height: 400px;
+					margin-bottom: 20px;
+					.stud-thumb{
+						border: none;
+						padding: 0;
+						height: 100%;
+						width: 100%;
+						.stud-head{
+							padding: 5px;
+							border-top-left-radius: 4px;
+							border-top-right-radius: 4px;
+							background: $primaryBlue;
+							color: #fff;
+
+							margin: 0 0 10px 0;
+
+						}
+					}
 
 				}
 			}
