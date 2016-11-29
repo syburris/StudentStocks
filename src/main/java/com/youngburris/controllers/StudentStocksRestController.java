@@ -551,157 +551,138 @@ public class StudentStocksRestController {
     }
 
 //    route to retrieve all of the students in an array list
-    @RequestMapping(path = "/students", method = RequestMethod.POST)
-    public ResponseEntity<ArrayList<Student>> getStudents(@RequestBody HashMap search) {
-        String gpa = (String) search.get("gpa");
-        String schoolId = (String) search.get("schoolId");
-
+    @RequestMapping(path = "/students/{search}/{value:.+}", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<Student>> getStudents(@PathVariable("search") String search, @PathVariable("value") String value) {
         ArrayList<Student> studentList = new ArrayList<>();
-        if(gpa != null) {
-            double gpaSearch = Double.parseDouble(gpa);
-            if (gpaSearch == 2.5) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 2.5) {
-                        studentList.add(student);
+        if (search.equals("gpa")) {
+            if(value != null) {
+                double gpaSearch = Double.parseDouble(value);
+                if (gpaSearch == 2.5) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 2.5) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 2.6) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 2.6) {
-                        studentList.add(student);
+                } else if (gpaSearch == 2.6) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 2.6) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 2.7) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 2.7) {
-                        studentList.add(student);
+                } else if (gpaSearch == 2.7) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 2.7) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 2.8) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 2.8) {
-                        studentList.add(student);
+                } else if (gpaSearch == 2.8) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 2.8) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 2.9) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 2.9) {
-                        studentList.add(student);
+                } else if (gpaSearch == 2.9) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 2.9) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 3) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 3) {
-                        studentList.add(student);
+                } else if (gpaSearch == 3) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 3) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 3.1) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 3.1) {
-                        studentList.add(student);
+                } else if (gpaSearch == 3.1) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 3.1) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 3.2) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 3.2) {
-                        studentList.add(student);
+                } else if (gpaSearch == 3.2) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 3.2) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 3.3) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 3.3) {
-                        studentList.add(student);
+                } else if (gpaSearch == 3.3) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 3.3) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 3.4) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 3.4) {
-                        studentList.add(student);
+                } else if (gpaSearch == 3.4) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 3.4) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 3.5) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 3.5) {
-                        studentList.add(student);
+                } else if (gpaSearch == 3.5) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 3.5) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 3.6) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 3.6) {
-                        studentList.add(student);
+                } else if (gpaSearch == 3.6) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 3.6) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 3.7) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 3.7) {
-                        studentList.add(student);
+                } else if (gpaSearch == 3.7) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 3.7) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 3.8) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 3.8) {
-                        studentList.add(student);
+                } else if (gpaSearch == 3.8) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 3.8) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 3.9) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 3.9) {
-                        studentList.add(student);
+                } else if (gpaSearch == 3.9) {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 3.9) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else if (gpaSearch == 4) {
-                for (Student student : students.findAll()) {
-                    double studentGpa = Double.parseDouble(student.getGpa());
-                    if (studentGpa >= 4) {
-                        studentList.add(student);
+                } else {
+                    for (Student student : students.findAll()) {
+                        double studentGpa = Double.parseDouble(student.getGpa());
+                        if (studentGpa >= 4) {
+                            studentList.add(student);
+                        }
                     }
-                }
-            }
-            else {
-                studentList = (ArrayList<Student>) students.findAll();
-            }
-        }
-
-        else if (schoolId != null) {
-            for (Student student : students.findAll()) {
-                int id = Integer.parseInt(schoolId);
-                int school = student.getMySchool().getId();
-                if (school == id) {
-                    studentList.add(student);
                 }
             }
         }
-
+        else if (search.equals("school")) {
+            if (value != null) {
+                int id = Integer.parseInt(value);
+                for (Student student : students.findAll()) {
+                    int school = student.getMySchool().getId();
+                    if (school == id) {
+                        studentList.add(student);
+                    }
+                }
+            }
+        }
         else {
             studentList = (ArrayList<Student>) students.findAll();
         }
