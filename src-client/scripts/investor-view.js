@@ -50,7 +50,7 @@ const InvestorView = React.createClass({
                   })}
                </div>
             </div>
-
+            
          </div>
       )
    }
@@ -79,7 +79,7 @@ const StudentCard = React.createClass({
       return(
          <div className="col-xs-6 col-sm-3  stud-card">
             <div className="thumbnail stud-thumb">
-               <h4 className={headerStyles}><i className="fa fa-graduation-cap" aria-hidden="true"></i> {this.props.studentData.get('school')}</h4>
+               <h4 className={headerStyles}><i className="fa fa-graduation-cap" aria-hidden="true"></i>{this.props.studentData.get('school')}</h4>
 
                <div className="row">
                   <div className="col-xs-7">
