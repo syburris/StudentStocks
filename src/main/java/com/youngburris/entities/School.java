@@ -43,11 +43,14 @@ public class School {
     @Column
     String logo;
 
+    @Column
+    String color;
+
     public School() {
     }
 
     public School(String name, String street, String city, String state, String zip, String country, String phone,
-                  String logo, String website) {
+                  String logo, String website, String color) {
         this.name = name;
         this.street = street;
         this.city = city;
@@ -57,6 +60,7 @@ public class School {
         this.phone = phone;
         this.logo = logo;
         this.website = website;
+        this.color = color;
     }
 
     public int getId() {
@@ -137,5 +141,13 @@ public class School {
 
     public void setWebsite(String website) {
         this.website = website;
+    }
+
+    public String getColor() {
+        return color;
+    }
+
+    public void setColor(String color) {
+        this.color = color;
     }
 }

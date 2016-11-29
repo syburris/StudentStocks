@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -62,25 +63,25 @@ public class StudentStocksRestController {
         //        add seed data (schools)
         if (schools.count() == 0) {
             School school = new School("College of Charleston", "66 George Street", "Charleston", "SC", "29424", "USA",
-                    "843.805.5507", "images/cofc.jpg", "http://www.cofc.edu/");
+                    "843.805.5507", "images/cofc.jpg", "http://www.cofc.edu/", "cofc");
             School school1 = new School("University of South Carolina", "816 Bull Street", "Columbia", "SC", "29208", "USA",
-                    "803.777.0169", "images/carolina.jpg", "http://www.sc.edu/");
+                    "803.777.0169", "images/carolina.jpg", "http://www.sc.edu/", "usc");
             School school2 = new School("Harvard University", "86 Brattle Street", "Cambridge", "MA", "02138", "USA",
-                    "617.495.1000", "images/harvard.jpg", "http://www.harvard.edu/");
+                    "617.495.1000", "images/harvard.jpg", "http://www.harvard.edu/", "harvard");
             School school3 = new School("University of Virginia", "190 McCormick Road", "Charlottesville", "VA", "22903", "USA",
-                    "434.924.0311", "images/uva.png", "http://www.virginia.edu/");
+                    "434.924.0311", "images/uva.png", "http://www.virginia.edu/", "uva");
             School school4 = new School("University of Oxford", "University Offices", "Wellington Square", "Oxford", "OX1 2JD", "United Kingdom",
-                    "44.1865.270000", "images/oxford.jpg", "http://www.ox.ac.uk/");
+                    "44.1865.270000", "images/oxford.jpg", "http://www.ox.ac.uk/", "oxford");
             School school5 = new School("Pepperdine University", "24255 Pacific Coast Hwy", "Malibu", "CA", "90263", "USA",
-                    "310.506.4000", "images/pepperdine.png", "https://www.pepperdine.edu/");
+                    "310.506.4000", "images/pepperdine.png", "https://www.pepperdine.edu/", "pepper");
             School school6 = new School("Massachusetts Institute of Technology", "77 Massachusetts Ave", "Cambridge", "MA", "02139", "USA",
-                    "617.253.1000", "images/mit.png", "http://web.mit.edu/");
+                    "617.253.1000", "images/mit.png", "http://web.mit.edu/", "mit");
             School school7 = new School("Dartmouth College", "10 North Main Street", "Hanover", "New Hampshire", "03755", "USA",
-                    "603.646.2875", "images/dartmouth.png", "http://dartmouth.edu/");
+                    "603.646.2875", "images/dartmouth.png", "http://dartmouth.edu/", "dart");
             School school8 = new School("Rhode Island School of Design", "2 College St", "Providence", "RI", "02903", "USA",
-                    "401.454.6100", "images/risd-logo.png", "http://www.risd.edu/");
+                    "401.454.6100", "images/risd-logo.png", "http://www.risd.edu/", "ri");
             School school9 = new School("Brown University", "69 Brown Street", "Providence", "RI", "02912", "USA",
-                    "401.863.1000", "images/brown-logo.png", "https://www.brown.edu/");
+                    "401.863.1000", "images/brown-logo.png", "https://www.brown.edu/", "brown");
             schools.save(school);
             schools.save(school1);
             schools.save(school2);
@@ -550,10 +551,162 @@ public class StudentStocksRestController {
     }
 
 //    route to retrieve all of the students in an array list
-    @RequestMapping(path = "/students", method = RequestMethod.GET)
-    public ResponseEntity<ArrayList<Student>> getStudents() {
-        ArrayList<Student> studentArrayList = (ArrayList<Student>) students.findAll();
-        return new ResponseEntity<ArrayList<Student>>(studentArrayList, HttpStatus.OK);
+    @RequestMapping(path = "/students", method = RequestMethod.POST)
+    public ResponseEntity<ArrayList<Student>> getStudents(@RequestBody HashMap search) {
+        String gpa = (String) search.get("gpa");
+        String schoolId = (String) search.get("schoolId");
+
+        ArrayList<Student> studentList = new ArrayList<>();
+        if(gpa != null) {
+            double gpaSearch = Double.parseDouble(gpa);
+            if (gpaSearch == 2.5) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 2.5) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 2.6) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 2.6) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 2.7) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 2.7) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 2.8) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 2.8) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 2.9) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 2.9) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 3) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 3) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 3.1) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 3.1) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 3.2) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 3.2) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 3.3) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 3.3) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 3.4) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 3.4) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 3.5) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 3.5) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 3.6) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 3.6) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 3.7) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 3.7) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 3.8) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 3.8) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 3.9) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 3.9) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else if (gpaSearch == 4) {
+                for (Student student : students.findAll()) {
+                    double studentGpa = Double.parseDouble(student.getGpa());
+                    if (studentGpa >= 4) {
+                        studentList.add(student);
+                    }
+                }
+            }
+            else {
+                studentList = (ArrayList<Student>) students.findAll();
+            }
+        }
+
+        else if (schoolId != null) {
+            for (Student student : students.findAll()) {
+                int id = Integer.parseInt(schoolId);
+                int school = student.getMySchool().getId();
+                if (school == id) {
+                    studentList.add(student);
+                }
+            }
+        }
+
+        else {
+            studentList = (ArrayList<Student>) students.findAll();
+        }
+
+        return new ResponseEntity<ArrayList<Student>>(studentList, HttpStatus.OK);
     }
 
 //    route to retrieve all of the loans in an array list
