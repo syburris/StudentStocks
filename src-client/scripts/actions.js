@@ -33,8 +33,9 @@ const ACTIONS = {
       let allStudents = new SingleStudentModel()
 
       allStudents.set(field)
+      console.log("what im gettinn", allStudents)
       allStudents.save().then(function(){
-         STORE.setStore('allStudents', allStudents.models)
+         STORE.setStore('allStudents', allStudents)
       })
    },
    submitLoanForm: function(formInfo){
