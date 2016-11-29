@@ -29,12 +29,12 @@ const ACTIONS = {
    },
 
 
-   fetchAllStudents: function(field){
-      let allStudents = new SingleStudentModel()
+   fetchAllStudents: function(){
+      let allStudents = new AllStudentsColl()
 
-      allStudents.set(field)
-      console.log("what im gettinn", allStudents)
-      allStudents.save().then(function(){
+      allStudents.fetch().then(function(){
+         console.log("what im gettinn", allStudents)
+
          STORE.setStore('allStudents', allStudents)
       })
    },
