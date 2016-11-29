@@ -550,9 +550,15 @@ public class StudentStocksRestController {
         return new ResponseEntity<ArrayList<Investor>>(investorArrayList, HttpStatus.OK);
     }
 
+    @RequestMapping(path = "/students", method = RequestMethod.GET)
+    public ResponseEntity<ArrayList<Student>> getStudents() {
+        ArrayList<Student> studentList = (ArrayList<Student>) students.findAll();
+        return new ResponseEntity<ArrayList<Student>>(studentList, HttpStatus.OK);
+    }
+
 //    route to retrieve all of the students in an array list
     @RequestMapping(path = "/students/{search}/{value:.+}", method = RequestMethod.GET)
-    public ResponseEntity<ArrayList<Student>> getStudents(@PathVariable("search") String search, @PathVariable("value") String value) {
+    public ResponseEntity<ArrayList<Student>> searchStudents(@PathVariable("search") String search, @PathVariable("value") String value) {
         ArrayList<Student> studentList = new ArrayList<>();
         if (search.equals("gpa")) {
             if(value != null) {
