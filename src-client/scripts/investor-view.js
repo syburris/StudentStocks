@@ -50,7 +50,7 @@ const InvestorView = React.createClass({
                   })}
                </div>
             </div>
-            
+
          </div>
       )
    }
@@ -68,8 +68,7 @@ const StudentCard = React.createClass({
 
 
    render: function(){
-      let headerStyles = "stud-head text-center "
-// + this.props.studentData.attributes.mySchool.color
+      let headerStyles = "stud-head text-center "+ this.props.studentData.attributes.mySchool.color
       let amountInvested = parseInt(this.props.studentData.get("loan").principalBalance)
       let loanAmount = parseInt(this.props.studentData.get("loan").loanGoal)
       let perVal = ((amountInvested / loanAmount)* 100) + "%"
@@ -92,8 +91,9 @@ const StudentCard = React.createClass({
                         </div>
                      </div>
                   </div>
-                  <button className="btn btn-primary" onClick={this._handleInvest}>Invest</button>
                </div>
+               <button className="btn btn-primary" onClick={this._handleInvest}>Invest</button>
+               
             </div>
          </div>
       )

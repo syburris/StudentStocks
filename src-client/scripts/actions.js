@@ -35,7 +35,7 @@ const ACTIONS = {
       allStudents.fetch().then(function(){
          console.log("what im gettinn", allStudents)
 
-         STORE.setStore('allStudents', allStudents)
+         STORE.setStore('allStudents', allStudents.models)
       })
    },
    submitLoanForm: function(formInfo){
