@@ -94,7 +94,24 @@ public class Student {
         this.major = major;
         this.minor = minor;
         this.ssn = ssn;
+    }
 
+    public Student(String username, String password, String firstName, String lastName, String school,
+                   Level level, String bio, String highSchool, String gpa, String major,
+                   String minor, String ssn, double balance) {
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.school = school;
+        this.level = level;
+        this.bio = bio;
+        this.highSchool = highSchool;
+        this.gpa = gpa;
+        this.major = major;
+        this.minor = minor;
+        this.ssn = ssn;
+        this.balance = balance;
     }
 
     public int getId() {
@@ -112,7 +129,6 @@ public class Student {
     public void setUsername(String username) {
         this.username = username;
     }
-
 
     public String getPassword() {
         return password;
