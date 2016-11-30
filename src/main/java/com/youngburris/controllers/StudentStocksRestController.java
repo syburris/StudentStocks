@@ -98,7 +98,7 @@ public class StudentStocksRestController {
         if (students.count() == 0) {
             Student student = new Student("stevenburris@gmail.com", PasswordStorage.createHash("hunter2"), "Steven", "Burris",
                     "College of Charleston", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'll stop.",
-                    "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12");
+                    "Porter-Gaud", "4", "Accounting", "French", "123456-1234-12", 2000);
             student.setMySchool(schools.findFirstByName(student.getSchool()));
             Loan loan = new Loan("20000", "5", "1");
             postLoan(student, loan);
@@ -106,14 +106,14 @@ public class StudentStocksRestController {
             Student student1 = new Student("rossboatwright@gmail.com", PasswordStorage.createHash("hunter2"),
                     "Ross", "Boatwright", "Massachusetts Institute of Technology", Student.Level.GRADUATE,
                     "This is filler info. I have no idea what to type here, so I'll stop.", "Wando", "4", "Finance", "Spanish",
-                    "527362-4253-32");
+                    "527362-4253-32", 2000);
             student1.setMySchool(schools.findFirstByName(student1.getSchool()));
             Loan loan1 = new Loan("30000", "10", "4");
             postLoan(student1, loan1);
 
             Student student2 = new Student("seanseabrook@gmail.com", PasswordStorage.createHash("hunter2"), "Sean", "Burris",
                     "Pepperdine University", Student.Level.UNDERGRADUATE, "This is filler info. I have no idea what to type here, so I'm going to stop.",
-                    "James Island", "3.5", "Project Management", null, "928374-2378-42");
+                    "James Island", "3.5", "Project Management", "Spanish", "928374-2378-42", 2000);
             student2.setMySchool(schools.findFirstByName(student2.getSchool()));
             Loan loan2 = new Loan("50000", "8", "2");
             postLoan(student2, loan2);
@@ -121,7 +121,7 @@ public class StudentStocksRestController {
             Student student3 = new Student("mikebrown@gmail.com", PasswordStorage.createHash("hunter2"), "Mike", "Brown",
                     "Dartmouth College", Student.Level.UNDERGRADUATE,
                     "My name is Michael Brown. I'm 18 years old and a senior at Wando, and I have been accepted to Dartmouth in the Fall.  I am going to be studying biology with the hopes of continuing to get my MD.",
-                    "Wando", "3.7", "Biology", "Chemistry", "648935-4235-42");
+                    "Wando", "3.7", "Biology", "Chemistry", "648935-4235-42", 2000);
             student3.setMySchool(schools.findFirstByName(student3.getSchool()));
             Loan loan3 = new Loan("40000", "10", "4");
             postLoan(student3, loan3);
@@ -129,7 +129,7 @@ public class StudentStocksRestController {
             Student student4 = new Student("zachthomas@gmail.com", PasswordStorage.createHash("hunter2"), "Zach", "Thomas",
                     "Brown University", Student.Level.UNDERGRADUATE, "My name is Zach Thomas. I just graduated from Woodberry Forest School and I'm currently taking a gap year to do some traveling." +
                     "I have been accepted to Brown for the fall of 2017, and I will be studying Finance.", "Woodberry Forest School", "3.8",
-                    "Finance", "Marketing", "478392-1038-38");
+                    "Finance", "Marketing", "478392-1038-38", 2000);
             student4.setMySchool(schools.findFirstByName(student4.getSchool()));
             Loan loan4 = new Loan("20000", "4", "2");
             postLoan(student4, loan4);
@@ -137,7 +137,7 @@ public class StudentStocksRestController {
             Student student5 = new Student("barrydaniels@gmail.com", PasswordStorage.createHash("hunter2"), "Barry", "Daniels",
                     "University of Oxford", Student.Level.GRADUATE, "My name is Barry Daniels. I'm a recent graduate of Newberry and The Iron Yard, and" +
                     "I've been accepted to Oxford for the graduate literature program.", "Christ School", "3.4",
-                    "British Literature", "Comparative Literature", "378242-7293-28");
+                    "British Literature", "Comparative Literature", "378242-7293-28", 2000);
             student5.setMySchool(schools.findFirstByName(student5.getSchool()));
             Loan loan5 = new Loan("30000", "5", "2");
             postLoan(student5, loan5);
@@ -145,7 +145,7 @@ public class StudentStocksRestController {
             Student student6 = new Student("victorguy@gmail.com", PasswordStorage.createHash("hunter2"), "Victor", "Guy",
                     "College of Charleston", Student.Level.UNDERGRADUATE, "My name is Victor, I went to West Ashley High School and graduated early." +
                     "I've been accepted to the College of Charleston to study Computer Information Systems in the fall of 2017.", "West Ashley High School",
-                    "3.33", "Computer Information Systems", "Decision Sciences", "289432-4283-90");
+                    "3.33", "Computer Information Systems", "Decision Sciences", "289432-4283-90", 2000);
             student6.setMySchool(schools.findFirstByName(student6.getSchool()));
             Loan loan6 = new Loan("45000", "6", "4");
             postLoan(student6, loan6);
@@ -153,7 +153,7 @@ public class StudentStocksRestController {
             Student student7 = new Student("thomasdonaldson@gmail.com", PasswordStorage.createHash("hunter2"), "Thomas", "Donaldson",
                     "University of Virginia", Student.Level.GRADUATE, "My name is Thomas and I recently graduated from Clemson University with a B.S." +
                     " in Engineering.  I've been accepted to UVA's graduate school to persue my masters in Engineering.", "Porter-Gaud School",
-                    "3.12", "Engineering", "Mandarin", "639483-3489-23");
+                    "3.12", "Engineering", "Mandarin", "639483-3489-23", 2000);
             student7.setMySchool(schools.findFirstByName(student7.getSchool()));
             Loan loan7 = new Loan("32000", "10", "4");
             postLoan(student7, loan7);
@@ -161,7 +161,7 @@ public class StudentStocksRestController {
             Student student8 = new Student("travishunter@gmail.com", PasswordStorage.createHash("hunter2"), "Travis", "Hunter",
                     "University of South Carolina", Student.Level.UNDERGRADUATE, "My name is Travis. I'm a senior at Wando High School, " +
                     "and I'll be attending USC in the Fall. I plan on majoring in Chemistry and would like to study chemical engineering.",
-                    "Wando High School", "3.31", "Chemistry", "Engineering", "327992-2378-73");
+                    "Wando High School", "3.31", "Chemistry", "Engineering", "327992-2378-73", 2000);
             student8.setMySchool(schools.findFirstByName(student8.getSchool()));
             Loan loan8 = new Loan("27000", "5", "1");
             postLoan(student8, loan8);
@@ -169,7 +169,7 @@ public class StudentStocksRestController {
             Student student9 = new Student("josegonzales@gmail.com", PasswordStorage.createHash("hunter2"), "Jose", "Gonzales",
                     "University of South Carolina", Student.Level.UNDERGRADUATE, "My name is Jose, and I'm a senior at West Ashley High School. " +
                     "I'll be attending USC in the Fall, and I'll be studying Accounting.", "West Ashley High School", "3.72",
-                    "Accounting", "Finance", "128378-2387-37");
+                    "Accounting", "Finance", "128378-2387-37", 2000);
             student9.setMySchool(schools.findFirstByName(student9.getSchool()));
             Loan loan9 = new Loan("39000", "8", "3");
             postLoan(student9, loan9);
@@ -177,7 +177,7 @@ public class StudentStocksRestController {
             Student student10 = new Student("conradjones@gmail.com", PasswordStorage.createHash("hunter2"), "Conrad", "Jones",
                     "Harvard University", Student.Level.GRADUATE, "My name is Conrad Jones, and I recently graduated from Brown. " +
                     "I'll be attending Harvard Law in the Fall.", "Woodberry Forest School", "3.98", "Tax Law", "Accounting",
-                    "234979-2234-82");
+                    "234979-2234-82", 2000);
             student10.setMySchool(schools.findFirstByName(student10.getSchool()));
             Loan loan10 = new Loan("80000", "10", "4");
             postLoan(student10, loan10);
@@ -185,7 +185,7 @@ public class StudentStocksRestController {
             Student student11 = new Student("danielschwartz@gmail.com", PasswordStorage.createHash("hunter2"), "Daniel", "Schwartz",
                     "Pepperdine University", Student.Level.UNDERGRADUATE, "My name is Daniel, and I'm a senior at Charleston Collegiate. " +
                     "I'll be attending Pepperdine in the Fall to study theatre.", "Charleston Collegiate School", "3.11",
-                    "Theatre", "Music Theory", "149872-2387-74");
+                    "Theatre", "Music Theory", "149872-2387-74", 2000);
             student11.setMySchool(schools.findFirstByName(student11.getSchool()));
             Loan loan11 = new Loan("73000", "9", "3");
             postLoan(student11, loan11);
@@ -193,7 +193,7 @@ public class StudentStocksRestController {
             Student student12 = new Student("georgesmythe@gmail.com", PasswordStorage.createHash("hunter2"), "George", "Smythe",
                     "Rhode Island School of Design", Student.Level.UNDERGRADUATE, "My name is George and I'm a senior at Porter-Gaud School. " +
                     "I'll be attending RISD in the Fall, and I'll be studying graphic design.", "Porter-Gaud School", "3.44",
-                    "Graphic Design", "Computer Science", "928352-2794-23");
+                    "Graphic Design", "Computer Science", "928352-2794-23", 2000);
             student12.setMySchool(schools.findFirstByName(student12.getSchool()));
             Loan loan12 = new Loan("38000", "6", "2");
             postLoan(student12, loan12);
@@ -201,7 +201,7 @@ public class StudentStocksRestController {
             Student student13 = new Student("williamthompson@gmail.com", PasswordStorage.createHash("hunter2"), "William", "Thompson",
                     "University of South Carolina", Student.Level.UNDERGRADUATE, "My name is William Thompson, and I'm a senior at " +
                     "Bishop England High School. I'm attending USC in the fall, and I'll be studying Business Administration.",
-                    "Bishop England High School", "3.65", "Business Administration", "French", "293847-4297-02");
+                    "Bishop England High School", "3.65", "Business Administration", "French", "293847-4297-02", 2000);
             student13.setMySchool(schools.findFirstByName(student13.getSchool()));
             Loan loan13 = new Loan("14500", "5", "2");
             postLoan(student13, loan13);
@@ -209,7 +209,7 @@ public class StudentStocksRestController {
             Student student14 = new Student("richardsalmons@gmail.com", PasswordStorage.createHash("hunter2"), "Richard", "Salmons",
                     "Pepperdine University", Student.Level.UNDERGRADUATE, "My name is Richard Salmons, and I'm a senior at Wando High School. " +
                     "I'll be attending Pepperdine in the Fall, and I plan on majoring in Communications.", "Wando High School", "3.12",
-                    "Communications", "Spanish", "419723-3178-31");
+                    "Communications", "Spanish", "419723-3178-31", 2000);
             student14.setMySchool(schools.findFirstByName(student14.getSchool()));
             Loan loan14 = new Loan("28000", "8", "4");
             postLoan(student14, loan14);
@@ -253,8 +253,6 @@ public class StudentStocksRestController {
             investors.save(investor3);
             investors.save(investor4);
         }
-
-
     }
 
     @PreDestroy
@@ -433,6 +431,8 @@ public class StudentStocksRestController {
         double newPaymentBalance = paymentBalance + thePayment;
         loan.setPaymentBalance(newPaymentBalance);
 
+//        if the student's balance is too low, don't let them make a payment
+
 //        repay the investors' principal
         List<Investment> investmentArrayList = loan.getInvestments();
         double principalPayment = principalPortion(loan);
@@ -503,6 +503,13 @@ public class StudentStocksRestController {
 //        if the investor is logged in, let them invest in a loan
 //        first parse the investment amount as a double and find the loan they're investing in
         double investmentAmount = Double.parseDouble(investment.getAmount());
+        if (investmentAmount == 0) {
+            return new ResponseEntity<Investor>(HttpStatus.PAYMENT_REQUIRED);
+        }
+        double investorBalance = investor.getBalance();
+        if (investmentAmount > investorBalance) {
+            return new ResponseEntity<Investor>(HttpStatus.I_AM_A_TEAPOT);
+        }
         Loan loan = loans.findOne(Integer.parseInt(investment.getLoanId()));
 //        after the loan has been found, parse the available investment amount as a double
 //        and make sure that the amount they want to invest is not larger than the available investment amount
@@ -552,7 +559,12 @@ public class StudentStocksRestController {
 
     @RequestMapping(path = "/students", method = RequestMethod.GET)
     public ResponseEntity<ArrayList<Student>> getStudents() {
-        ArrayList<Student> studentList = (ArrayList<Student>) students.findAll();
+        ArrayList<Student> studentList = new ArrayList<>();
+        for (Student student : students.findAll()) {
+            if(!student.getLoan().isFunded()) {
+                studentList.add(student);
+            }
+        }
         return new ResponseEntity<ArrayList<Student>>(studentList, HttpStatus.OK);
     }
 
@@ -567,112 +579,144 @@ public class StudentStocksRestController {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 2.5) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 2.6) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 2.6) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 2.7) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 2.7) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 2.8) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 2.8) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 2.9) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 2.9) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 3) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 3) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 3.1) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 3.1) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 3.2) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 3.2) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 3.3) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 3.3) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 3.4) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 3.4) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 3.5) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 3.5) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 3.6) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 3.6) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 3.7) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 3.7) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 3.8) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 3.8) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else if (gpaSearch == 3.9) {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 3.9) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 } else {
                     for (Student student : students.findAll()) {
                         double studentGpa = Double.parseDouble(student.getGpa());
                         if (studentGpa >= 4) {
-                            studentList.add(student);
+                            if (!student.getLoan().isFunded()) {
+                                studentList.add(student);
+                            }
                         }
                     }
                 }
@@ -684,13 +728,19 @@ public class StudentStocksRestController {
                 for (Student student : students.findAll()) {
                     int school = student.getMySchool().getId();
                     if (school == id) {
-                        studentList.add(student);
+                        if (!student.getLoan().isFunded()) {
+                            studentList.add(student);
+                        }
                     }
                 }
             }
         }
         else {
-            studentList = (ArrayList<Student>) students.findAll();
+            for (Student student : students.findAll()) {
+                if (!student.getLoan().isFunded()) {
+                    studentList.add(student);
+                }
+            }
         }
 
         return new ResponseEntity<ArrayList<Student>>(studentList, HttpStatus.OK);
