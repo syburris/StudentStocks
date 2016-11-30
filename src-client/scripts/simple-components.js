@@ -374,7 +374,7 @@ const StudModal = React.createClass({
                      <button className="btn btn-primary" onClick={this._handleInvestment}>Make Investment</button>
 
                   </form>
-                  
+
                </div>
             </div>
          </div>

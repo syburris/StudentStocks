@@ -11,7 +11,7 @@ const AppView = React.createClass({
    getInitialState: function(){
 
       ACTIONS.fetchSchoolData()
-      ACTIONS.fetchAllStudents()
+      // ACTIONS.fetchAllStudents()
 
       return STORE.getStoreData()
    },
@@ -21,7 +21,7 @@ const AppView = React.createClass({
       let self = this
       console.log(this.state)
       ACTIONS.fetchSchoolData()
-      ACTIONS.fetchAllStudents({})
+      ACTIONS.fetchAllStudents(this.state.searchField)
 
 
       STORE.onChange(function(){
@@ -54,7 +54,7 @@ const AppView = React.createClass({
             return <StudentView user={this.state.currentUser}/>
             break;
          case "dash/investors":
-            return <InvestorView user={this.state.currentUser} studentInfo={this.state.allStudents} selectedStudent={this.state.selectedStudent} showDrop={this.state.showDrop} searchView={this.state.showSearch}/>
+            return <InvestorView user={this.state.currentUser} studentInfo={this.state.allStudents} selectedStudent={this.state.selectedStudent} showDrop={this.state.showDrop} searchField={this.state.searchField} searchView={this.state.showSearch}/>
             break;
          // case "game":
          //    return <GameView crntUser={this.state.currentUser}/>

@@ -8,7 +8,7 @@ const STORE = {
       allStudents: [],
       currentUser: {},
       selectedStudent: {},
-      studentsSearched: {},
+      searchField: "/students",
       userType: "",
       showDrop: false,
       showSearch: false,

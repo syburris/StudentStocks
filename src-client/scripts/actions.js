@@ -29,8 +29,8 @@ const ACTIONS = {
    },
 
 
-   fetchAllStudents: function(){
-      let allStudents = new AllStudentsColl()
+   fetchAllStudents: function(route = "/students"){
+      let allStudents = new AllStudentsColl(route)
 
       allStudents.fetch().then(function(){
          console.log("what im gettinn", allStudents)
