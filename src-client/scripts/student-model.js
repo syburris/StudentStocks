@@ -39,7 +39,11 @@ const SingleStudentModel = Backbone.Model.extend({
 
 const AllStudentsColl = Backbone.Collection.extend({
    model: SingleStudentModel,
-   url: "/students"
+   url: "/students",
+   initialize: function(path){
+      this.url = path
+
+   },
 
 
 

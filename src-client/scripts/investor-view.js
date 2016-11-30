@@ -98,6 +98,15 @@ const StudentCard = React.createClass({
    }
 })
 const UserNav = React.createClass({
+   getInitialState: function(){
+      return(
+         {searched: "/students"}
+      )
+   },
+   _handleSearch: function(slctd){
+      console.log("is this linked up", slctd)
+
+   },
 
    _handleLogout: function(){
 
@@ -120,7 +129,7 @@ const UserNav = React.createClass({
          console.log("runnniinnnn?",this.props.showDrop)
          if(this.props.showDrop === true){
             console.log("hello?")
-            return <DropDownMenu/>
+            return <DropDownMenu handleSearch={this._handleSearch}/>
          }
 
       }.bind(this)
@@ -164,6 +173,7 @@ const StudSearch = React.createClass({
 
 
    render: function(){
+
       return(
          <li>
             <input type="text"/>
@@ -173,15 +183,25 @@ const StudSearch = React.createClass({
 })
 
 const DropDownMenu = React.createClass({
+   _handleSelect: function(evt){
+      console.log(evt.target.name)
+      if(evt.target.name === "/students"){
+         ACTIONS.fetchAllStudents(evt.target.name)
+      }else{
+         this.props.handleSearch(evt.target.name)
+
+      }
+
+   },
 
    render: function(){
+      console.log(this.state)
       return(
          <ul className="dropdown-menu drop-search text-center">
             <li className="drop-title">Search By:</li>
-            <li><a href="">School</a></li>
-            <li><a href="">GPA</a></li>
-            <li><a href="">Major</a></li>
-            <li><a href="">Show All</a></li>
+            <li  onClick={this._handleSelect}><a href="#/dash/investors" name="/students/school/">School</a></li>
+            <li  onClick={this._handleSelect}><a href="#/dash/investors" name="/students/gpa/">GPA</a></li>
+            <li  onClick={this._handleSelect}><a href="#/dash/investors" name="/students">Show All</a></li>
          </ul>
 
       )
