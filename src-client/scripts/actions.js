@@ -168,6 +168,7 @@ const ACTIONS = {
       pay.save().then(function(){
          console.log("donneeeeee")
       })
+      ACTIONS.fetchCurrentStudent()
    },
 
 

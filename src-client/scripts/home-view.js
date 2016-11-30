@@ -116,7 +116,7 @@ const NavView = React.createClass({
          <nav className="home-nav container-fluid">
 
 
-            <div className="row">
+            <div className="row nav-row">
                <div className="title-cont col-xs-12 col-sm-4 text-center">
                   <div className="logo-cont">
                      <img src="images/main-logo.png" alt=""/>

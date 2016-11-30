@@ -297,6 +297,7 @@ const InvstFormModal = React.createClass({
       return(
          <div className="gen-modal signup-modal">
             <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
+            <h3>Investor Signup</h3>
             <div className="form-cont">
                <form action="" className="form-horizontal">
                   {/* username */}
@@ -370,7 +371,7 @@ const StudModal = React.createClass({
                </div> */}
                <div className="">
                   <form action="" className="form-horizontal">
-                     <SimpInput title="Amount to invest" name="amount" handlesChange={this.handleChange} />
+                     <SimpInput title="Amount to invest" name="amount" handleChange={this.handleChange} />
                      <button className="btn btn-primary" onClick={this._handleInvestment}>Make Investment</button>
 
                   </form>

@@ -37,7 +37,7 @@ const InvestorView = React.createClass({
       return(
 
          <div className="fluid-container in-cont">
-            <UserNav userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} showDrop={this.props.showDrop} searchView={this.props.searchView} schoolData={this.props.schoolData} />
+            <UserNav user={this.props.user} userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} showDrop={this.props.showDrop} searchView={this.props.searchView} schoolData={this.props.schoolData} />
             {modalView()}
             <div className="container student-box">
                <div className="row">
@@ -89,6 +89,8 @@ const StudentCard = React.createClass({
                   <h4>{this.props.studentData.get("firstName")+ " " + this.props.studentData.get("lastName")}</h4>
                   <p><span>Major: </span>{this.props.studentData.get('major')}</p>
                   <p><span>GPA: </span>{this.props.studentData.get('gpa')}</p>
+                  <p>StudentStock Remaining:</p>
+                  <h4>{loanAmount - amountInvested}</h4>
                </div>
                <button className="btn btn-primary btn-invst" onClick={this._handleInvest}>Invest</button>
 
@@ -158,11 +160,14 @@ const UserNav = React.createClass({
                      {showSearchBar()}
 
                   </ul>
+                  <h4 className='active'>Total Investments returned: $ {this.props.user.attributes.principalPaid}</h4>
+
                   <ul className="nav navbar-nav navbar-right">
                      <li><p>{this.props.firstName}</p><span>{this.props.userName}</span> </li>
                      <li><i className="fa fa-user" aria-hidden="true"></i></li>
                      <li><a href="#">Logout</a></li>
                   </ul>
+
                </div>
             </div>
          </nav>
