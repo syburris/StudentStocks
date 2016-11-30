@@ -134,13 +134,15 @@ const UserNav = React.createClass({
          console.log("runnniinnnn?",this.props.showDrop)
          if(this.props.showDrop === true){
             console.log("hello?")
-            return <DropDownMenu handleSearch={this._handleSearch}/>
+            return <DropDownMenu handleSearch={this._handleSearch} mySchool={this.props.user.attributes.mySchool.id}/>
          }
 
       }.bind(this)
       let showSearchBar = function(){
          if(this.state.searched === "school"){
             return <SchoolFilter schools={this.props.schoolData}/>
+         }else if(this.state.searched === "gpa"){
+            return <GpaFilter />
          }
       }.bind(this)
 
@@ -182,23 +184,28 @@ const SchoolFilter = React.createClass({
       console.log("clickky")
       console.log(this.refs.school.value)
       let newSearch = "/students/school/" + this.refs.school.value
+
       ACTIONS.fetchAllStudents(newSearch)
+
 
    },
 
 
    render: function(){
       return(
-         <form action="" className="search-form">
-            <select name="" id="" ref="school">
-               {this.props.schools.map(function(obj, i){
-                  return(
-                     <SchoolOption val={obj.get("id")} title={obj.get("name")} key={i}/>
-                  )
-               })}
-            </select>
-            <button className="btn btn-primary" onClick={this._handleSubmit}>search</button>
+         <form className="navbar-form navbar-left" role="search">
+            <div className="form-group">
+               <select className="form-control" name="" id="select" ref="school">
+                  {this.props.schools.map(function(obj, i){
+                     return(
+                        <SchoolOption val={obj.get("id")} title={obj.get("name")} key={i}/>
+                     )
+                  })}
+               </select>
+            </div>
+            <button type="submit" className="btn btn-primary" onClick={this._handleSubmit}>Submit</button>
          </form>
+
       )
    }
 })
@@ -210,11 +217,39 @@ const SchoolOption = React.createClass({
       )
    }
 })
+const GpaFilter = React.createClass({
+
+   _handleSubmit: function(evt){
+      evt.preventDefault()
+      console.log("clickky")
+      console.log(this.refs.school.value)
+      let newSearch = "/students/gpa/" + this.refs.gpa.value
+
+      ACTIONS.fetchAllStudents(newSearch)
+
+
+   },
+
+
+
+   render: function(){
+      return(
+         <form action="" className="navbar-form navbar-left">
+            <div className="form-group">
+               <select name="" id="select" className="form-control" ref="gpa"></select>
+            </div>
+         </form>
+      )
+   }
+})
 
 const DropDownMenu = React.createClass({
    _handleSelect: function(evt){
       if(evt.target.name === "/students"){
          ACTIONS.fetchAllStudents(evt.target.name)
+      }else if(evt.target.name === "myschools"){
+         let mySchool = "/students/school/" + this.props.mySchool
+         ACTIONS.fetchAllStudents(mySchool)
       }else{
          this.props.handleSearch(evt.target.name)
 
@@ -228,6 +263,9 @@ const DropDownMenu = React.createClass({
       return(
          <ul className="dropdown-menu drop-search text-center">
             <li className="drop-title">Search By:</li>
+            <li onClick={this._handleSelect}>
+               <a href="#/dash/investors" name="myschools">My school</a>
+            </li>
             <li  onClick={this._handleSelect}><a href="#/dash/investors" name="school">School</a></li>
             <li  onClick={this._handleSelect}><a href="#/dash/investors" name="gpa">GPA</a></li>
             <li  onClick={this._handleSelect}><a href="#/dash/investors" name="/students">Show All</a></li>
