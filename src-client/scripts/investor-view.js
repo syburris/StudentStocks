@@ -37,7 +37,7 @@ const InvestorView = React.createClass({
       return(
 
          <div className="fluid-container in-cont">
-            <UserNav userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} showDrop={this.props.showDrop} searchView={this.props.searchView} />
+            <UserNav userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} showDrop={this.props.showDrop} searchView={this.props.searchView} schoolData={this.props.schoolData} />
             {modalView()}
             <div className="container student-box">
                <div className="row">
@@ -106,6 +106,8 @@ const UserNav = React.createClass({
    _handleSearch: function(slctd){
       console.log("is this linked up", slctd)
 
+      this.setState({searched: slctd})
+
    },
 
    _handleLogout: function(){
@@ -124,6 +126,7 @@ const UserNav = React.createClass({
 
 
    render: function(){
+      console.log(this.state)
 
       let showDropDown = function(){
          console.log("runnniinnnn?",this.props.showDrop)
@@ -134,8 +137,8 @@ const UserNav = React.createClass({
 
       }.bind(this)
       let showSearchBar = function(){
-         if(this.props.searchView === true){
-            return <StudSearch/>
+         if(this.state.searched === "school"){
+            return <SchoolFilter schools={this.props.schoolData}/>
          }
       }.bind(this)
 
@@ -152,7 +155,7 @@ const UserNav = React.createClass({
                   <ul className="nav navbar-nav">
 
                      <li className="active" onClick={this._handleSearchButton}><a href="#/dash/investors"><i className="fa fa-search" aria-hidden="true"></i><span className="sr-only">(current)</span></a></li>
-
+                     {showSearchBar()}
 
                   </ul>
                   <ul className="nav navbar-nav navbar-right">
@@ -168,29 +171,50 @@ const UserNav = React.createClass({
    }
 })
 
-const StudSearch = React.createClass({
+const SchoolFilter = React.createClass({
+   _handleSubmit: function(evt){
+      evt.preventDefault()
+      console.log("clickky")
+      console.log(this.refs.school.value)
+      let newSearch = "/students/school/" + this.refs.school.value
+      ACTIONS.fetchAllStudents(newSearch)
 
+   },
 
 
    render: function(){
-
       return(
-         <li>
-            <input type="text"/>
-         </li>
+         <form action="" className="search-form">
+            <select name="" id="" ref="school">
+               {this.props.schools.map(function(obj, i){
+                  return(
+                     <SchoolOption val={obj.get("id")} title={obj.get("name")} key={i}/>
+                  )
+               })}
+            </select>
+            <button className="btn btn-primary" onClick={this._handleSubmit}>search</button>
+         </form>
+      )
+   }
+})
+const SchoolOption = React.createClass({
+
+   render: function(){
+      return(
+         <option value={this.props.val}>{this.props.title}</option>
       )
    }
 })
 
 const DropDownMenu = React.createClass({
    _handleSelect: function(evt){
-      console.log(evt.target.name)
       if(evt.target.name === "/students"){
          ACTIONS.fetchAllStudents(evt.target.name)
       }else{
          this.props.handleSearch(evt.target.name)
 
       }
+      STORE.setStore("showDrop", false)
 
    },
 
@@ -199,8 +223,8 @@ const DropDownMenu = React.createClass({
       return(
          <ul className="dropdown-menu drop-search text-center">
             <li className="drop-title">Search By:</li>
-            <li  onClick={this._handleSelect}><a href="#/dash/investors" name="/students/school/">School</a></li>
-            <li  onClick={this._handleSelect}><a href="#/dash/investors" name="/students/gpa/">GPA</a></li>
+            <li  onClick={this._handleSelect}><a href="#/dash/investors" name="school">School</a></li>
+            <li  onClick={this._handleSelect}><a href="#/dash/investors" name="gpa">GPA</a></li>
             <li  onClick={this._handleSelect}><a href="#/dash/investors" name="/students">Show All</a></li>
          </ul>
 

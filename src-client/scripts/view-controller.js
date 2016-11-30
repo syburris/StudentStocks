@@ -54,7 +54,7 @@ const AppView = React.createClass({
             return <StudentView user={this.state.currentUser}/>
             break;
          case "dash/investors":
-            return <InvestorView user={this.state.currentUser} studentInfo={this.state.allStudents} selectedStudent={this.state.selectedStudent} showDrop={this.state.showDrop} searchField={this.state.searchField} searchView={this.state.showSearch}/>
+            return <InvestorView schoolData={this.state.schools} user={this.state.currentUser} studentInfo={this.state.allStudents} selectedStudent={this.state.selectedStudent} showDrop={this.state.showDrop} searchField={this.state.searchField} searchView={this.state.showSearch}/>
             break;
          // case "game":
          //    return <GameView crntUser={this.state.currentUser}/>
