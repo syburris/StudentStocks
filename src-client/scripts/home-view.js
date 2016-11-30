@@ -52,11 +52,11 @@ const HomeView = React.createClass({
             {studFormModalView()}
             {invstFormModalView()}
             <div className="top-offset"></div>
-
             <NavView/>
-
+            <div className="abt-cont">
+            </div>
             <HeaderHeros/>
-            <AboutStocks/>
+
             <StudentSuccess/>
             <div className="row">
                {this.props.schoolData.map((obj, i) =>{
@@ -116,7 +116,7 @@ const NavView = React.createClass({
          <nav className="home-nav container-fluid">
 
 
-            <div className="row">
+            <div className="row nav-row">
                <div className="title-cont col-xs-12 col-sm-4 text-center">
                   <div className="logo-cont">
                      <img src="images/main-logo.png" alt=""/>
@@ -181,82 +181,34 @@ const HeaderHeros = React.createClass({
       return(
          <div className="row text-center apply-cont">
             <div className="col-xs-12 col-sm-6 student-hero">
-               <h3>Are you A Student?</h3>
-               <p>Apply for a loan today</p>
-               {/* route to student form page  */}
-               <button className="btn btn-primary" onClick={this._handleStudentForm} ref="student">Apply Now</button>
-               <p>or</p>
-               {/* page down to student about/testimonials */}
-               <button className="btn btn-primary" onClick={this._handleLoginModalView}>Find out more</button>
-               <h4>XX Active Student Loans</h4>
-
-            </div>
-            <div className="col-xs-12 col-sm-6 invester-hero">
-               <h3>Become an Investor...</h3>
-               <p>Invest in our future today</p>
-               {/* route to student form page  */}
-               <button className="btn btn-primary" onClick={this._handleInvestorForm}>Apply Now</button>
-               <p>or</p>
-               {/* page down to student about/testimonials */}
-               <button className="btn btn-primary">Find out more</button>
-               <h4>XX Current Investors</h4>
-            </div>
-         </div>
-
-
-      )
-   }
-
-
-})
-
-
-const AboutStocks = React.createClass({
-
-
-   render: function(){
-
-      return (
-         <div className="row abt-cont text-center">
-
-            <div>
-               <h2>How StudentStocks<span>&#8482;</span> Works</h2>
-               <p>Here at StudentStocks we make the frustration of student loans a thing of the past</p>
-            </div>
-            <div className="col-xs-12 col-sm-4 abt-col">
-               <h3>Easy Signup</h3>
-               {/* <i className="fa fa-file-text-o abt-icon" aria-hidden="true"></i> */}
-               <div className="icon-container">
-                  <img src="/images/Untitled-4.png" alt=""/>
-               </div>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptate nulla beatae ratione itaque fuga veritatis accusantium, debitis ab, voluptatem voluptatum quis suscipit similique tempora blanditiis sint in! Id, doloribus, aliquam!</p>
-
-
-            </div>
-            <div className="col-xs-12 col-sm-4 abt-col">
-               <h3>Lower Rates</h3>
+               <h1>Are you a Student?</h1>
                <div className="icon-container">
                   <img src="/images/StudentIcon.png" alt=""/>
                </div>
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Similique quam voluptatibus error hic officia quasi obcaecati velit beatae soluta, nobis, atque, nam rerum ullam deleniti maiores. Recusandae amet beatae expedita!</p>
-
+               <p>Apply for a loan today</p>
+               {/* route to student form page  */}
+               <button className="btn btn-primary" onClick={this._handleStudentForm} ref="student">Apply Now</button>
             </div>
-            <div className="col-xs-12 col-sm-4 abt-col">
-               <h3>Become an Investor</h3>
+            <div className="col-xs-12 col-sm-6 invester-hero">
+               <h1>Become an Investor...</h1>
                <div className="icon-container">
                   <img src="/images/DollarSign_icon.png" alt=""/>
                </div>
-
-               <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quis ut, nihil aliquid soluta ipsum ea esse eius! Eius iste quaerat, iusto necessitatibus ex aliquam ducimus animi rem quo illo tempora.</p>
-
+               <p>Invest in our future today</p>
+               {/* route to student form page  */}
+               <button className="btn btn-primary" onClick={this._handleInvestorForm}>Apply Now</button>
             </div>
-
          </div>
 
 
       )
    }
+
+
 })
+
+
+
 
 
 

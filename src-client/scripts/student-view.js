@@ -38,7 +38,7 @@ const StudentView = React.createClass({
                               <h4>Payment Info >></h4>
                               <h3>Minimum payment: <span>$145.37</span></h3>
                               <p>Loan balance: <span>${this.props.user.attributes && this.props.user.attributes.loanGoal}</span></p>
-                              <p>Payment due: <span>December 1, 2016</span></p>
+                              <p>Payment due: <span>December 3, 2016</span></p>
                               <button className="btn btn-primary" onClick={this._handlePayment}>Make Payment</button>
                            </div>
                            <div className="thumbnail">
@@ -62,6 +62,8 @@ const StudentView = React.createClass({
                            <h2>Current Loan Info</h2>
                            <div className="row">
                               <div className="col-xs-8">
+                                 <p>Amount promised:</p>
+                                 <h3>{this.props.user.attributes.loan.principalBalance}</h3>
                                  <p>Remaining Grace Period:</p>
                                  <h3>{this.props.user.attributes.loan.gracePeriod} Years</h3>
                                  <p>Current Loan Length</p>

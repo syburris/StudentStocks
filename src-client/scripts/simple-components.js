@@ -297,6 +297,7 @@ const InvstFormModal = React.createClass({
       return(
          <div className="gen-modal signup-modal">
             <a className="close-modal" href="#" onClick={this._exitLogin}>X</a>
+            <h3>Investor Signup</h3>
             <div className="form-cont">
                <form action="" className="form-horizontal">
                   {/* username */}

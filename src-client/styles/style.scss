@@ -39,12 +39,7 @@ body{
 		  right: 20px;
 		}
 }
-// $barColor: tomato;
-// $overlayColor: #fffde8;
-// $backColor: #2f3439;
-//
-//
-//
+
 
 .cofc{
 	color: #fff;
@@ -86,7 +81,7 @@ body{
 	background: #00205C;
 	color: #fff;
 	i{
-		color: #EE7624
+		color: #EE7624;
 	}
 }
 .mit{
@@ -213,15 +208,16 @@ body{
 
 			.home-nav{
 				height: 240px;
-
-
-
 				background: $transBlue;
 				color: #fff;
+				.nav-row{
+					margin: 0;
+				}
+
 				.logo-cont{
 					position: absolute;
 					top: -80px;
-					left: 70px;
+					left: 140px;
 					width: 180px;
 
 				}
@@ -270,32 +266,21 @@ body{
 
 
 			.apply-cont{
-				position: relative;
-				bottom: 0;
-				left: 0;
-			}
-
-			.abt-cont{
+				color: #fff;
+				background: $transBlue;
 				margin: 0;
-				background: #fff;
-				color: #5BC0DE;
-				.abt-col{
-					// .icon-container{
-					// 	margin: 0 auto;
-					// 	width: 30px;
-					// }
-
-
+				.icon-container{
+					margin: 0 auto;
+					width: 30%;
 				}
 
 			}
-			.success-story{
+
+			.abt-cont{
+				height: 400px;
 			}
+
+
 		}
-
-
-
-
-
-	}
+}
 }
