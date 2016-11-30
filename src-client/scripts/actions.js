@@ -35,7 +35,7 @@ const ACTIONS = {
       allStudents.fetch().then(function(){
          console.log("what im gettinn", allStudents)
 
-         STORE.setStore('allStudents', allStudents)
+         STORE.setStore('allStudents', allStudents.models)
       })
    },
    submitLoanForm: function(formInfo){
@@ -155,8 +155,9 @@ const ACTIONS = {
 
       stockInvst.set(loanInfo)
 
-      stockInvst.save().then(function(){
-
+      stockInvst.save().then(function(serverRes){
+         ACTIONS.fetchAllStudents()
+         STORE.setStore("selectedStudent", {})
          location.hash = "dash/investors"
       })
 

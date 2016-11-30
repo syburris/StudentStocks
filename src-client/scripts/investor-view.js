@@ -50,7 +50,7 @@ const InvestorView = React.createClass({
                   })}
                </div>
             </div>
-            
+
          </div>
       )
    }
@@ -68,32 +68,30 @@ const StudentCard = React.createClass({
 
 
    render: function(){
-      let headerStyles = "stud-head text-center "
-// + this.props.studentData.attributes.mySchool.color
+      let progBarStyles = + this.props.studentData.attributes.mySchool.color
+      let headerStyles = "stud-head text-center "+ this.props.studentData.attributes.mySchool.color
       let amountInvested = parseInt(this.props.studentData.get("loan").principalBalance)
       let loanAmount = parseInt(this.props.studentData.get("loan").loanGoal)
-      let perVal = ((amountInvested / loanAmount)* 100) + "%"
+      let perVal = Math.floor(((amountInvested / loanAmount)* 100)) + "%"
       let style = {
          width: perVal,
       }
       return(
          <div className="col-xs-6 col-sm-3  stud-card">
             <div className="thumbnail stud-thumb">
-               <h4 className={headerStyles}><i className="fa fa-graduation-cap" aria-hidden="true"></i>{this.props.studentData.get('school')}</h4>
-
-               <div className="row">
-                  <div className="col-xs-7">
-                     <h4>{this.props.studentData.get("firstName")+ " " + this.props.studentData.get("lastName")}</h4>
-                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Perspiciatis ipsa eos facere doloribus quis culpa, neque ratione autem, voluptatibus aut maiores nam cupiditate est modi commodi, sunt! Consequatur aspernatur, asperiores.</p>
+               <div className="progress vertical">
+                  <div className="progress-bar fill-bar text-center" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style={style}>
+                     <h3>{perVal}</h3>
                   </div>
-                  <div className="col-xs-5">
-                     <div className="progress vertical">
-                        <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style={style}>
-                        </div>
-                     </div>
-                  </div>
-                  <button className="btn btn-primary" onClick={this._handleInvest}>Invest</button>
                </div>
+               <h4 className={headerStyles}><i className="fa fa-graduation-cap" aria-hidden="true"></i>{this.props.studentData.get('school')}</h4>
+               <div className="row thumb-info">
+                  <h4>{this.props.studentData.get("firstName")+ " " + this.props.studentData.get("lastName")}</h4>
+                  <p><span>Major: </span>{this.props.studentData.get('major')}</p>
+                  <p><span>GPA: </span>{this.props.studentData.get('gpa')}</p>
+               </div>
+               <button className="btn btn-primary btn-invst" onClick={this._handleInvest}>Invest</button>
+
             </div>
          </div>
       )
