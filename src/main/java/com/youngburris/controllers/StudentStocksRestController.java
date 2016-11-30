@@ -803,7 +803,7 @@ public class StudentStocksRestController {
 //        find the interest amount of the payment by multiplying the monthly interest rate
 //          by the loan's principal balance
         double interestPortion = principalBalance * i;
-        double principalPortion = payment - interestPortion;
+        double principalPortion = payment - (Math.round(interestPortion * 100.00) / 100.00);
         double newBalance = principalBalance - principalPortion;
         return newBalance;
     }
@@ -816,7 +816,7 @@ public class StudentStocksRestController {
 
 //        find the interest portion of the loan
         double interestPortion = principalBalance * i;
-        return interestPortion;
+        return (Math.round(interestPortion * 100.00) / 100.00);
     }
 
     public static double principalPortion(Loan loan) {
@@ -829,7 +829,7 @@ public class StudentStocksRestController {
 //          by the loan's principal balance
         double interestPortion = principalBalance * i;
         double principalPortion = payment - interestPortion;
-        return principalPortion;
+        return Math.round(principalPortion * 100.00) / 100;
     }
 
     public void postLoan(Student student, Loan loan) {
