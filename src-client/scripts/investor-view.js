@@ -108,8 +108,7 @@ const UserNav = React.createClass({
 
    },
 
-   _handleLogout: fu
-   nction(){
+   _handleLogout: function(){
 
       ACTIONS.logOut()
    },
