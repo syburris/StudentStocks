@@ -233,7 +233,6 @@ const GpaFilter = React.createClass({
 
 
    render: function(){
-      let
       return(
          <form action="" className="navbar-form navbar-left">
             <div className="form-group">
