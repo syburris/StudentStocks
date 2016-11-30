@@ -374,10 +374,7 @@ const StudModal = React.createClass({
                      <button className="btn btn-primary" onClick={this._handleInvestment}>Make Investment</button>
 
                   </form>
-                  <div className="progress vertical">
-                     <div className="progress-bar progress-bar-info" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style={style}>
-                     </div>
-                  </div>
+                  
                </div>
             </div>
          </div>

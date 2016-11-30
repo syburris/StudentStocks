@@ -155,8 +155,9 @@ const ACTIONS = {
 
       stockInvst.set(loanInfo)
 
-      stockInvst.save().then(function(){
-
+      stockInvst.save().then(function(serverRes){
+         ACTIONS.fetchAllStudents()
+         STORE.setStore("selectedStudent", {})
          location.hash = "dash/investors"
       })
 
