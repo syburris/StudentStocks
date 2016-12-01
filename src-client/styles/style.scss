@@ -135,6 +135,50 @@ body{
 
 	#app-container{
 		.in-cont{
+			min-height: 968px;
+
+
+
+			.invst-tab{
+				box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+				z-index: 1;
+   			width: 60px;
+				height: 60px;
+   			position: fixed;
+   			background: $transBlue;
+   			transform: translate(-50%, 0);
+   			left: 2%;
+   			top: 52%;
+				border-top-right-radius: 3px;
+				border-bottom-right-radius: 3px;
+
+
+
+			}
+			.info-modal{
+				transition: all 0.5s ease-in;
+				box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+				border-top-right-radius: 3px;
+				border-bottom-right-radius: 3px;
+				color: #fff;
+				font-weight: 700;
+				z-index: 1;
+				text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+
+				position: fixed;
+				width: 300px;
+				height: 400px;
+				background: $transBlue;
+				transform: translate(-50%, 0);
+				left: 11%;
+				top: 35%;
+				.invst-tab{
+					box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+					left: 110%;
+					top: 39%;
+				}
+
+			}
 			.invst-nav{
 				background: $primaryBlue;
 				color: #fff;
@@ -152,7 +196,8 @@ body{
 						padding: 20px 0 20px 20px
 					}
 					.nav-search{
-						padding: 40px;
+						padding: 40px 0px 40px 40px;
+
 						:hover{
 							color: $iconColor;
 						}
@@ -165,13 +210,28 @@ body{
 
 						}
 					}
-					.nav-info{
-						li{
-							font-size: 16px;
+
+				}
+				.nav-info{
+					padding: 24px;
+					li{
+
+						font-size: 22px;
+						padding: 3px;
+						text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+
+						a{
+							padding: 5px;
+							color: #fff;
+							&:hover{
+								color: $iconColor;
+							}
 						}
 					}
 				}
 				.drop-search{
+					transition: all .2s ease-in;
+
 					width: 300px;
 					background: $transBlue;
 					position: absolute;
@@ -258,6 +318,8 @@ body{
 				background: $transBlue;
 				color: #fff;
 				.nav-row{
+					text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+
 					margin: 0;
 				}
 
@@ -271,6 +333,9 @@ body{
 				.title-cont{
 					position: relative;
 					padding-top: 90px;
+					h1{
+						font-weight: 700;
+					}
 				}
 				.menu-col{
 
@@ -281,8 +346,9 @@ body{
 							padding-right: 15px;
 							a{
 								color: #fff;
-								:hover{
-									color: #fff;
+								&:hover{
+									border-bottom: 3px solid $iconColor;
+									color: $iconColor;
 								}
 								:visited{
 									color: #fff;
@@ -324,6 +390,7 @@ body{
 			}
 
 			.abt-cont{
+				padding-bottom: 30px;
 				height: 400px;
 			}
 

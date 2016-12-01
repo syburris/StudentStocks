@@ -1,7 +1,7 @@
 const React = require('react')
 const ACTIONS = require("./actions.js")
 const STORE = require('./store.js')
-
+const numeral = require('numeral')
 
 const LoginModal = React.createClass({
 
@@ -355,24 +355,23 @@ const StudModal = React.createClass({
    render: function(){
       let amountInvested = parseInt(this.props.modData.loan.principalBalance)
       let loanAmount = parseInt(this.props.modData.loan.loanGoal)
-      let perVal = ((amountInvested / loanAmount)* 100) + "%"
-      let style = {
-         width: perVal,
-      }
-
+      let amountDiff = (loanAmount - amountInvested);
       return(
-         <div className="gen-modal stud-modal">
+         <div className="gen-modal stud-modal text-center">
             <a className="close-modal" href="#/dash/investors" onClick={this._exitLogin}>X</a>
             <div>
+               <h3>Make An Investment</h3>
                <h4>{this.props.modData.firstName} {this.props.modData.lastName}</h4>
                <p>{this.props.modData.school}</p>
                {/* <div className="progress progress-striped active">
                   <div className="progress-bar progess-bar-info" style={style}></div>
                </div> */}
+               <p>Loan Amount Remaining</p>
+               <h3>{numeral(amountDiff).format('$0,0')}</h3>
                <div className="">
                   <form action="" className="form-horizontal">
                      <SimpInput title="Amount to invest" name="amount" handleChange={this.handleChange} />
-                     <button className="btn btn-primary" onClick={this._handleInvestment}>Make Investment</button>
+                     <button className="btn btn-primary" onClick={this._handleInvestment}>invest</button>
 
                   </form>
 

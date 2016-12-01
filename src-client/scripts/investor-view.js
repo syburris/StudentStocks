@@ -40,6 +40,7 @@ const InvestorView = React.createClass({
          <div className="fluid-container in-cont">
             <UserNav user={this.props.user} userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} showDrop={this.props.showDrop} searchView={this.props.searchView} schoolData={this.props.schoolData} />
             {modalView()}
+            <InfoModal userInfo={this.props.user.attributes}/>
             <div className="container student-box">
                <div className="row">
                   {this.props.studentInfo.map((obj, i)=>{
@@ -169,7 +170,7 @@ const UserNav = React.createClass({
                </ul>
 
                <ul className="nav navbar-nav navbar-right nav-info">
-                  <li><p>{this.props.firstName}</p><span>{this.props.userName}</span> </li>
+                  <li>{this.props.firstName}</li>
                   <li><i className="fa fa-user" aria-hidden="true"></i></li>
                   <li><a href="#">Logout</a></li>
                </ul>
@@ -289,6 +290,59 @@ const DropDownMenu = React.createClass({
    }
 })
 
+const InfoModal = React.createClass({
+   getInitialState: function(){
+      return(
+         {showModal: false}
+      )
+   },
+
+   _toggleModal: function(){
+      if(this.state.showModal === false){
+         this.setState({showModal: true})
+      }else if(this.state.showModal === true){
+         this.setState({showModal: false})
+      }
+   },
+
+   render: function(){
+      let addInvestments = function(){
+         var total = 0
+         this.props.userInfo.investments.map(function(obj, i){
+            let newNum = parseInt(obj.amount)
+            total += newNum
+            console.log(total)
+         })
+         return total
+      }.bind(this)
+      console.log(this.state.showModal)
+      if(this.state.showModal === false){
+         return(
+            <div className="invst-tab" onClick={this._toggleModal}>
+               <img src="images/DollarSign_icon.png" alt=""/>
+            </div>
+         )
+      }else{
+         return(
+            <div className="info-modal text-center">
+               <div className="invst-tab" onClick={this._toggleModal}>
+                  <img src="images/DollarSign_icon.png" alt=""/>
+               </div>
+               <h3>Investment info</h3>
+               <div className="text-cont">
+                  <p>Current Account balance:</p>
+                  <h3>{numeral(this.props.userInfo.balance).format('$0,0')}</h3>
+                  <p>Number of Investments</p>
+                  <h3>{this.props.userInfo.investments.length}</h3>
+                  <p>Total Amount Invested</p>
+                  <h3>{numeral(addInvestments()).format('$0,0')}</h3>
+               </div>
+            </div>
+         )
+      }
+
+   }
+})
 
 
 module.exports = InvestorView
