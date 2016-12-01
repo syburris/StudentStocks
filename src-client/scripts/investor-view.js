@@ -2,6 +2,7 @@ const React = require('react')
 const ACTIONS = require('./actions.js')
 const {StudModal} = require('./simple-components.js')
 const STORE = require("./store.js")
+const numeral = require('numeral')
 
 const InvestorView = React.createClass({
 
@@ -72,6 +73,7 @@ const StudentCard = React.createClass({
       let headerStyles = "stud-head text-center "+ this.props.studentData.attributes.mySchool.color
       let amountInvested = parseInt(this.props.studentData.get("loan").principalBalance)
       let loanAmount = parseInt(this.props.studentData.get("loan").loanGoal)
+      let amountRemaining = (loanAmount - amountInvested);
       let perVal = Math.floor(((amountInvested / loanAmount)* 100)) + "%"
       let style = {
          width: perVal,
@@ -85,12 +87,12 @@ const StudentCard = React.createClass({
                   </div>
                </div>
                <h4 className={headerStyles}><i className="fa fa-graduation-cap" aria-hidden="true"></i>{this.props.studentData.get('school')}</h4>
-               <div className="row thumb-info">
+               <div className="row thumb-info text-center">
                   <h4>{this.props.studentData.get("firstName")+ " " + this.props.studentData.get("lastName")}</h4>
                   <p><span>Major: </span>{this.props.studentData.get('major')}</p>
                   <p><span>GPA: </span>{this.props.studentData.get('gpa')}</p>
-                  <p>StudentStock Remaining:</p>
-                  <h4>{loanAmount - amountInvested}</h4>
+                  <p>Loan Amount Remaining:</p>
+                  <h4>{numeral(amountRemaining).format('$0,0')}</h4>
                </div>
                <button className="btn btn-primary btn-invst" onClick={this._handleInvest}>Invest</button>
 
@@ -110,6 +112,10 @@ const UserNav = React.createClass({
 
       this.setState({searched: slctd})
 
+   },
+   _resetSearch: function(newView = ""){
+      console.log("hello?")
+      this.setState({searched: newView})
    },
 
    _handleLogout: function(){
@@ -140,9 +146,9 @@ const UserNav = React.createClass({
       }.bind(this)
       let showSearchBar = function(){
          if(this.state.searched === "school"){
-            return <SchoolFilter schools={this.props.schoolData}/>
+            return <SchoolFilter removeBar={this._resetSearch} schools={this.props.schoolData}/>
          }else if(this.state.searched === "gpa"){
-            return <GpaFilter />
+            return <GpaFilter removeBar={this._resetSearch}/>
          }
       }.bind(this)
 
@@ -150,27 +156,24 @@ const UserNav = React.createClass({
       return(
          <nav className="invst-nav navbar-default">
             <div className="container-fluid">
-               <div className="navbar-header">
-                  <a className="navbar-brand" onClick={this._handleLogout}>StudentStocks</a>
+               <div className="navbar-header nav-head-cont">
+                  <a className="navbar-brand nav-title" onClick={this._handleLogout}>StudentStocks</a>
+                  <a onClick={this._handleSearchButton} href="#/dash/investors" className="nav-search"><i className="fa fa-search" aria-hidden="true"></i></a>
                </div>
                {showDropDown()}
 
-               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul className="nav navbar-nav">
+               <ul className="nav navbar-nav">
 
-                     <li className="active" onClick={this._handleSearchButton}><a href="#/dash/investors"><i className="fa fa-search" aria-hidden="true"></i><span className="sr-only">(current)</span></a></li>
-                     {showSearchBar()}
+                  {showSearchBar()}
 
-                  </ul>
-                  <h4 className='active'>Total Investments returned: $ {this.props.user.attributes.principalPaid}</h4>
+               </ul>
 
-                  <ul className="nav navbar-nav navbar-right">
-                     <li><p>{this.props.firstName}</p><span>{this.props.userName}</span> </li>
-                     <li><i className="fa fa-user" aria-hidden="true"></i></li>
-                     <li><a href="#">Logout</a></li>
-                  </ul>
+               <ul className="nav navbar-nav navbar-right nav-info">
+                  <li><p>{this.props.firstName}</p><span>{this.props.userName}</span> </li>
+                  <li><i className="fa fa-user" aria-hidden="true"></i></li>
+                  <li><a href="#">Logout</a></li>
+               </ul>
 
-               </div>
             </div>
          </nav>
 
@@ -186,6 +189,7 @@ const SchoolFilter = React.createClass({
       let newSearch = "/students/school/" + this.refs.school.value
 
       ACTIONS.fetchAllStudents(newSearch)
+      this.props.removeBar("")
 
 
    },
@@ -195,6 +199,7 @@ const SchoolFilter = React.createClass({
       return(
          <form className="navbar-form navbar-left" role="search">
             <div className="form-group">
+               <label htmlFor="">School</label>
                <select className="form-control" name="" id="select" ref="school">
                   {this.props.schools.map(function(obj, i){
                      return(
@@ -222,22 +227,31 @@ const GpaFilter = React.createClass({
    _handleSubmit: function(evt){
       evt.preventDefault()
       console.log("clickky")
-      console.log(this.refs.school.value)
+      console.log(this.refs.gpa.value)
       let newSearch = "/students/gpa/" + this.refs.gpa.value
 
       ACTIONS.fetchAllStudents(newSearch)
-
+      this.props.removeBar("")
 
    },
 
 
 
    render: function(){
+
       return(
          <form action="" className="navbar-form navbar-left">
             <div className="form-group">
-               <select name="" id="select" className="form-control" ref="gpa"></select>
+               <label htmlFor="">GPA</label>
+               <select name="" id="select" className="form-control" ref="gpa">
+                  <option value="2.5">2.5 + </option>
+                  <option value="3.0">3.0 + </option>
+                  <option value="3.5">3.5 + </option>
+                  <option value="4.0">4.0 + </option>
+                  <option value="4.5">4.5 + </option>
+               </select>
             </div>
+            <button type="submit" className="btn btn-primary" onClick={this._handleSubmit}>Submit</button>
          </form>
       )
    }
@@ -263,12 +277,12 @@ const DropDownMenu = React.createClass({
       return(
          <ul className="dropdown-menu drop-search text-center">
             <li className="drop-title">Search By:</li>
-            <li onClick={this._handleSelect}>
+            <li className="selections" onClick={this._handleSelect}>
                <a href="#/dash/investors" name="myschools">My school</a>
             </li>
-            <li  onClick={this._handleSelect}><a href="#/dash/investors" name="school">School</a></li>
-            <li  onClick={this._handleSelect}><a href="#/dash/investors" name="gpa">GPA</a></li>
-            <li  onClick={this._handleSelect}><a href="#/dash/investors" name="/students">Show All</a></li>
+            <li className="selections"  onClick={this._handleSelect}><a href="#/dash/investors" name="school">School</a></li>
+            <li className="selections"  onClick={this._handleSelect}><a href="#/dash/investors" name="gpa">GPA</a></li>
+            <li className="selections"  onClick={this._handleSelect}><a href="#/dash/investors" name="/students">Show All</a></li>
          </ul>
 
       )
