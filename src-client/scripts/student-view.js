@@ -12,7 +12,7 @@ const StudentView = React.createClass({
    },
 
    _handlePayment: function(){
-      let newPayment={payment: "236.0"}
+      let newPayment={payment: this.props.user.attributes.loan.monthlyPayment}
       ACTIONS.submitPayment(newPayment)
    },
 
@@ -28,7 +28,7 @@ const StudentView = React.createClass({
       return(
          <div className="fluid-container student-view">
             <UserNav userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} />
-            <div className="container">
+            <div className="container info-cont">
                <div className="row">
                   <h1>Welcome <span>{this.props.user.attributes  && this.props.user.attributes.firstName}</span></h1>
                   <div className="col-xs-12 col-sm-4 left-col">
@@ -36,7 +36,7 @@ const StudentView = React.createClass({
                         <div className="col-xs-12 col-sm-12">
                            <div className="thumbnail">
                               <h4>Payment Info >></h4>
-                              <h3>Minimum payment: <span>$145.37</span></h3>
+                              <h3>Minimum payment: <span>${this.props.user.attributes.loan.monthlyPayment}</span></h3>
                               <p>Loan balance: <span>${this.props.user.attributes && this.props.user.attributes.loanGoal}</span></p>
                               <p>Payment due: <span>December 3, 2016</span></p>
                               <button className="btn btn-primary" onClick={this._handlePayment}>Make Payment</button>
@@ -99,24 +99,17 @@ const UserNav = React.createClass({
 
 
       return(
-         <nav className="navbar navbar-default">
+         <nav className="usr-nav navbar-default">
             <div className="container-fluid">
-               <div className="navbar-header">
-                  <a className="navbar-brand" >StudentStocks</a>
+               <div className="navbar-header nav-head-cont">
+                  <a className="navbar-brand nav-title" >StudentStocks</a>
                </div>
 
-               <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                  <ul className="nav navbar-nav">
-                     <li className="active"><a href="#/login/students">STUDENT LOGIN <span className="sr-only">(current)</span></a></li>
-                     <li><a href="#">Link</a></li>
-
-                  </ul>
-                  <ul className="nav navbar-nav navbar-right">
-                     <li><p>{this.props.firstName}</p><span>{this.props.userName}</span> </li>
-                     <li><i className="fa fa-user" aria-hidden="true"></i></li>
-                     <li><button onClick={this._handleLogout}>Logout</button></li>
-                  </ul>
-               </div>
+               <ul className="nav navbar-nav navbar-right nav-info">
+                  <li>{this.props.firstName}</li>
+                  <li><i className="fa fa-user" aria-hidden="true"></i></li>
+                  <li><a href="#">Logout</a></li>
+               </ul>
             </div>
          </nav>
 

@@ -57,15 +57,6 @@ const HomeView = React.createClass({
             </div>
             <HeaderHeros/>
 
-            <StudentSuccess/>
-            <div className="row">
-               {this.props.schoolData.map((obj, i) =>{
-
-                  return (
-                     <SchoolItem imgSrc={obj.get('logo')} key={i}/>
-                  )
-               })}
-            </div>
 
 
 

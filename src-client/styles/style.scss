@@ -127,13 +127,103 @@ body{
 
   }
 }
+.usr-nav{
+	background: $primaryBlue;
+	color: #fff;
+	box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+	height: 80px;
+	width: 100%;
+	z-index: 1;
+	position: fixed;
+	.nav-head-cont{
+		.nav-title{
+			color: #fff;
+			text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+			font-size: 30px;
+			font-weight: 700;
+			padding: 20px 0 20px 20px
+		}
+		.nav-search{
+			padding: 40px 0px 40px 40px;
 
+			:hover{
+				color: $iconColor;
+			}
+			i{
+				text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+
+				padding: 17px;
+				color: #fff;
+				font-size: 30px;
+
+			}
+		}
+
+	}
+	.nav-info{
+		padding: 24px;
+		li{
+
+			font-size: 22px;
+			padding: 3px;
+			text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+
+			a{
+				padding: 5px;
+				color: #fff;
+				&:hover{
+					color: $iconColor;
+				}
+			}
+		}
+	}
+	.drop-search{
+		transition: all .2s ease-in;
+
+		width: 300px;
+		background: $transBlue;
+		position: absolute;
+		top: 76.5px;
+		left: 140px;
+		display: block;
+		font-size: 18px;
+		text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+
+		.drop-title{
+
+		}
+		.selections{
+			a{color: #fff;
+				text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+				&:hover{
+					font-weight: 700;
+					background: $primaryOrg;
+				}
+			}
+
+		}
+	}
+}
 
 .progress-bar {
   box-shadow: inset 0px 4px 6px rgba(100,100,100,0.6);
 }
 
 	#app-container{
+		.student-view{
+			background: $primaryBlue;
+			min-height: 968px;
+			.info-cont{
+				padding-top: 90px;
+				h1{
+					text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+
+					color: #fff;
+					font-weight: 700;
+
+				}
+			}
+		}
 		.in-cont{
 			min-height: 968px;
 
@@ -179,83 +269,7 @@ body{
 				}
 
 			}
-			.invst-nav{
-				background: $primaryBlue;
-				color: #fff;
-				box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-				height: 80px;
-				width: 100%;
-				z-index: 1;
-				position: fixed;
-				.nav-head-cont{
-					.nav-title{
-						color: #fff;
-						text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-						font-size: 30px;
-						font-weight: 700;
-						padding: 20px 0 20px 20px
-					}
-					.nav-search{
-						padding: 40px 0px 40px 40px;
 
-						:hover{
-							color: $iconColor;
-						}
-						i{
-							text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-
-							padding: 17px;
-							color: #fff;
-							font-size: 30px;
-
-						}
-					}
-
-				}
-				.nav-info{
-					padding: 24px;
-					li{
-
-						font-size: 22px;
-						padding: 3px;
-						text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-
-						a{
-							padding: 5px;
-							color: #fff;
-							&:hover{
-								color: $iconColor;
-							}
-						}
-					}
-				}
-				.drop-search{
-					transition: all .2s ease-in;
-
-					width: 300px;
-					background: $transBlue;
-					position: absolute;
-					top: 76.5px;
-      			left: 140px;
-					display: block;
-					font-size: 18px;
-					text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-
-					.drop-title{
-
-					}
-					.selections{
-						a{color: #fff;
-							text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
-							&:hover{
-								font-weight: 700;
-								background: $primaryOrg;
-							}
-						}
-
-					}
-				}
-			}
 			.stud-modal{
 				background-color: #dbd9d9;
 				width: 300px;
@@ -308,6 +322,7 @@ body{
 		.home-view{
 			background: url(../images/home-main.jpg) no-repeat center center fixed;
 			background-size: cover;
+			padding-bottom: 50px;
 			.top-offset{
 				background:rgba(0, 0, 0, 0);
 				height: 100px;
@@ -379,6 +394,8 @@ body{
 
 
 			.apply-cont{
+				text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.4);
+
 				color: #fff;
 				background: $transBlue;
 				margin: 0;
