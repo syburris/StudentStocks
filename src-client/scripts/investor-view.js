@@ -155,7 +155,7 @@ const UserNav = React.createClass({
 
 
       return(
-         <nav className="invst-nav navbar-default">
+         <nav className="usr-nav navbar-default">
             <div className="container-fluid">
                <div className="navbar-header nav-head-cont">
                   <a className="navbar-brand nav-title" onClick={this._handleLogout}>StudentStocks</a>
