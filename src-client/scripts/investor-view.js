@@ -336,6 +336,8 @@ const InfoModal = React.createClass({
                   <h3>{this.props.userInfo.investments.length}</h3>
                   <p>Total Amount Invested</p>
                   <h3>{numeral(addInvestments()).format('$0,0')}</h3>
+                  <p>Return On Investments</p>
+                  <h3>{numeral(this.props.userInfo.principalPaid).format('$0,0')}</h3>
                </div>
             </div>
          )
