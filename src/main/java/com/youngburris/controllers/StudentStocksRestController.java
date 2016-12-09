@@ -890,6 +890,7 @@ public class StudentStocksRestController {
         loan.setNumberOfPeriods(String.valueOf(Double.parseDouble(loan.getLoanLength()) * 12));
         loan.setPrincipalBalance(String.valueOf(0.00));
         loan.setPaymentBalance(0.00);
+        loans.save(loan);
 
 //        calculate the monthly payment
         String payment = String.valueOf(monthlyPayment(loan));
