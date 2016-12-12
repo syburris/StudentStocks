@@ -351,7 +351,7 @@ public class StudentStocksRestController {
                     student.getBio(), student.getHighSchool(), student.getGpa(),
                     student.getMajor(), student.getMinor(), student.getSsn());
             studentFromDB.setMySchool(schools.findFirstByName(student.getSchool()));
-            studentFromDB.setBalance(0);
+            studentFromDB.setBalance(20000);
             students.save(studentFromDB);
         }
 //        if the username already exists in the database, throw an error
@@ -393,7 +393,7 @@ public class StudentStocksRestController {
         Investor investorFromDB = investors.findFirstByUsername(investor.getUsername());
         if (investorFromDB == null) {
             investorFromDB = new Investor(investor.getUsername(),PasswordStorage.createHash(investor.getPassword()),
-                    investor.getFirstName(),investor.getLastName(),investor.getSsn(),investor.getSchool(),0.00);
+                    investor.getFirstName(),investor.getLastName(),investor.getSsn(),investor.getSchool(),100000);
             investorFromDB.setMySchool(schools.findFirstByName(investor.getSchool()));
             investors.save(investorFromDB);
         }
@@ -420,7 +420,7 @@ public class StudentStocksRestController {
             return new ResponseEntity<Payment>(HttpStatus.FORBIDDEN);
         }
 
-        //        if the student's balance is too low, don't let them make a payment
+//        if the student's balance is too low, don't let them make a payment
         if (student.getBalance() < Double.parseDouble(payment.getPayment())) {
             return new ResponseEntity<Payment>(HttpStatus.BAD_REQUEST);
         }
