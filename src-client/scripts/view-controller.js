@@ -19,14 +19,12 @@ const AppView = React.createClass({
 
    componentWillMount: function(){
       let self = this
-      console.log(this.state)
       ACTIONS.fetchSchoolData()
       ACTIONS.fetchAllStudents(this.state.searchField)
 
 
       STORE.onChange(function(){
          self.setState(STORE.getStoreData())
-         console.log('app state changed')
 
       })
    },

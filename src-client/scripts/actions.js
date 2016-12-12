@@ -13,7 +13,6 @@ const ACTIONS = {
 
 
    logOut: function(){
-      console.log("exexutttinn")
       let mod = new StudentModel()
 
       mod.logOut()
@@ -33,7 +32,6 @@ const ACTIONS = {
       let allStudents = new AllStudentsColl(route)
 
       allStudents.fetch().then(function(){
-         console.log("what im gettinn", allStudents)
 
          STORE.setStore('allStudents', allStudents.models)
       })
@@ -43,10 +41,8 @@ const ACTIONS = {
 
       loanForm.set(formInfo)
       loanForm.save().then(function(serverRes){
-         console.log(serverRes)
          let mod = new StudentModel()
          mod.set(serverRes)
-         console.log("this is whats getting set",mod)
          STORE.setStore("currentUser", mod)
       })
       location.hash = "/dash/students"
@@ -69,7 +65,6 @@ const ACTIONS = {
       formInst.set(formInfo)
 
       formInst.save().then(function(){
-         // console.log('this is serverresponse ', serverRes)
          // let mod = new StudentModel()
          // mod.set(serverRes)
          // STORE.setStore('currentUser', mod)
@@ -103,8 +98,6 @@ const ACTIONS = {
          STORE.setStore("userType", "")
 
          location.hash = "/dash/investors"
-         // localStorage.setItem("user_id", serverRes.id);
-         // console.log(localStorage.getItem("user_id"))
       })
 
 
@@ -125,7 +118,6 @@ const ACTIONS = {
 
          location.hash = "/dash/students"
 
-         // console.log(localStorage.getItem("user_id"))
 
       })
    },
@@ -137,7 +129,6 @@ const ACTIONS = {
 
          STORE.setStore('currentUser', newModel)
       }).fail(function(){
-         console.log("WHOOPS!")
       })
    },
    fetchCurrentInvestor: function(){
