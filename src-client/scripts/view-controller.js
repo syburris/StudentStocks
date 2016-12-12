@@ -51,6 +51,7 @@ const AppView = React.createClass({
             return <HomeView schoolData={this.state.schools} showModal={this.state.showModal} userType={this.state.userType}/>
             break;
          case "dash/students":
+
             return <StudentView user={this.state.currentUser}/>
             break;
          case "dash/investors":
