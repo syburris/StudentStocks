@@ -37,9 +37,6 @@ const StudentView = React.createClass({
 
 
 
-
-      // console.log("student props", this.props.user.attributes)
-      // console.log('ehhhh', this.props.user)
       return(
          <div className="fluid-container student-view">
             <UserNav userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} />
@@ -106,7 +103,6 @@ const StudentView = React.createClass({
 const UserNav = React.createClass({
 
    _handleLogout: function(){
-      console.log('hahsdkfjahsldkfhja')
 
       ACTIONS.logOut()
    },
@@ -116,7 +112,7 @@ const UserNav = React.createClass({
 
 
       return(
-         <nav className="usr-nav navbar-default">
+         <nav className="usr-nav navbar-default stdnt-nav">
             <div className="container-fluid">
                <div className="navbar-header nav-head-cont">
                   <a className="navbar-brand nav-title" >StudentStocks</a>
