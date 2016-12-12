@@ -16,10 +16,7 @@ import java.io.File;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by stevenburris on 11/15/16.
@@ -422,6 +419,12 @@ public class StudentStocksRestController {
         if (student == null) {
             return new ResponseEntity<Payment>(HttpStatus.FORBIDDEN);
         }
+
+        //        if the student's balance is too low, don't let them make a payment
+        if (student.getBalance() < Double.parseDouble(payment.getPayment())) {
+            return new ResponseEntity<Payment>(HttpStatus.BAD_REQUEST);
+        }
+
 //      get the loan from the student
         Loan loan = student.getLoan();
 
@@ -431,7 +434,7 @@ public class StudentStocksRestController {
         double newPaymentBalance = paymentBalance + thePayment;
         loan.setPaymentBalance(newPaymentBalance);
 
-//        if the student's balance is too low, don't let them make a payment
+
 
 //        repay the investors' principal
         List<Investment> investmentArrayList = loan.getInvestments();
