@@ -46,6 +46,7 @@ const ACTIONS = {
          console.log(serverRes)
          let mod = new StudentModel()
          mod.set(serverRes)
+         console.log("this is whats getting set",mod)
          STORE.setStore("currentUser", mod)
       })
       location.hash = "/dash/students"

@@ -14,14 +14,29 @@ const StudentView = React.createClass({
    _handlePayment: function(){
       let newPayment={payment: this.props.user.attributes.loan.monthlyPayment}
       ACTIONS.submitPayment(newPayment)
+
    },
 
    render: function(){
-      if(!this.props.user.attributes){
+      if(this.props.user.attributes === undefined){
          return(
             <p>Loadingggg</p>
          )
       }
+      let isFunded = function(){
+         var funded
+         if(this.props.user.attributes.loan.funded === false){
+            funded = "Not Yet Funded"
+             return funded
+
+         }else{
+            funded = "You're Funded!"
+             return funded
+         }
+      }.bind(this)
+
+
+
 
       // console.log("student props", this.props.user.attributes)
       // console.log('ehhhh', this.props.user)
@@ -36,8 +51,8 @@ const StudentView = React.createClass({
                         <div className="col-xs-12 col-sm-12">
                            <div className="thumbnail">
                               <h4>Payment Info >></h4>
-                              <h3>Minimum payment: <span>${this.props.user.attributes.loan.monthlyPayment}</span></h3>
-                              <p>Loan balance: <span>${this.props.user.attributes && this.props.user.attributes.loanGoal}</span></p>
+                              <h3>Minimum payment: <span>${this.props.user.attributes.loan && this.props.user.attributes.loan.monthlyPayment}</span></h3>
+                              <p>Loan balance: <span>${this.props.user.attributes.loan.principalBalance}</span></p>
                               <p>Payment due: <span>December 3, 2016</span></p>
                               <button className="btn btn-primary" onClick={this._handlePayment}>Make Payment</button>
                            </div>
@@ -62,8 +77,10 @@ const StudentView = React.createClass({
                            <h2>Current Loan Info</h2>
                            <div className="row">
                               <div className="col-xs-8">
-                                 <p>Amount promised:</p>
-                                 <h3>{this.props.user.attributes.loan.principalBalance}</h3>
+                                 <p>Loan Fully Funded?</p>
+                                 <h3>{isFunded()}</h3>
+                                 <p>Current Loan Goal:</p>
+                                 <h3>{this.props.user.attributes.loan.loanGoal}</h3>
                                  <p>Remaining Grace Period:</p>
                                  <h3>{this.props.user.attributes.loan.gracePeriod} Years</h3>
                                  <p>Current Loan Length</p>
