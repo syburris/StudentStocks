@@ -51,7 +51,7 @@ public class StudentStocksRestController {
     @PostConstruct
     public void init() throws PasswordStorage.CannotPerformOperationException, SQLException {
 //        initiate h2 server
-        h2 = Server.createWebServer("-webPort", "80").start();
+        h2 = Server.createWebServer().start();
 
 //        if images folder doesn't exist, create it
         File f = new File("public/images");
