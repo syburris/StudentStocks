@@ -51,7 +51,7 @@ public class StudentStocksRestController {
     @PostConstruct
     public void init() throws PasswordStorage.CannotPerformOperationException, SQLException {
 //        initiate h2 server
-        h2 = Server.createWebServer("-webPort", "4042").start();
+        h2 = Server.createWebServer("-webPort", "80").start();
 
 //        if images folder doesn't exist, create it
         File f = new File("public/images");
@@ -890,6 +890,7 @@ public class StudentStocksRestController {
         loan.setNumberOfPeriods(String.valueOf(Double.parseDouble(loan.getLoanLength()) * 12));
         loan.setPrincipalBalance(String.valueOf(0.00));
         loan.setPaymentBalance(0.00);
+        loans.save(loan);
 
 //        calculate the monthly payment
         String payment = String.valueOf(monthlyPayment(loan));
