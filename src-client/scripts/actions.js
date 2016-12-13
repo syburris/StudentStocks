@@ -124,7 +124,6 @@ const ACTIONS = {
 
    fetchCurrentStudent: function(){
       let newModel = new StudentModel()
-      console.log("thisone?", newModel)
       newModel.checkAuth("/currentstudent").then(function(){
 
          STORE.setStore('currentUser', newModel)
@@ -133,12 +132,10 @@ const ACTIONS = {
    },
    fetchCurrentInvestor: function(){
       let newModel = new InvestorAppModel()
-      console.log("thisone?", newModel)
       newModel.checkAuth().then(function(){
 
          STORE.setStore('currentUser', newModel)
       }).fail(function(){
-         console.log("WHOOPS!")
       })
    },
 
@@ -158,7 +155,6 @@ const ACTIONS = {
       let pay = new StudentPayment()
       pay.set(payInfo)
       pay.save().then(function(){
-         console.log("donneeeeee")
       })
       ACTIONS.fetchCurrentStudent()
    },

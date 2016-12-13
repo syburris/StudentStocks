@@ -6,9 +6,12 @@ const STORE = require('./store.js')
 
 const StudentView = React.createClass({
 
-   componentWillMount: function(){
+   componentWillReceiveProps: function(){
       ACTIONS.fetchCurrentStudent()
 
+   },
+   componentWillMount: function(){
+      ACTIONS.fetchCurrentStudent()
    },
 
    _handlePayment: function(){
@@ -37,6 +40,7 @@ const StudentView = React.createClass({
 
 
 
+
       return(
          <div className="fluid-container student-view">
             <UserNav userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} />
@@ -49,7 +53,7 @@ const StudentView = React.createClass({
                            <div className="thumbnail">
                               <h4>Payment Info >></h4>
                               <h3>Minimum payment: <span>${this.props.user.attributes.loan && this.props.user.attributes.loan.monthlyPayment}</span></h3>
-                              <p>Loan balance: <span>${this.props.user.attributes.loan.principalBalance}</span></p>
+                              <p>Loan balance: <span>${this.props.user.attributes.loan &&this.props.user.attributes.principalBalance}</span></p>
                               <p>Payment due: <span>December 3, 2016</span></p>
                               <button className="btn btn-primary" onClick={this._handlePayment}>Make Payment</button>
                            </div>

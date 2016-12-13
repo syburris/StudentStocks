@@ -7,8 +7,6 @@ const LoginModal = React.createClass({
 
    _handleSubmit: function(evt){
       evt.preventDefault()
-      console.log(this.refs.userField.value)
-      console.log(this.refs.passField.value)
       let loginInfo = {
          username: this.refs.userField.value,
          password: this.refs.passField.value
@@ -64,7 +62,6 @@ const StudFormModal = React.createClass({
       let newForm = this.state.studentForm;
       newForm["school"] = this.refs.school.value
       newForm["level"] = this.refs.level.value
-      console.log(newForm)
       ACTIONS.submitStudentForm(newForm)
 
          this.setState({pageView: 2, studentForm: {}})
@@ -74,7 +71,6 @@ const StudFormModal = React.createClass({
    _handleFormSubmit: function(evt){
       evt.preventDefault()
       let newForm = this.state.studentForm
-      console.log(this.refs)
       newForm["gracePeriod"] = this.refs.gracePeriod.value
       newForm["loanLength"] = this.refs.loanLength.value
 
@@ -83,7 +79,6 @@ const StudFormModal = React.createClass({
 
    },
    // _nextChanges: function(evt){
-   //    console.log(evt.target)
    //    let updateForm = this.state.studentForm
    //    // updateform[]
    //
@@ -92,9 +87,7 @@ const StudFormModal = React.createClass({
    //
    // },
    _handlePageOne: function(evt){
-      console.log("??????")
       evt.preventDefault()
-      console.log('this is the state you want to send to your backend>', this.state)
       let newForm = this.state.studentForm;
          newForm["bio"] = this.refs.bio.value
 
@@ -107,7 +100,6 @@ const StudFormModal = React.createClass({
    },
    handleChange: function(data, name) {
       let newState = this.state.studentForm
-      console.log(this.refs)
 
       newState[name] = data;
 
@@ -132,7 +124,6 @@ const StudFormModal = React.createClass({
 
             newArr.push({value: numStr, text: numStr + year })
          }
-         console.log(newArr)
          return newArr
       }
 
@@ -285,7 +276,6 @@ const InvstFormModal = React.createClass({
       newState[name] = data;
 
       this.setState(newState, () => {
-         console.log('current state', this.state);
       });
    },
    _exitLogin: function(){
@@ -334,7 +324,6 @@ const StudModal = React.createClass({
       newState[name] = data;
 
       this.setState(newState, () => {
-         console.log('current state', this.state);
       });
    },
 
@@ -345,7 +334,6 @@ const StudModal = React.createClass({
       evt.preventDefault()
       let invstForm = this.state
       invstForm["loanId"] = this.props.loanData.id.toString()
-      console.log(invstForm)
       ACTIONS.handleInvestment(invstForm)
    },
 
