@@ -146,6 +146,7 @@ const ACTIONS = {
 
       stockInvst.save().then(function(serverRes){
          ACTIONS.fetchAllStudents()
+         ACTIONS.fetchCurrentInvestor()
          STORE.setStore("selectedStudent", {})
          location.hash = "dash/investors"
       })
@@ -155,8 +156,8 @@ const ACTIONS = {
       let pay = new StudentPayment()
       pay.set(payInfo)
       pay.save().then(function(){
+
       })
-      ACTIONS.fetchCurrentStudent()
    },
 
 
