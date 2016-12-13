@@ -7,10 +7,13 @@ import numeral from 'numeral'
 const StudentView = React.createClass({
 
    componentWillReceiveProps: function(){
-      ACTIONS.fetchCurrentStudent()
+      if(this.props.user.attributes === undefined){
+         ACTIONS.fetchCurrentStudent()
+
+      }
 
    },
-   componentWillMount: function(){
+   componentDidMount: function(){
       ACTIONS.fetchCurrentStudent()
    },
 
