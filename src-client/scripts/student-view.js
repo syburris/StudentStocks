@@ -2,7 +2,7 @@ const React = require("react")
 const ACTIONS = require('./actions.js')
 const {NavView} = require("./home-view.js")
 const STORE = require('./store.js')
-
+import numeral from 'numeral'
 
 const StudentView = React.createClass({
 
@@ -17,6 +17,7 @@ const StudentView = React.createClass({
    _handlePayment: function(){
       let newPayment={payment: this.props.user.attributes.loan.monthlyPayment}
       ACTIONS.submitPayment(newPayment)
+
 
    },
 
@@ -41,6 +42,7 @@ const StudentView = React.createClass({
 
 
 
+
       return(
          <div className="fluid-container student-view">
             <UserNav userName={this.props.user.attributes && this.props.user.attributes.username} firstName={this.props.user.attributes && this.props.user.attributes.firstName} />
@@ -53,8 +55,7 @@ const StudentView = React.createClass({
                            <div className="thumbnail">
                               <h4>Payment Info >></h4>
                               <h3>Minimum payment: <span>${this.props.user.attributes.loan && this.props.user.attributes.loan.monthlyPayment}</span></h3>
-                              <p>Loan balance: <span>${this.props.user.attributes.loan &&this.props.user.attributes.principalBalance}</span></p>
-                              <p>Payment due: <span>December 3, 2016</span></p>
+                              <p>Loan balance: <span>{this.props.user.attributes && numeral(this.props.user.attributes.loan.principalBalance).format('$0,0')}</span></p>
                               <button className="btn btn-primary" onClick={this._handlePayment}>Make Payment</button>
                            </div>
                            <div className="thumbnail">
@@ -81,7 +82,7 @@ const StudentView = React.createClass({
                                  <p>Loan Fully Funded?</p>
                                  <h3>{isFunded()}</h3>
                                  <p>Current Loan Goal:</p>
-                                 <h3>{this.props.user.attributes.loan.loanGoal}</h3>
+                                 <h3>{numeral(this.props.user.attributes.loan.loanGoal).format('$0,0')}</h3>
                                  <p>Remaining Grace Period:</p>
                                  <h3>{this.props.user.attributes.loan.gracePeriod} Years</h3>
                                  <p>Current Loan Length</p>
