@@ -13,18 +13,14 @@ const HomeView = React.createClass({
    },
 
    _handleClick: function(evt){
-      console.log(evt)
-      console.log(this.refs)
 
 
    },
 
    render: function(){
-      console.log('data', this.props)
-      let loginModalView = function(){
+     let loginModalView = function(){
 
          if(this.props.userType === "Student" || this.props.userType === "Investor"){
-            console.log("im tryin to changggaa")
                return <LoginModal userType={this.props.userType}/>
 
          }
@@ -145,7 +141,6 @@ const HeaderHeros = React.createClass({
 
    _handleStudentForm: function(evt){
       evt.preventDefault()
-      console.log(evt)
 
       STORE.setStore("userType", "StudentSignup")
    },
@@ -158,7 +153,6 @@ const HeaderHeros = React.createClass({
    },
 
    _handleLoginModalView: function(evt){
-      console.log(evt)
 
       STORE.setStore('showLoginModal', true)
    },

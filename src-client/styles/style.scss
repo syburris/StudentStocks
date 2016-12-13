@@ -211,8 +211,13 @@ body{
 
 	#app-container{
 		.student-view{
+
 			background: $primaryBlue;
 			min-height: 968px;
+
+			.stdnt-nav{
+				background: $primaryBlue;
+			}
 			.info-cont{
 				padding-top: 90px;
 				h1{

@@ -27,7 +27,6 @@ const AppRouter = Backbone.Router.extend({
 
    showSignup: function(type){
       let crntView = "signup/"+ type;
-      console.log(crntView)
 
       ReactDOM.render(<AppView currentView={crntView}/>, document.querySelector("#app-container"))
    },
