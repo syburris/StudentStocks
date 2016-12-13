@@ -7,8 +7,6 @@ const InvstLoginView = React.createClass({
 
    _handleSubmit: function(evt){
       evt.preventDefault()
-      console.log(this.refs.userField.value)
-      console.log(this.refs.passField.value)
       let loginInfo = {
          username: this.refs.userField.value,
          password: this.refs.passField.value
@@ -39,8 +37,6 @@ const StdntLoginView = React.createClass({
 
    _handleSubmit: function(evt){
       evt.preventDefault()
-      console.log(this.refs.userField.value)
-      console.log(this.refs.passField.value)
       let loginInfo = {
          username: this.refs.userField.value,
          password: this.refs.passField.value
