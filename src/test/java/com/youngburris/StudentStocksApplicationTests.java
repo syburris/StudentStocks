@@ -48,56 +48,56 @@ public class StudentStocksApplicationTests {
 		mockMvc = MockMvcBuilders.webAppContextSetup(wac).build();
 	}
 
-	@Test
-	public void aTestLoginStudent() throws Exception{
-	    mockMvc.perform(
-	            MockMvcRequestBuilders.post("/studentlogin")
-                    .param("username", "stevenburris@gmail.com")
-                    .param("password", "hunter2")
-        );
-        Assert.assertTrue(students.findFirstByUsername("stevenburris@gmail.com") != null);
-	}
-
-	@Test
-    public void bTestLoginInvestor() throws Exception {
-	    mockMvc.perform(
-	            MockMvcRequestBuilders.post("/investorlogin")
-                    .param("username", "stevenburris@gmail.com")
-                    .param("password", "hunter2")
-        );
-	    Assert.assertTrue(investors.findFirstByUsername("stevenburris@gmail.com") != null);
-    }
-
-    @Test
-    public void cTestCreateStudent() throws Exception {
-	    mockMvc.perform(
-	            MockMvcRequestBuilders.post("/student")
-                    .param("username", "fake@gmail.com")
-                    .param("password", "hunter2")
-                    .param("firstName", "Fake")
-                    .param("lastName", "Student")
-                    .param("school", "College of Charleston")
-                    .param("level", "UNDERGRADUATE")
-                    .param("bio", "lkj")
-                    .param("highSchool", "Wando")
-                    .param("gpa", "3")
-                    .param("major", "Accounting")
-                    .param("minor", "French")
-                    .param("ssn", "234123")
-        );
-	    Assert.assertTrue(students.findFirstByUsername("fake@gmail.com") != null);
-    }
-
-    @Test
-    public void dTestPostLoan() throws Exception {
-	    cTestCreateStudent();
-	    mockMvc.perform(
-	            MockMvcRequestBuilders.post("/postloan")
-                    .param("loanGoal", "20000")
-                    .param("loanLength", "4")
-                    .param("gracePeriod", "2")
-        );
-	    Assert.assertTrue(Double.parseDouble(students.findFirstByUsername("fake@gmail.com").getLoan().getPrincipalBalance()) == 0);
-    }
+//	@Test
+//	public void aTestLoginStudent() throws Exception{
+//	    mockMvc.perform(
+//	            MockMvcRequestBuilders.post("/studentlogin")
+//                    .param("username", "stevenburris@gmail.com")
+//                    .param("password", "hunter2")
+//        );
+//        Assert.assertTrue(students.findFirstByUsername("stevenburris@gmail.com") != null);
+//	}
+//
+//	@Test
+//    public void bTestLoginInvestor() throws Exception {
+//	    mockMvc.perform(
+//	            MockMvcRequestBuilders.post("/investorlogin")
+//                    .param("username", "stevenburris@gmail.com")
+//                    .param("password", "hunter2")
+//        );
+//	    Assert.assertTrue(investors.findFirstByUsername("stevenburris@gmail.com") != null);
+//    }
+//
+//    @Test
+//    public void cTestCreateStudent() throws Exception {
+//	    mockMvc.perform(
+//	            MockMvcRequestBuilders.post("/student")
+//                    .param("username", "fake@gmail.com")
+//                    .param("password", "hunter2")
+//                    .param("firstName", "Fake")
+//                    .param("lastName", "Student")
+//                    .param("school", "College of Charleston")
+//                    .param("level", "UNDERGRADUATE")
+//                    .param("bio", "lkj")
+//                    .param("highSchool", "Wando")
+//                    .param("gpa", "3")
+//                    .param("major", "Accounting")
+//                    .param("minor", "French")
+//                    .param("ssn", "234123")
+//        );
+//	    Assert.assertTrue(students.findFirstByUsername("fake@gmail.com") != null);
+//    }
+//
+//    @Test
+//    public void dTestPostLoan() throws Exception {
+//	    cTestCreateStudent();
+//	    mockMvc.perform(
+//	            MockMvcRequestBuilders.post("/postloan")
+//                    .param("loanGoal", "20000")
+//                    .param("loanLength", "4")
+//                    .param("gracePeriod", "2")
+//        );
+//	    Assert.assertTrue(Double.parseDouble(students.findFirstByUsername("fake@gmail.com").getLoan().getPrincipalBalance()) == 0);
+//    }
 
 }
